@@ -8,7 +8,7 @@ public class CameraControl : MonoBehaviour
 
     // atrributes
 
-    private Transform target;
+    public Transform target;
 
     private Vector3 offset;
 
