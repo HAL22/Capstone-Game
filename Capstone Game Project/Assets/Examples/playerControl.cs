@@ -8,7 +8,7 @@ public class playerControl : MonoBehaviour {
     private float rotation;
     private float radians;
     private Animation anim;
-    private Rigidbody rigidbody;
+    public Rigidbody rigidbody;
     private bool free;
     private float attackTimer;
 
