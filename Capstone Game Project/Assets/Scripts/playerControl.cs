@@ -15,10 +15,14 @@ public class playerControl : MonoBehaviour {
     public float attackDelay = 1f;
     public float rotationalSpeed = 1.5f;
     public float walkingSpeed = 10f;
-    public GameObject magicEffect;
-    public GameObject dustEffect;
+    //public GameObject magicEffect;
+    //public GameObject dustEffect;
 
-
+    public KeyCode forward = KeyCode.W;
+    public KeyCode backward = KeyCode.S;
+    public KeyCode rotLeft = KeyCode.A;
+    public KeyCode rotRight = KeyCode.D;
+    public KeyCode attack = KeyCode.Q;
 
     // Use this for initialization
     void Start () {
@@ -32,8 +36,9 @@ public class playerControl : MonoBehaviour {
 	void Update () {
 
         free = true;
+        rigidbody.velocity = new Vector3(0, 0, 0);
         attackTimer += Time.deltaTime;
-        if (Input.GetKey(KeyCode.Q) && attackTimer>attackDelay)//ranged attack
+        if (Input.GetKey(attack) && attackTimer>attackDelay)//ranged attack
         {
             attackTimer = 0;
 
@@ -42,17 +47,17 @@ public class playerControl : MonoBehaviour {
                 anim.CrossFade("attack");
             }
 
-            StartCoroutine(SpellEffect(0.2f,1f));//fire effect
+            /*StartCoroutine(SpellEffect(0.2f,1f));//fire effect
 
             RaycastHit hit;
             if (Physics.Raycast(transform.position + new Vector3(0, 1, 0), transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, 1))//determine if attack hits something
             {
                 StartCoroutine(DelayedDestroy(hit.transform.gameObject, 0.3f));
             }
-
+            */
         }
 
-        if (Input.GetKey(KeyCode.W))//move forward
+        if (Input.GetKey(forward))//move forward
         {
             radians = rotation / 360 * 2 * Mathf.PI;
             rigidbody.velocity = new Vector3(Mathf.Sin(radians) * walkingSpeed, 0, Mathf.Cos(radians) * walkingSpeed);
@@ -65,7 +70,7 @@ public class playerControl : MonoBehaviour {
 
         }
 
-        if (Input.GetKey(KeyCode.S))//move backward
+        if (Input.GetKey(backward))//move backward
         {
             radians = rotation / 360 * 2 * Mathf.PI;
             rigidbody.velocity = new Vector3(Mathf.Sin(radians) * (-walkingSpeed), 0, Mathf.Cos(radians)*(-walkingSpeed));
@@ -77,7 +82,7 @@ public class playerControl : MonoBehaviour {
             free = false;
         }
 
-        if (Input.GetKey(KeyCode.A))//rotate left
+        if (Input.GetKey(rotLeft))//rotate left
         {
             rotation -= rotationalSpeed;
             if (!anim.IsPlaying("walk"))
@@ -87,7 +92,7 @@ public class playerControl : MonoBehaviour {
             free = false;
         }
 
-        if (Input.GetKey(KeyCode.D))//rotate right
+        if (Input.GetKey(rotRight))//rotate right
         {
             rotation += rotationalSpeed;
             if (!anim.IsPlaying("walk"))
@@ -104,7 +109,6 @@ public class playerControl : MonoBehaviour {
 
         if (free)
         {
-            rigidbody.velocity = new Vector3(0,0,0);
             if (!anim.IsPlaying("free"))
            {
                 anim.CrossFade("free");
@@ -119,6 +123,7 @@ public class playerControl : MonoBehaviour {
         transform.rotation = Quaternion.Euler(0, rotation, 0);
     }
 
+    /*
     private IEnumerator DelayedDestroy(GameObject target, float duration)//destroy hit target after delay
     {     
         yield return new WaitForSeconds(duration);
@@ -141,4 +146,5 @@ public class playerControl : MonoBehaviour {
         yield return new WaitForSeconds(duration);
         Destroy(spell);
     }
+    */
 }

@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class follow : MonoBehaviour {
+public class followLook : MonoBehaviour {
 
     public Transform target;
     public float speed = 0.15f;
     public float offset = 1.0f;
     public float height = 5f;
-    public Slider[] sliders;
+    //public Slider[] sliders;
 
     private float radians;
     private float rotation;
@@ -21,12 +21,13 @@ public class follow : MonoBehaviour {
 
     void FixedUpdate()
     {
-        height = sliders[0].value;
-        offset = sliders[1].value;
+        //height = sliders[0].value;
+        //offset = sliders[1].value;
         radians = rotation / 360 * 2 * Mathf.PI + Mathf.PI;
         rotation = target.rotation.eulerAngles.y;
         radians = rotation / 360 * 2 * Mathf.PI + Mathf.PI;
         Vector3 desiredPos = target.position + new Vector3(Mathf.Sin(radians) * offset, height, Mathf.Cos(radians) * offset);
         transform.position = Vector3.Lerp(transform.position, desiredPos, speed);
+        transform.LookAt(target.position + new Vector3(0, 2.5f, 0));
     }
 }

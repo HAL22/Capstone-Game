@@ -31,14 +31,13 @@ public class CameraControl : MonoBehaviour
         if (target != null)
         {
             trans.position = target.position + offset;
-            trans.LookAt(target);
-            
+            trans.LookAt(target); 
         }
 
 		
 	}
 
-    public  void SetTarget(GameObject player)
+    public void SetTarget(GameObject player)
     {
         Debug.Log("Here");
         target = player.transform;
