@@ -650,6 +650,7 @@ GameObject:
   - component: {fileID: 2078027360}
   - component: {fileID: 2078027362}
   - component: {fileID: 2078027361}
+  - component: {fileID: 2078027363}
   m_Layer: 0
   m_Name: NetWorkManager
   m_TagString: Untagged
@@ -699,7 +700,7 @@ MonoBehaviour:
   m_NetworkPort: 7777
   m_ServerBindToIP: 0
   m_ServerBindAddress: 
-  m_NetworkAddress: 137.158.58.119
+  m_NetworkAddress: 169.254.8.198
   m_DontDestroyOnLoad: 1
   m_RunInBackground: 1
   m_ScriptCRCCheck: 1
@@ -777,3 +778,24 @@ MonoBehaviour:
   - {fileID: 1438521244197662, guid: 6a0c9c442a6ecf940a4686eb36c16bfe, type: 2}
   - {fileID: 1454206399221362, guid: e7b1ab0521b47824499a4458fa603924, type: 2}
   - {fileID: 0}
+--- !u!114 &2078027363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2078027359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1553936188, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BroadcastPort: 7777
+  m_BroadcastKey: 2222
+  m_BroadcastVersion: 1
+  m_BroadcastSubVersion: 1
+  m_BroadcastInterval: 1000
+  m_UseNetworkManager: 0
+  m_BroadcastData: HELLO
+  m_ShowGUI: 1
+  m_OffsetX: 300
+  m_OffsetY: 0
