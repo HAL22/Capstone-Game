@@ -15,6 +15,10 @@ public class minionAI : MonoBehaviour
     public int cap;
     private List<GameObject> enemies;
     private int targetNum;
+    public GameObject towerPos;
+    public string tower;
+    public bool mustDie;
+    public bool isAlive;
 
 
 
@@ -24,9 +28,10 @@ public class minionAI : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         myTransform = transform;
         raycastLayer = 1 << LayerMask.NameToLayer("PrimaryGameObjects");
-        targetObject = null;
+        targetObject = towerPos;
         enemies = new  List<GameObject>();
         cap = 1;
+        isAlive = true;
         
 		
 	}
@@ -34,6 +39,7 @@ public class minionAI : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        die();
         SearchForTarget();
         moveToTarget();
 		
@@ -41,11 +47,38 @@ public class minionAI : MonoBehaviour
 
     void SearchForTarget()
     {
-        
-        if (targetObject==null)
+
+
+
+        /*  if (targetObject.GetComponent<Identify>().id != tower)
+          {
+              if (targetObject.GetComponent<minionAI>().isAlive==false)
+              {
+                  targetObject = towerPos;
+
+              }
+
+          }*/
+
+        if (targetObject == null)
         {
-           // Debug.Log("Target is null");
+            targetObject = towerPos;
+        }
+
+
+        if (targetObject==null || targetObject.GetComponent<Identify>().id==tower )
+        {
+
             
+
+
+
+
+           
+
+
+            // Debug.Log("Target is null");
+
             enemies.Clear();
 
             Collider[] hitCollider = Physics.OverlapSphere(myTransform.position, rad, raycastLayer);
@@ -55,23 +88,28 @@ public class minionAI : MonoBehaviour
             if (hitCollider.Length > 0)
             {
 
-               // Debug.Log("Got hits");
-                
+                // Debug.Log("Got hits");
+
                 for (int i = 0; i < hitCollider.Length; i++)
                 {
                     if (hitCollider[i].gameObject.GetComponent<Identify>().id != id)
                     {
                         enemies.Add(hitCollider[i].gameObject);
-                       
+
                     }
                 }
+            }
+
+            else
+            {
+                targetObject = towerPos;
             }
 
             if (enemies.Count > 0)
             {
                 for (int i = 0; i < enemies.Count; i++)
                 {
-                    if (enemies[i].GetComponent<minionAI>().getTargetNum() < cap)
+                    if (enemies[i].GetComponent<minionAI>().getTargetNum() < cap || enemies.Count==1)
                     {
                         enemies[i].GetComponent<minionAI>().targetThis();
                         Debug.Log(" I have a target");
@@ -117,5 +155,16 @@ public class minionAI : MonoBehaviour
     public int getTargetNum()
     {
         return targetNum;
+    }
+
+    void die()
+    {
+
+        if (mustDie == true)
+        {
+            isAlive = false;
+            Destroy(gameObject, 1.2f);
+        }
+
     }
 }

@@ -9,49 +9,47 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1797899678770522}
+  m_RootGameObject: {fileID: 1887296165305924}
   m_IsPrefabParent: 1
---- !u!1 &1797899678770522
+--- !u!1 &1887296165305924
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4952289370181480}
-  - component: {fileID: 33200042426474414}
-  - component: {fileID: 65103610218258778}
-  - component: {fileID: 23094651478784332}
-  - component: {fileID: 195189912286801154}
-  - component: {fileID: 114540464012659904}
-  - component: {fileID: 54592251763456158}
-  - component: {fileID: 114305814862431398}
-  m_Layer: 8
-  m_Name: Red2
+  - component: {fileID: 4352634263467360}
+  - component: {fileID: 33620117838933034}
+  - component: {fileID: 65080066606985432}
+  - component: {fileID: 23367432211687664}
+  - component: {fileID: 54823313768826334}
+  - component: {fileID: 114203738907622108}
+  m_Layer: 0
+  m_Name: tower1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4952289370181480
+--- !u!4 &4352634263467360
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1797899678770522}
+  m_GameObject: {fileID: 1887296165305924}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.98, y: 0.5, z: 2.94}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalPosition: {x: 0.791, y: 1.24, z: 3.95}
+  m_LocalScale: {x: 0.5, y: 2, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23094651478784332
+--- !u!23 &23367432211687664
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1797899678770522}
+  m_GameObject: {fileID: 1887296165305924}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -60,7 +58,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: f315477fefaccbe4496402ed2425148d, type: 2}
+  - {fileID: 2100000, guid: 81071a6d55cbfd0438fd510c6b016c01, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -80,19 +78,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33200042426474414
+--- !u!33 &33620117838933034
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1797899678770522}
+  m_GameObject: {fileID: 1887296165305924}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54592251763456158
+--- !u!54 &54823313768826334
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1797899678770522}
+  m_GameObject: {fileID: 1887296165305924}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -102,64 +100,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &65103610218258778
+--- !u!65 &65080066606985432
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1797899678770522}
+  m_GameObject: {fileID: 1887296165305924}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114305814862431398
+--- !u!114 &114203738907622108
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1797899678770522}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a56a528028e00e9489468fd93a12ff6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rad: 1
-  id: Red
-  cap: 0
-  towerPos: {fileID: 1147015813646720, guid: fc45d6883afbce748a8af01e4e2eb872, type: 2}
-  tower: Tower2
---- !u!114 &114540464012659904
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1797899678770522}
+  m_GameObject: {fileID: 1887296165305924}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 442b0d8c38f1e984d9c57c28ab2ac036, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: Red
---- !u!195 &195189912286801154
-NavMeshAgent:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1797899678770522}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 1
-  m_BaseOffset: 0.5
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  id: Tower1
