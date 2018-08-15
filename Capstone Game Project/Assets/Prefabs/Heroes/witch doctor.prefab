@@ -795,7 +795,7 @@ Transform:
   m_GameObject: {fileID: 108720}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 408722}
   - {fileID: 408724}
@@ -1792,7 +1792,7 @@ MonoBehaviour:
   backward: 274
   rotLeft: 276
   rotRight: 275
-  attack: 303
+  attack: 47
   special: 257
 --- !u!114 &114148088248845352
 MonoBehaviour:
