@@ -10,11 +10,13 @@ public class playerControl : MonoBehaviour {
     private Animation anim;
     public Rigidbody rigidbody;
     private bool free;
-    private float attackTimer;
+    private float actionTimer;
+    private bool dead;
 
-    public float attackDelay = 1f;
+    public float actionCooldown = 1f;
     public float rotationalSpeed = 1.5f;
     public float walkingSpeed = 10f;
+    public LayerMask hitLayer;
     //public GameObject magicEffect;
     //public GameObject dustEffect;
 
@@ -23,6 +25,7 @@ public class playerControl : MonoBehaviour {
     public KeyCode rotLeft = KeyCode.A;
     public KeyCode rotRight = KeyCode.D;
     public KeyCode attack = KeyCode.Q;
+    public KeyCode special = KeyCode.E;
 
     // Use this for initialization
     void Start () {
@@ -30,90 +33,109 @@ public class playerControl : MonoBehaviour {
         anim = GetComponent<Animation>();
         rigidbody = GetComponent<Rigidbody>();
         free = true;
-        attackTimer = attackDelay;
+        actionTimer = actionCooldown;
+        dead = false;
     }
 	
 	void Update () {
 
         free = true;
         rigidbody.velocity = new Vector3(0, 0, 0);
-        attackTimer += Time.deltaTime;
-        if (Input.GetKey(attack) && attackTimer>attackDelay)//ranged attack
+        actionTimer += Time.deltaTime;
+        if (actionTimer > actionCooldown && !dead)//only if not currently 
         {
-            attackTimer = 0;
-
-            if (!anim.IsPlaying("attack"))
+            if (Input.GetKey(attack))//ranged attack
             {
-                anim.CrossFade("attack");
+                actionTimer = 0;
+                if (!anim.IsPlaying("attack"))
+                {
+                    anim.CrossFade("attack");
+                }
+
+                //StartCoroutine(SpellEffect(0.2f,1f));//fire effect
+
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position + new Vector3(0, 1, 0), transform.TransformDirection(Vector3.forward), out hit, 2.5f, hitLayer))//determine if attack hits something
+                {
+                    hit.transform.gameObject.GetComponent<healthManager>().Damage(10);
+                }
             }
 
-            /*StartCoroutine(SpellEffect(0.2f,1f));//fire effect
-
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position + new Vector3(0, 1, 0), transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, 1))//determine if attack hits something
+            if (Input.GetKey(special))//ranged attack
             {
-                StartCoroutine(DelayedDestroy(hit.transform.gameObject, 0.3f));
-            }
-            */
-        }
+                actionTimer = 0;
+                if (!anim.IsPlaying("skill"))
+                {
+                    anim.CrossFade("skill");
+                }
 
-        if (Input.GetKey(forward))//move forward
-        {
-            radians = rotation / 360 * 2 * Mathf.PI;
-            rigidbody.velocity = new Vector3(Mathf.Sin(radians) * walkingSpeed, 0, Mathf.Cos(radians) * walkingSpeed);
-            if (!anim.IsPlaying("walk"))
+                /*StartCoroutine(SpellEffect(0.2f,1f));//fire effect
+
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position + new Vector3(0, 1, 0), transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, 1))//determine if attack hits something
+                {
+                    StartCoroutine(DelayedDestroy(hit.transform.gameObject, 0.3f));
+                }
+                */
+            }
+
+            if (Input.GetKey(forward))//move forward
             {
-                anim["walk"].speed = 1.0f;
-                anim.CrossFade("walk");
+                radians = rotation / 360 * 2 * Mathf.PI;
+                rigidbody.velocity = new Vector3(Mathf.Sin(radians) * walkingSpeed, 0, Mathf.Cos(radians) * walkingSpeed);
+                if (!anim.IsPlaying("walk"))
+                {
+                    anim["walk"].speed = 1.0f;
+                    anim.CrossFade("walk");
+                }
+                free = false;
+
             }
-            free = false;
 
-        }
-
-        if (Input.GetKey(backward))//move backward
-        {
-            radians = rotation / 360 * 2 * Mathf.PI;
-            rigidbody.velocity = new Vector3(Mathf.Sin(radians) * (-walkingSpeed), 0, Mathf.Cos(radians)*(-walkingSpeed));
-            if (!anim.IsPlaying("walk"))
+            if (Input.GetKey(backward))//move backward
             {
-                anim["walk"].speed = -1.0f;
-                anim.CrossFade("walk");
+                radians = rotation / 360 * 2 * Mathf.PI;
+                rigidbody.velocity = new Vector3(Mathf.Sin(radians) * (-walkingSpeed), 0, Mathf.Cos(radians) * (-walkingSpeed));
+                if (!anim.IsPlaying("walk"))
+                {
+                    anim["walk"].speed = -1.0f;
+                    anim.CrossFade("walk");
+                }
+                free = false;
             }
-            free = false;
-        }
 
-        if (Input.GetKey(rotLeft))//rotate left
-        {
-            rotation -= rotationalSpeed;
-            if (!anim.IsPlaying("walk"))
+            if (Input.GetKey(rotLeft))//rotate left
             {
-                anim.CrossFade("walk");
+                rotation -= rotationalSpeed;
+                if (!anim.IsPlaying("walk"))
+                {
+                    anim.CrossFade("walk");
+                }
+                free = false;
             }
-            free = false;
-        }
 
-        if (Input.GetKey(rotRight))//rotate right
-        {
-            rotation += rotationalSpeed;
-            if (!anim.IsPlaying("walk"))
+            if (Input.GetKey(rotRight))//rotate right
             {
-                anim.CrossFade("walk");
+                rotation += rotationalSpeed;
+                if (!anim.IsPlaying("walk"))
+                {
+                    anim.CrossFade("walk");
+                }
+                free = false;
             }
-            free = false;
-        }
 
-        if (Input.GetKey(KeyCode.Escape))
-        {
-            Application.Quit();
-        }
+            if (Input.GetKey(KeyCode.Escape))
+            {
+                Application.Quit();
+            }
 
-        if (free)
-        {
-            if (!anim.IsPlaying("free"))
-           {
-                anim.CrossFade("free");
-           }
-
+            if (free)
+            {
+                if (!anim.IsPlaying("free"))
+                {
+                    anim.CrossFade("free");
+                }
+            }
         }
 
     }
@@ -121,6 +143,12 @@ public class playerControl : MonoBehaviour {
     void FixedUpdate()
     {
         transform.rotation = Quaternion.Euler(0, rotation, 0);
+    }
+
+    public void die()
+    {
+        dead = true;
+        anim.CrossFade("death");
     }
 
     /*
