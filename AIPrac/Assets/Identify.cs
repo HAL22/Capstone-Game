@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Identify : MonoBehaviour
 {
-
     public string id;
+    public int minionPriority;
 
-	
 }

@@ -35,6 +35,13 @@ public class minionAI : MonoBehaviour
         
 		
 	}
+
+    static int sortByIdentity(GameObject m1, GameObject m2)
+    {
+
+        return m1.GetComponent<Identify>().minionPriority.CompareTo(m2.GetComponent<Identify>().minionPriority);
+
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -69,14 +76,6 @@ public class minionAI : MonoBehaviour
         if (targetObject==null || targetObject.GetComponent<Identify>().id==tower )
         {
 
-            
-
-
-
-
-           
-
-
             // Debug.Log("Target is null");
 
             enemies.Clear();
@@ -95,6 +94,7 @@ public class minionAI : MonoBehaviour
                     if (hitCollider[i].gameObject.GetComponent<Identify>().id != id)
                     {
                         enemies.Add(hitCollider[i].gameObject);
+                        
 
                     }
                 }
