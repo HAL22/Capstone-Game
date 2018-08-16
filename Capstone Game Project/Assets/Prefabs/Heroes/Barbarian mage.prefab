@@ -1430,7 +1430,7 @@ GameObject:
   - component: {fileID: 224107363620451992}
   - component: {fileID: 222444675451021458}
   - component: {fileID: 114557475944129888}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Healthbar Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1449,7 +1449,7 @@ GameObject:
   - component: {fileID: 114890897653710884}
   - component: {fileID: 114572152453244904}
   - component: {fileID: 114566419404733448}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Healthbar Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1466,7 +1466,7 @@ GameObject:
   - component: {fileID: 224894002761431432}
   - component: {fileID: 222965025075494642}
   - component: {fileID: 114806715899146306}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Healthbar Foreground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1571,9 +1571,13 @@ MonoBehaviour:
   actionCooldown: 1
   rotationalSpeed: 1.5
   walkingSpeed: 10
-  hitLayer:
+  allyLayer:
     serializedVersion: 2
     m_Bits: 256
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  skill: 0
   forward: 119
   backward: 115
   rotLeft: 97

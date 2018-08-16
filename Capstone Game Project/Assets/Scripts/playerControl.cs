@@ -12,11 +12,15 @@ public class playerControl : MonoBehaviour {
     private bool free;
     private float actionTimer;
     private bool dead;
+    
 
     public float actionCooldown = 1f;
     public float rotationalSpeed = 1.5f;
     public float walkingSpeed = 10f;
-    public LayerMask hitLayer;
+    public LayerMask allyLayer;
+    public LayerMask enemyLayer;
+    public enum Skill { smash, heal };
+    public Skill skill; 
     //public GameObject magicEffect;
     //public GameObject dustEffect;
 
@@ -55,7 +59,7 @@ public class playerControl : MonoBehaviour {
                 //StartCoroutine(SpellEffect(0.2f,1f));//fire effect
 
                 RaycastHit hit;
-                if (Physics.Raycast(transform.position + new Vector3(0, 1, 0), transform.TransformDirection(Vector3.forward), out hit, 2.5f, hitLayer))//determine if attack hits something
+                if (Physics.Raycast(transform.position + new Vector3(0, 1, 0), transform.TransformDirection(Vector3.forward), out hit, 2.5f, enemyLayer))//determine if attack hits something
                 {
                     hit.transform.gameObject.GetComponent<healthManager>().Damage(10);
                 }
@@ -69,14 +73,32 @@ public class playerControl : MonoBehaviour {
                     anim.CrossFade("skill");
                 }
 
-                /*StartCoroutine(SpellEffect(0.2f,1f));//fire effect
+                //StartCoroutine(SpellEffect(0.2f,1f));//fire effect
 
-                RaycastHit hit;
-                if (Physics.Raycast(transform.position + new Vector3(0, 1, 0), transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, 1))//determine if attack hits something
+                radians = rotation / 360 * 2 * Mathf.PI;
+                new Vector3(Mathf.Sin(radians) * walkingSpeed, 0, Mathf.Cos(radians) * walkingSpeed);
+
+                if (skill == Skill.smash)
                 {
-                    StartCoroutine(DelayedDestroy(hit.transform.gameObject, 0.3f));
+                    Collider[] hitColliders = Physics.OverlapSphere(transform.position + new Vector3(Mathf.Sin(radians) * 2.5f, 1, Mathf.Cos(radians) * 2.5f), 2f, enemyLayer);
+                    int i = 0;
+                    while (i < hitColliders.Length)
+                    {
+                        hitColliders[i].gameObject.GetComponent<healthManager>().Damage(10);
+                        i++;
+                    }
                 }
-                */
+                else if(skill == Skill.heal)
+                {
+                    Collider[] hitColliders = Physics.OverlapSphere(transform.position + new Vector3(Mathf.Sin(radians) * 2.5f, 1, Mathf.Cos(radians) * 2.5f), 2f, allyLayer);
+                    int i = 0;
+                    while (i < hitColliders.Length)
+                    {
+                        hitColliders[i].gameObject.GetComponent<healthManager>().Damage(-10);
+                        i++;
+                    }
+                }
+
             }
 
             if (Input.GetKey(forward))//move forward
@@ -175,4 +197,4 @@ public class playerControl : MonoBehaviour {
         Destroy(spell);
     }
     */
-}
+            }
