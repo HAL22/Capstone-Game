@@ -29,6 +29,7 @@ public class MinionAI : MonoBehaviour
     void Start ()
     {
 
+
         localSetMinionData();
         
 		
@@ -37,8 +38,132 @@ public class MinionAI : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        KillGame();
 		
 	}
+
+    void SearchFortarget()
+    {
+        // will be improved when death is impleneted in all game object
+        if (targetObect != null) 
+        {
+
+            if (targetObect.GetComponent<healthManager>() != null)
+            {
+                if (targetObect.GetComponent<healthManager>().currentHealth <= 0)
+                {
+                    targetObect = null;
+
+                }
+            }
+
+
+        }
+
+
+        if (targetObect == null) // I know that the target has died or destroyed
+        {
+            targetObect = EnemyTower;
+
+        }
+
+        if (targetObect == null || (WithInAttackDistance(EnemyTower) == false && targetObect == EnemyTower)) // start searching
+        {
+
+            Enemies.Clear();// start with fresh enemies
+
+            // I check the specified radius for enemies //Collider[] hitCollider = Physics.OverlapSphere(myTransform.position, rad, raycastLayer);
+            Collider[] hitcollider = Physics.OverlapSphere(transform.position, searchRadius, EnemyraycastLayer);
+
+            if (hitcollider.Length > 0)
+            {
+                for (int i = 0; i < hitcollider.Length; i++)
+                {
+                    Enemies.Add(hitcollider[i].gameObject);
+
+                }
+
+                if (Enemies.Count > 0)
+                {
+                    Enemies.Sort(sortByidentity);
+                }
+
+            }
+            else
+            {
+                targetObect = EnemyTower;
+            }
+
+            if (Enemies.Count > 0)
+            {
+                for (int i = 0; i < Enemies.Count; i++)
+                {
+                    if (Enemies[i]!=null) // if the gameobject are not null
+                    {
+                        if (Enemies[i].GetComponent<gameObjectIdentity>().ID == 0) // if its a minion
+                        {
+                            if (Enemies[i].GetComponent<MinionAI>().howManyMinions < AttackPerMinion)
+                            {
+                                Enemies[i].GetComponent<MinionAI>().targetThisMinion();
+                                targetObect = Enemies[i];
+                                break;
+
+                            }
+
+                        }
+
+                        targetObect = Enemies[i];
+                        break;
+
+                    }
+
+                }
+            }
+
+
+            // do the attack
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+    }
+
+    void moveToTarget()
+    {
+        if (targetObect != null)
+        {
+            SetNav();
+        }
+    }
+
+    void SetNav()
+    {
+        agent.SetDestination(targetObect.transform.position);
+    }
+
+    /// <summary>
+    /// When the one of the towers gets destroyed, for testing
+    /// </summary>
+
+    void KillGame()
+    {
+
+        if (AllyTower == null || EnemyTower == null)
+        {
+            Application.Quit();
+        }
+
+    }
 
 
 
@@ -91,7 +216,7 @@ public class MinionAI : MonoBehaviour
     /// </summary>
     /// <returns></returns>
 
-    public bool WithInAttackDistance()
+    public bool WithInAttackDistance(GameObject targetObect)
     {
         float distance = (float)Math.Sqrt((transform.position.x - targetObect.transform.position.x) * (transform.position.x - targetObect.transform.position.x) + (transform.position.y-targetObect.transform.position.y) * (transform.position.y - targetObect.transform.position.y) + (transform.position.z-targetObect.transform.position.z) * (transform.position.z - targetObect.transform.position.z));
 

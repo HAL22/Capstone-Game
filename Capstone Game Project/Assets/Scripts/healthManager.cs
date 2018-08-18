@@ -10,7 +10,7 @@ public class healthManager : MonoBehaviour
     public int maxHealth = 100;
     public RectTransform healthBar;
     
-    private int currentHealth;
+    public int currentHealth;
 
     public void MinionDeath()
     {
