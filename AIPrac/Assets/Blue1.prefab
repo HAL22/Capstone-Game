@@ -128,6 +128,10 @@ MonoBehaviour:
   rad: 100
   id: Blue
   cap: 0
+  towerPos: {fileID: 0}
+  tower: 
+  mustDie: 0
+  isAlive: 0
 --- !u!114 &114994420824198028
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -140,6 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: Blue
+  minionPriority: 1
 --- !u!195 &195839676570099920
 NavMeshAgent:
   m_ObjectHideFlags: 1
