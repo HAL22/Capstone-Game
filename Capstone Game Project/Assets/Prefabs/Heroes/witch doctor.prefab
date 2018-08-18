@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 54247780647095568}
   - component: {fileID: 114121484120060796}
   - component: {fileID: 114078626901032738}
+  - component: {fileID: 114870394032350322}
   m_Layer: 9
   m_Name: witch doctor
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1781,7 +1782,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 041a789b5dae98f4a89a423f79a8c59a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidbody: {fileID: 0}
   actionCooldown: 1
   rotationalSpeed: 1.5
   walkingSpeed: 10
@@ -1901,6 +1901,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114870394032350322
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 108720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54d3faa6b4b76ab4389b002e5ad06fd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: 2
 --- !u!222 &222864904074408066
 CanvasRenderer:
   m_ObjectHideFlags: 1
