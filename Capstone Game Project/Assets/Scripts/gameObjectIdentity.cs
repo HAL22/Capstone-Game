@@ -9,7 +9,8 @@ using UnityEngine;
 public class gameObjectIdentity : MonoBehaviour
 {
 
-    public int ID; // needed for sorting
+    public  int ID; // needed for sorting
+    
 
 	
 }

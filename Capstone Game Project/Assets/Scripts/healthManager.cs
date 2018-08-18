@@ -3,12 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class healthManager : MonoBehaviour {
+public class healthManager : MonoBehaviour
+{
+
 
     public int maxHealth = 100;
     public RectTransform healthBar;
     
     private int currentHealth;
+
+    public void MinionDeath()
+    {
+        if (currentHealth <= 0 && gameObject.GetComponent<MinionAI>() != null)
+        {
+            gameObject.GetComponent<MinionAI>().Die();
+
+        }
+    }
 
 	// Use this for initialization
 	void Start () {
@@ -17,7 +28,9 @@ public class healthManager : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
+        MinionDeath();
 		
 	}
 
