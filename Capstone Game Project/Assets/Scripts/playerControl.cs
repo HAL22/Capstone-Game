@@ -31,6 +31,22 @@ public class playerControl : MonoBehaviour {
     public KeyCode attack = KeyCode.Q;
     public KeyCode special = KeyCode.E;
 
+    // for spawning units
+
+    public Transform spawnPos;
+    public GameObject unit;
+    public GameObject allyTower;
+    public GameObject enemyTower;
+    public string enemyLayerToUnit;
+    public string allyLayerToUnit;
+    public int searchRadius;
+    public float attacklength;
+    public int healthimpact;
+    public int attackperminion;
+    public KeyCode spawn;
+
+    public Camera cam;
+
     // Use this for initialization
     void Start () {
         rotation = transform.rotation.eulerAngles.y;
@@ -40,8 +56,19 @@ public class playerControl : MonoBehaviour {
         actionTimer = actionCooldown;
         dead = false;
     }
+
+    void spawnUnits()
+    {
+        if (Input.GetKey(spawn))
+        {
+            unit.GetComponent<MinionAI>().setMinionData(enemyTower, allyTower, enemyLayerToUnit, allyLayerToUnit, searchRadius, attacklength, healthimpact, attackperminion,  cam);
+            Instantiate(unit, spawnPos.position, spawnPos.rotation);
+        }
+    }
 	
 	void Update () {
+
+        spawnUnits();
 
         free = true;
         rigidbody.velocity = new Vector3(0, 0, 0);

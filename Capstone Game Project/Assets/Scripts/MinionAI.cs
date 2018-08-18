@@ -16,8 +16,10 @@ public class MinionAI : MonoBehaviour
     public string AllyLayer;
     public float searchRadius;
     public float attackLength;
-    public float healthImpact;
+    public int healthImpact;
     public List<GameObject> Enemies;
+    public Camera cam;
+    public float attackrad;
     
 
     private LayerMask EnemyraycastLayer;
@@ -39,8 +41,21 @@ public class MinionAI : MonoBehaviour
 	void Update ()
     {
         KillGame();
+
+        SearchFortarget();
+        moveToTarget();
 		
 	}
+
+    void Attack(GameObject target)
+    {
+        if (target != null)
+        {
+            Debug.Log("attack");
+            target.GetComponent<healthManager>().Damage(this.healthImpact);
+        }
+
+    }
 
     void SearchFortarget()
     {
@@ -110,7 +125,19 @@ public class MinionAI : MonoBehaviour
 
                             }
 
+                            else if (Enemies.Count == 1)
+                            {
+                                Enemies[i].GetComponent<MinionAI>().targetThisMinion();
+                                targetObect = Enemies[i];
+                                break;
+
+                            }
+
+
+
                         }
+
+                     
 
                         targetObect = Enemies[i];
                         break;
@@ -123,6 +150,7 @@ public class MinionAI : MonoBehaviour
 
             // do the attack
 
+            attackwithinRad();
 
 
 
@@ -167,7 +195,7 @@ public class MinionAI : MonoBehaviour
 
 
 
-    public void setMinionData(GameObject EnemyTower, GameObject AllyTower, string EnemyLayer, string AllyLayer, float searchRadius, float attackLength, float healthImpact,int AttackPerMinion)
+    public void setMinionData(GameObject EnemyTower, GameObject AllyTower, string EnemyLayer, string AllyLayer, float searchRadius, float attackLength, int healthImpact,int AttackPerMinion, Camera cam)
     {
         this.EnemyTower = EnemyTower;
         this.AllyTower = AllyTower;
@@ -177,6 +205,7 @@ public class MinionAI : MonoBehaviour
         this.attackLength = attackLength;
         this.healthImpact = healthImpact;
         this.AttackPerMinion = AttackPerMinion;
+        this.cam = cam;
 
     }
 
@@ -189,6 +218,10 @@ public class MinionAI : MonoBehaviour
         Enemies = new List<GameObject>();
         agent = GetComponent<NavMeshAgent>();
 
+        gameObject.layer = LayerMask.NameToLayer(AllyLayer);
+
+        gameObject.GetComponentInChildren<healthbarFaceCamera>().cam = this.cam;
+        attackrad = 5;
     }
 
     public void targetThisMinion()
@@ -218,8 +251,8 @@ public class MinionAI : MonoBehaviour
 
     public bool WithInAttackDistance(GameObject targetObect)
     {
-        float distance = (float)Math.Sqrt((transform.position.x - targetObect.transform.position.x) * (transform.position.x - targetObect.transform.position.x) + (transform.position.y-targetObect.transform.position.y) * (transform.position.y - targetObect.transform.position.y) + (transform.position.z-targetObect.transform.position.z) * (transform.position.z - targetObect.transform.position.z));
-
+        float distance = Vector3.Distance(transform.position, targetObect.transform.position);
+      //  Debug.Log(distance);
         if (distance <= attackLength)
         {
             return true;
@@ -244,6 +277,27 @@ public class MinionAI : MonoBehaviour
 
         return m1ID.CompareTo(m2ID);
 
+
+    }
+
+    public void attackwithinRad()
+    {
+
+        if (targetObect != null)
+        {
+            Collider[] hitcollider = Physics.OverlapSphere(transform.position, attackrad, EnemyraycastLayer);
+
+            for (int i = 0; i < hitcollider.Length; i++)
+            {
+                
+                    hitcollider[i].gameObject.GetComponent<healthManager>().Damage(10);
+                    //break;
+
+                
+            }
+
+
+        }
 
     }
 

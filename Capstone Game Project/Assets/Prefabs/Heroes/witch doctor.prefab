@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 54247780647095568}
   - component: {fileID: 114121484120060796}
   - component: {fileID: 114078626901032738}
-  - component: {fileID: 114870394032350322}
+  - component: {fileID: 114537259208380426}
   m_Layer: 9
   m_Name: witch doctor
   m_TagString: Player
@@ -1700,7 +1700,7 @@ GameObject:
   - component: {fileID: 224118171638106318}
   - component: {fileID: 222993921064146772}
   - component: {fileID: 114732221079154324}
-  m_Layer: 11
+  m_Layer: 9
   m_Name: Healthbar Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1717,7 +1717,7 @@ GameObject:
   - component: {fileID: 224333169489070584}
   - component: {fileID: 222864904074408066}
   - component: {fileID: 114843585845064690}
-  m_Layer: 11
+  m_Layer: 9
   m_Name: Healthbar Foreground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1736,7 +1736,7 @@ GameObject:
   - component: {fileID: 114251746601485820}
   - component: {fileID: 114546879494894984}
   - component: {fileID: 114148088248845352}
-  m_Layer: 11
+  m_Layer: 9
   m_Name: Healthbar Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1753,7 +1753,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -1771,6 +1771,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   healthBar: {fileID: 224333169489070584}
+  currentHealth: 0
 --- !u!114 &114121484120060796
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1798,6 +1799,18 @@ MonoBehaviour:
   rotRight: 275
   attack: 47
   special: 257
+  spawnPos: {fileID: 0}
+  unit: {fileID: 100048, guid: 7ed3e345f07e89940ae0c1e00eeb7d1d, type: 2}
+  allyTower: {fileID: 0}
+  enemyTower: {fileID: 0}
+  enemyLayerToUnit: Player 1 Units
+  allyLayerToUnit: Player 2 Units
+  searchRadius: 50
+  attacklength: 70
+  healthimpact: 10
+  attackperminion: 1
+  spawn: 109
+  cam: {fileID: 0}
 --- !u!114 &114148088248845352
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1831,6 +1844,18 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114537259208380426
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 108720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54d3faa6b4b76ab4389b002e5ad06fd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: 2
 --- !u!114 &114546879494894984
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1901,18 +1926,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114870394032350322
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 108720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54d3faa6b4b76ab4389b002e5ad06fd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ID: 2
 --- !u!222 &222864904074408066
 CanvasRenderer:
   m_ObjectHideFlags: 1

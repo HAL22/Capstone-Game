@@ -40,7 +40,7 @@ public class healthManager : MonoBehaviour
         {
             currentHealth -= amt;
             currentHealth = Mathf.Min(currentHealth, maxHealth);
-            if (currentHealth <= 0)
+            if (currentHealth <= 0 && GetComponent<playerControl>()!=null)
             {
                 GetComponent<playerControl>().die();
             }

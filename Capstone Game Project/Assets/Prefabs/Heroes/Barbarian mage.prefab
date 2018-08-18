@@ -612,10 +612,10 @@ GameObject:
   - component: {fileID: 400080}
   - component: {fileID: 11100000}
   - component: {fileID: 13600000}
-  - component: {fileID: 54474412052628056}
   - component: {fileID: 114795575317483450}
   - component: {fileID: 114167077457835230}
   - component: {fileID: 114632896169118070}
+  - component: {fileID: 54165910735457006}
   m_Layer: 8
   m_Name: Barbarian mage
   m_TagString: Player
@@ -1474,7 +1474,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!54 &54474412052628056
+--- !u!54 &54165910735457006
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1484,7 +1484,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -1502,6 +1502,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   healthBar: {fileID: 224894002761431432}
+  currentHealth: 0
 --- !u!114 &114557475944129888
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1596,6 +1597,18 @@ MonoBehaviour:
   rotRight: 100
   attack: 113
   special: 101
+  spawnPos: {fileID: 0}
+  unit: {fileID: 100048, guid: 7ed3e345f07e89940ae0c1e00eeb7d1d, type: 2}
+  allyTower: {fileID: 0}
+  enemyTower: {fileID: 0}
+  enemyLayerToUnit: Player 2 Units
+  allyLayerToUnit: Player 1 Units
+  searchRadius: 50
+  attacklength: 70
+  healthimpact: 10
+  attackperminion: 1
+  spawn: 61
+  cam: {fileID: 0}
 --- !u!114 &114806715899146306
 MonoBehaviour:
   m_ObjectHideFlags: 1
