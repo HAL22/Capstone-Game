@@ -61,7 +61,7 @@ public class playerControl : MonoBehaviour {
     {
         if (Input.GetKey(spawn))
         {
-            unit.GetComponent<MinionAI>().setMinionData(enemyTower, allyTower, enemyLayerToUnit, allyLayerToUnit, searchRadius, attacklength, healthimpact, attackperminion,  cam);
+            unit.GetComponent<MinionAI>().setMinionData(enemyTower, allyTower, enemyLayerToUnit, allyLayerToUnit, searchRadius, attacklength, healthimpact, attackperminion,  cam,1f);
             Instantiate(unit, spawnPos.position, spawnPos.rotation);
         }
     }
