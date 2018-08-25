@@ -12,8 +12,8 @@ public class MinionAI : MonoBehaviour
     public GameObject targetObect;
     public int AttackPerMinion; // prevent minions from bunching
     public int howManyMinions; // basically this will count how many minions are attack this minion, prevent bunching
-    public string EnemyLayer;
-    public string AllyLayer;
+    public LayerMask EnemyLayer;
+    public LayerMask AllyLayer;
     public float searchRadius;
     public float attackLength;
     public int healthImpact;
@@ -21,9 +21,6 @@ public class MinionAI : MonoBehaviour
     public Camera cam;
     public float AttackRadius; // will attack in this radius
     
-
-    private LayerMask EnemyraycastLayer;
-    private LayerMask AllyraycastLayer;
     private NavMeshAgent agent;
 
 
@@ -93,7 +90,7 @@ public class MinionAI : MonoBehaviour
             Enemies.Clear();// start with fresh enemies
 
             // I check the specified radius for enemies //Collider[] hitCollider = Physics.OverlapSphere(myTransform.position, rad, raycastLayer);
-            Collider[] hitcollider = Physics.OverlapSphere(transform.position, searchRadius, EnemyraycastLayer);
+            Collider[] hitcollider = Physics.OverlapSphere(transform.position, searchRadius, EnemyLayer);
 
             if (hitcollider.Length > 0)
             {
@@ -214,7 +211,7 @@ public class MinionAI : MonoBehaviour
 
 
 
-    public void setMinionData(GameObject EnemyTower, GameObject AllyTower, string EnemyLayer, string AllyLayer, float searchRadius, float attackLength, int healthImpact,int AttackPerMinion, Camera cam, float rad)
+    public void setMinionData(GameObject EnemyTower, GameObject AllyTower, LayerMask EnemyLayer, LayerMask AllyLayer, float searchRadius, float attackLength, int healthImpact,int AttackPerMinion, Camera cam, float rad)
     {
         this.EnemyTower = EnemyTower;
         this.AllyTower = AllyTower;
@@ -233,11 +230,9 @@ public class MinionAI : MonoBehaviour
     {
         this.targetObect = this.EnemyTower;
         howManyMinions = 0;
-        this.EnemyraycastLayer = 1 << LayerMask.NameToLayer(this.EnemyLayer);
-        this.AllyraycastLayer = 1 << LayerMask.NameToLayer(this.AllyLayer);
         Enemies = new List<GameObject>();
         agent = GetComponent<NavMeshAgent>();
-        gameObject.layer = LayerMask.NameToLayer(AllyLayer);
+        gameObject.layer = AllyLayer;
         gameObject.GetComponentInChildren<healthbarFaceCamera>().cam = this.cam;
        
     }
@@ -305,7 +300,7 @@ public class MinionAI : MonoBehaviour
     
         if (targetObect != null && gameObject.GetComponent<healthManager>().currentHealth>0)
         {
-            Collider[] hitcollider = Physics.OverlapSphere(transform.position, AttackRadius, EnemyraycastLayer);
+            Collider[] hitcollider = Physics.OverlapSphere(transform.position, AttackRadius, EnemyLayer);
 
             for (int i = 0; i < hitcollider.Length; i++)
             {
