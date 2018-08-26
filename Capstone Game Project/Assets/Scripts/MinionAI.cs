@@ -62,21 +62,11 @@ public class MinionAI : MonoBehaviour
     void SearchFortarget()
     {
         // will be improved when death is impleneted in all game object
-        
+        if (targetObect.GetComponent<healthManager>().currentHealth == 0)
+        {
+            targetObect = null;
 
-            
-                if (targetObect.GetComponent<healthManager>().currentHealth == 0)
-                {
-                    targetObect = null;
-
-                }
-            
-
-
-        
-
-       
-
+        }
 
         if (targetObect == null) // I know that the target has died or destroyed
         {
@@ -172,14 +162,6 @@ public class MinionAI : MonoBehaviour
 
         attackwithinRad();
 
-
-
-
-
-
-
-
-
     }
 
     void moveToTarget()
@@ -209,8 +191,6 @@ public class MinionAI : MonoBehaviour
 
     }
 
-
-
     public void setMinionData(GameObject EnemyTower, GameObject AllyTower, LayerMask EnemyLayer, LayerMask AllyLayer, float searchRadius, float attackLength, int healthImpact,int AttackPerMinion, Camera cam, float rad)
     {
         this.EnemyTower = EnemyTower;
@@ -223,7 +203,6 @@ public class MinionAI : MonoBehaviour
         this.AttackPerMinion = AttackPerMinion;
         this.cam = cam;
         this.AttackRadius = rad;
-
     }
 
     public void localSetMinionData()
