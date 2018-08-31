@@ -374,7 +374,6 @@ GameObject:
   - component: {fileID: 400048}
   - component: {fileID: 9500000}
   - component: {fileID: 114920398150854796}
-  - component: {fileID: 136739622085386920}
   - component: {fileID: 195944594310071408}
   - component: {fileID: 114248638519083054}
   - component: {fileID: 114262333335989218}
@@ -1010,8 +1009,12 @@ MonoBehaviour:
   targetObect: {fileID: 0}
   AttackPerMinion: 1
   howManyMinions: 0
-  EnemyLayer: Player 1 Units
-  AllyLayer: Player 2 Units
+  EnemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  AllyLayer:
+    serializedVersion: 2
+    m_Bits: 0
   searchRadius: 50
   attackLength: 70
   healthImpact: 10
@@ -1108,19 +1111,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
---- !u!136 &136739622085386920
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100048}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.87
-  m_Height: 2.78
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.91, z: 0.12}
 --- !u!195 &195944594310071408
 NavMeshAgent:
   m_ObjectHideFlags: 1

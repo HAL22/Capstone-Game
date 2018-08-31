@@ -14,6 +14,7 @@ public class MinionAI : MonoBehaviour
     public int howManyMinions; // basically this will count how many minions are attack this minion, prevent bunching
     public LayerMask EnemyLayer;
     public LayerMask AllyLayer;
+    public LayerMask UILayer;
     public float searchRadius;
     public float attackLength;
     public int healthImpact;
@@ -191,7 +192,7 @@ public class MinionAI : MonoBehaviour
 
     }
 
-    public void setMinionData(GameObject EnemyTower, GameObject AllyTower, LayerMask EnemyLayer, LayerMask AllyLayer, float searchRadius, float attackLength, int healthImpact,int AttackPerMinion, Camera cam, float rad)
+    public void setMinionData(GameObject EnemyTower, GameObject AllyTower, LayerMask EnemyLayer, LayerMask AllyLayer, float searchRadius, float attackLength, int healthImpact,int AttackPerMinion, Camera cam, LayerMask UILayer, float rad)
     {
         this.EnemyTower = EnemyTower;
         this.AllyTower = AllyTower;
@@ -202,6 +203,7 @@ public class MinionAI : MonoBehaviour
         this.healthImpact = healthImpact;
         this.AttackPerMinion = AttackPerMinion;
         this.cam = cam;
+        this.UILayer = UILayer;
         this.AttackRadius = rad;
     }
 
@@ -211,7 +213,10 @@ public class MinionAI : MonoBehaviour
         howManyMinions = 0;
         Enemies = new List<GameObject>();
         agent = GetComponent<NavMeshAgent>();
-        gameObject.layer = AllyLayer;
+        gameObject.layer = (int)Mathf.Log(AllyLayer.value,2);
+        transform.Find("Healthbar Canvas").gameObject.layer = (int)Mathf.Log(UILayer.value, 2);
+        //GameObject.Find("Healthbar Foreground").layer = UILayer;
+       // GameObject.Find("Healthbar Background").layer = UILayer;
         gameObject.GetComponentInChildren<healthbarFaceCamera>().cam = this.cam;
        
     }

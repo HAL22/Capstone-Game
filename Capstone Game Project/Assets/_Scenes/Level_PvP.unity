@@ -21863,7 +21863,7 @@ MonoBehaviour:
   spawnPos:
   - {fileID: 1138346641}
   - {fileID: 1877035532}
-  knight: {fileID: 100048, guid: 7ed3e345f07e89940ae0c1e00eeb7d1d, type: 2}
+  knight: {fileID: 100048, guid: 272ec112bddec644a8af6599107e74f7, type: 2}
   tower:
   - {fileID: 1225871755}
   - {fileID: 1953524696}
@@ -21872,6 +21872,11 @@ MonoBehaviour:
     m_Bits: 256
   - serializedVersion: 2
     m_Bits: 512
+  UILayer:
+  - serializedVersion: 2
+    m_Bits: 1024
+  - serializedVersion: 2
+    m_Bits: 2048
   searchRadius: 10
   attacklength: 2
   healthimpact: 5
