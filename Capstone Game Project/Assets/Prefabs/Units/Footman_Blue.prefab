@@ -374,6 +374,7 @@ GameObject:
   - component: {fileID: 195563011681745540}
   - component: {fileID: 114765605277936288}
   - component: {fileID: 114801560614867724}
+  - component: {fileID: 136375843002661440}
   m_Layer: 0
   m_Name: Footman_Blue
   m_TagString: Untagged
@@ -1127,6 +1128,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!136 &136375843002661440
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100048}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.71
+  m_Height: 2.51
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.66, z: 0}
 --- !u!195 &195563011681745540
 NavMeshAgent:
   m_ObjectHideFlags: 1

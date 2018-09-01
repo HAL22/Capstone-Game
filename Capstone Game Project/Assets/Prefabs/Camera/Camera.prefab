@@ -55,7 +55,7 @@ Camera:
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.5
+    x: 0
     y: 0
     width: 0.5
     height: 1
@@ -67,7 +67,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294966269
+    m_Bits: 4294965245
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -100,7 +100,7 @@ MonoBehaviour:
   target: {fileID: 0}
   speed: 0.15
   offset: 20
-  height: 15
+  height: 20
 --- !u!124 &124859796201555800
 Behaviour:
   m_ObjectHideFlags: 1
