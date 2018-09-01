@@ -26,14 +26,17 @@ public class MinionAI : MonoBehaviour
     private NavMeshAgent agent;
     private Animator anim;
     private float attackTimer;
+    private enum State { Run, Attack, Die };
+    private State state;
 
 
     // Use this for initialization
     void Start ()
     {
         attackTimer = attackDelay;
+        state = State.Run;
         localSetMinionData();
-	}
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -42,7 +45,9 @@ public class MinionAI : MonoBehaviour
 
         if (gameObject.GetComponent<healthManager>().currentHealth > 0 && attackTimer>attackDelay)
         {
-            anim.CrossFadeInFixedTime("Run", 0.5f);
+            if(state != State.Run)
+                anim.CrossFadeInFixedTime("Run", 0.5f);
+                
             SearchFortarget();
             moveToTarget();
         }
@@ -73,6 +78,7 @@ public class MinionAI : MonoBehaviour
         transform.Find("Healthbar Canvas").gameObject.layer = (int)Mathf.Log(UILayer.value, 2);
         gameObject.GetComponentInChildren<healthbarFaceCamera>().cam = this.cam;
         anim = GetComponent<Animator>();
+        anim.SetBool("Run", true);
         anim.CrossFadeInFixedTime("Run", 0.5f);
     }
 
@@ -226,13 +232,10 @@ public class MinionAI : MonoBehaviour
 
     static int sortByidentity(GameObject m1,GameObject m2)
     {
-
         int m1ID = m1.GetComponent<gameObjectIdentity>().ID;
         int m2ID = m2.GetComponent<gameObjectIdentity>().ID;
 
         return m1ID.CompareTo(m2ID);
-
-
     }
 
     public void attackwithinRad()
@@ -249,7 +252,6 @@ public class MinionAI : MonoBehaviour
                 if (hitcollider[i].gameObject == targetObect && attackTimer > attackDelay)
                 {
                     attackTimer = 0;
-                    Debug.Log("Attack!");
                     anim.CrossFadeInFixedTime("Attack01", 0.5f);
                     hitcollider[i].gameObject.GetComponent<healthManager>().Damage(this.healthImpact);
                     break;
