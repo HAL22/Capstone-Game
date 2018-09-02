@@ -252,6 +252,7 @@ public class MinionAI : MonoBehaviour
                 if (hitcollider[i].gameObject == targetObect && attackTimer > attackDelay)
                 {
                     attackTimer = 0;
+                    anim.SetBool("AttackToRun", true);
                     anim.CrossFadeInFixedTime("Attack01", 0.5f);
                     hitcollider[i].gameObject.GetComponent<healthManager>().Damage(this.healthImpact);
                     break;

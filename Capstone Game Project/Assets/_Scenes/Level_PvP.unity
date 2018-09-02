@@ -21884,7 +21884,7 @@ MonoBehaviour:
   cam:
   - {fileID: 2102795353}
   - {fileID: 1275709927}
-  spawnTime: 5
+  spawnTime: 50
 --- !u!4 &1296620570
 Transform:
   m_ObjectHideFlags: 0
@@ -22140,6 +22140,11 @@ Prefab:
         type: 2}
       propertyPath: m_NormalizedViewPortRect.x
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 20212396346139790, guid: ee76bb268841c5a4bb80d4904309061f,
+        type: 2}
+      propertyPath: m_CullingMask.m_Bits
+      value: 4294966269
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ee76bb268841c5a4bb80d4904309061f, type: 2}
