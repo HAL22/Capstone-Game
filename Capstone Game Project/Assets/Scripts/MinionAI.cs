@@ -33,9 +33,24 @@ public class MinionAI : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+        //set initial variables
         attackTimer = attackDelay;
         state = State.Run;
-        localSetMinionData();
+        this.targetObect = this.EnemyTower;
+        howManyMinions = 0;
+        Enemies = new List<GameObject>();
+        agent = GetComponent<NavMeshAgent>();
+
+        //set layers of unit and healthbar
+        gameObject.layer = (int)Mathf.Log(AllyLayer.value, 2);
+        transform.Find("Healthbar Canvas").gameObject.layer = (int)Mathf.Log(UILayer.value, 2);
+        gameObject.GetComponentInChildren<healthbarFaceCamera>().cam = this.cam;
+
+        //set starting animation
+        anim = GetComponent<Animator>();
+        anim.SetBool("Run", true);
+        anim.SetBool("AttackToRun", true);
+        anim.CrossFadeInFixedTime("Run", 0.5f);
     }
 	
 	// Update is called once per frame
@@ -43,12 +58,13 @@ public class MinionAI : MonoBehaviour
     {
         attackTimer += Time.deltaTime;
 
-        if (gameObject.GetComponent<healthManager>().currentHealth > 0 && attackTimer>attackDelay)
+        if (state != State.Die && attackTimer>attackDelay)
         {
             if(state != State.Run)
                 anim.CrossFadeInFixedTime("Run", 0.5f);
                 
             SearchFortarget();
+            attackwithinRad();
             moveToTarget();
         }
     }
@@ -68,45 +84,13 @@ public class MinionAI : MonoBehaviour
         this.AttackRadius = rad;
     }
 
-    public void localSetMinionData()
-    {
-        this.targetObect = this.EnemyTower;
-        howManyMinions = 0;
-        Enemies = new List<GameObject>();
-        agent = GetComponent<NavMeshAgent>();
-        gameObject.layer = (int)Mathf.Log(AllyLayer.value, 2);
-        transform.Find("Healthbar Canvas").gameObject.layer = (int)Mathf.Log(UILayer.value, 2);
-        gameObject.GetComponentInChildren<healthbarFaceCamera>().cam = this.cam;
-        anim = GetComponent<Animator>();
-        anim.SetBool("Run", true);
-        anim.CrossFadeInFixedTime("Run", 0.5f);
-    }
-
-    void Attack(GameObject target)
-    {
-        if (target != null && attackTimer>attackDelay)
-        {
-            attackTimer = 0;
-            anim.CrossFadeInFixedTime("Attack01",0.5f);
-            target.GetComponent<healthManager>().Damage(this.healthImpact);
-        }
-
-    }
-
     void SearchFortarget()
     {
-        // will be improved when death is impleneted in all game object
-        if (targetObect.GetComponent<healthManager>().currentHealth == 0)
-        {
-            targetObect = null;
-        }
-
         if (targetObect == null) // I know that the target has died or destroyed
         {
             targetObect = EnemyTower;
         }
-
-        if (targetObect == null || ( targetObect == EnemyTower)) // start searching
+        else if (targetObect == EnemyTower)) // start searching
         {
             Enemies.Clear();// start with fresh enemies
             // I check the specified radius for enemies //Collider[] hitCollider = Physics.OverlapSphere(myTransform.position, rad, raycastLayer);
@@ -117,25 +101,19 @@ public class MinionAI : MonoBehaviour
                 for (int i = 0; i < hitcollider.Length; i++)
                 {
                     Enemies.Add(hitcollider[i].gameObject);
-
                 }
 
                 if (Enemies.Count > 0)
                 {
                     Enemies.Sort(sortByidentity);
                 }
-
-            }
-            else
-            {
-                targetObect = EnemyTower;
             }
 
             if (Enemies.Count > 0)
             {
                 for (int i = 0; i < Enemies.Count; i++)
                 {
-                    if (Enemies[i]!=null) // if the gameobject are not null
+                    if (Enemies[i] != null) // if the gameobject are not null
                     {
                         if (Enemies[i].GetComponent<gameObjectIdentity>().ID == 0) // if its a minion
                         {
@@ -145,44 +123,43 @@ public class MinionAI : MonoBehaviour
                                 targetObect = Enemies[i];
                                 break;
                             }
-                            else if (Enemies.Count == 1)
-                            {
-                                Enemies[i].GetComponent<MinionAI>().targetThisMinion();
-                                targetObect = Enemies[i];
-                                break;
-                            }
                         }
-                        if (Enemies[i].GetComponent<gameObjectIdentity>().ID != 0 && Enemies[i].GetComponent<healthManager>().currentHealth>0)
+                        if (Enemies[i].GetComponent<gameObjectIdentity>().ID != 0)
                         {
                             targetObect = Enemies[i];
                             break;
-
                         }
                     }
                 }
             }
         }
-        /* if (targetObect != null)
-         {
-             if (WithInAttackDistance(targetObect))
-             {
-                 targetObect.GetComponent<healthManager>().Damage(10);
-             }
-         }*/
-        attackwithinRad();
+    }
+
+    void attackwithinRad()
+    {
+        if (targetObect != null)
+        {
+            Collider[] hitcollider = Physics.OverlapSphere(transform.position, AttackRadius, EnemyLayer);
+
+            for (int i = 0; i < hitcollider.Length; i++)
+            {
+                if (hitcollider[i].gameObject == targetObect && attackTimer > attackDelay)
+                {
+                    attackTimer = 0;
+                    anim.CrossFadeInFixedTime("Attack01", 0.5f);
+                    hitcollider[i].gameObject.GetComponent<healthManager>().Damage(this.healthImpact);
+                    break;
+                }
+            }
+        }
     }
 
     void moveToTarget()
     {
         if (targetObect != null)
         {
-            SetNav();
+            agent.SetDestination(targetObect.transform.position);
         }
-    }
-
-    void SetNav()
-    {
-        agent.SetDestination(targetObect.transform.position);
     }
 
     public void targetThisMinion()
@@ -203,67 +180,12 @@ public class MinionAI : MonoBehaviour
         return howManyMinions;
     }
 
-    /// <summary>
-    /// This will check if the target object is with attack distance
-    /// </summary>
-    /// <returns></returns>
-
-    public bool WithInAttackDistance(GameObject targetObect)
-    {
-        // float distance = (float)Math.Sqrt((transform.position.x - targetObect.transform.position.x) * (transform.position.x - targetObect.transform.position.x)) ;
-        float distance = (float)Math.Sqrt(Vector3.Distance(transform.position, targetObect.transform.position));
-        if(targetObect!=EnemyTower)
-            Debug.Log(distance);
-        if (distance <= attackLength)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-
-    }
-
-    /// <summary>
-    /// for sorting the list of enemies
-    /// </summary>
-    /// <returns></returns>
-
-    static int sortByidentity(GameObject m1,GameObject m2)
+    static int sortByidentity(GameObject m1,GameObject m2)//sorting priority targets
     {
         int m1ID = m1.GetComponent<gameObjectIdentity>().ID;
         int m2ID = m2.GetComponent<gameObjectIdentity>().ID;
 
         return m1ID.CompareTo(m2ID);
-    }
-
-    public void attackwithinRad()
-    {
-    
-        if (targetObect != null && gameObject.GetComponent<healthManager>().currentHealth>0)
-        {
-            Collider[] hitcollider = Physics.OverlapSphere(transform.position, AttackRadius, EnemyLayer);
-
-            for (int i = 0; i < hitcollider.Length; i++)
-            {
-
-
-                if (hitcollider[i].gameObject == targetObect && attackTimer > attackDelay)
-                {
-                    attackTimer = 0;
-                    anim.SetBool("AttackToRun", true);
-                    anim.CrossFadeInFixedTime("Attack01", 0.5f);
-                    hitcollider[i].gameObject.GetComponent<healthManager>().Damage(this.healthImpact);
-                    break;
-                }
-
-                
-            }
-
-
-        }
-
     }
 
     public void Die()
