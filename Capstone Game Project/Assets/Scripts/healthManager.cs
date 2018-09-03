@@ -30,21 +30,28 @@ public class healthManager : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        MinionDeath();
-		
+
 	}
 
     public void Damage(int amt)
     {
         if(currentHealth > 0)
         {
+            Debug.Log("Damage " + amt);
             currentHealth -= amt;
             currentHealth = Mathf.Min(currentHealth, maxHealth);
-            if (currentHealth <= 0 && GetComponent<playerControl>()!=null)
+            if(currentHealth <= 0)
             {
-                GetComponent<playerControl>().die();
-            }
+                if (GetComponent<playerControl>() != null)
+                {
+                    GetComponent<playerControl>().Die();
+                }
+                if (GetComponent<MinionAI>() != null)
+                {
+                    GetComponent<MinionAI>().Die();
 
+                }
+            }
             healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y);
         }
         

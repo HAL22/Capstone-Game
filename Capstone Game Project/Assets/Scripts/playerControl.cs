@@ -166,7 +166,7 @@ public class playerControl : MonoBehaviour {
         transform.rotation = Quaternion.Euler(0, rotation, 0);
     }
 
-    public void die()
+    public void Die()
     {
         dead = true;
         anim.CrossFade("death");
