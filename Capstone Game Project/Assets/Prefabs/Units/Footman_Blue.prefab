@@ -1070,6 +1070,7 @@ MonoBehaviour:
     m_Bits: 0
   searchRadius: 0
   attackLength: 0
+  attackDelay: 500
   healthImpact: 0
   Enemies: []
   cam: {fileID: 0}
@@ -1109,9 +1110,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bacfb9310d617f54883a2c5b77fa97c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 50
   healthBar: {fileID: 224894901664806930}
-  currentHealth: 100
+  currentHealth: 50
 --- !u!114 &114981685250543196
 MonoBehaviour:
   m_ObjectHideFlags: 1

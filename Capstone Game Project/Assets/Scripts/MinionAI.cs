@@ -47,7 +47,7 @@ public class MinionAI : MonoBehaviour
         transform.Find("Healthbar Canvas").gameObject.layer = (int)Mathf.Log(UILayer.value, 2);
         gameObject.GetComponentInChildren<healthbarFaceCamera>().cam = this.cam;
 
-        GetComponent<healthManager>().healthBar = GetComponentInChildren<healthBarForrground>()
+        GetComponent<healthManager>().healthBar = transform.Find("Healthbar Canvas").gameObject.GetComponent<RectTransform>();
 
         //set starting animation
         anim = GetComponent<Animator>();
@@ -97,7 +97,7 @@ public class MinionAI : MonoBehaviour
         else if (targetObect == EnemyTower) // start searching
         {
             Enemies.Clear();// start with fresh enemies
-            // I check the specified radius for enemies //Collider[] hitCollider = Physics.OverlapSphere(myTransform.position, rad, raycastLayer);
+            // I check the specified radius for enemies
             Collider[] hitcollider = Physics.OverlapSphere(transform.position, searchRadius, EnemyLayer);
 
             if (hitcollider.Length > 0)
@@ -201,6 +201,6 @@ public class MinionAI : MonoBehaviour
         }
         anim.CrossFadeInFixedTime("Death", 0.5f);
         state = State.Dead;
-        Destroy(this, 2);
+        Destroy(gameObject, 2);
     }
 }

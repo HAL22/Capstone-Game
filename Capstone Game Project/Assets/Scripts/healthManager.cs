@@ -30,14 +30,13 @@ public class healthManager : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-
+        
 	}
 
     public void Damage(int amt)
     {
         if(currentHealth > 0)
         {
-            Debug.Log("Damage " + amt);
             currentHealth -= amt;
             currentHealth = Mathf.Min(currentHealth, maxHealth);
             if(currentHealth <= 0)
@@ -53,6 +52,7 @@ public class healthManager : MonoBehaviour
                 }
             }
             healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y);
+            Debug.Log("Damage " + amt + " Current " + currentHealth);
         }
         
     }
