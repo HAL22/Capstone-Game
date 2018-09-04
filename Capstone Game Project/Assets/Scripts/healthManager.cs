@@ -17,14 +17,12 @@ public class healthManager : MonoBehaviour
         if (currentHealth <= 0 && gameObject.GetComponent<MinionAI>() != null)
         {
             gameObject.GetComponent<MinionAI>().Die();
-
         }
     }
 
 	// Use this for initialization
 	void Start () {
         currentHealth = maxHealth;
-		
 	}
 	
 	// Update is called once per frame
