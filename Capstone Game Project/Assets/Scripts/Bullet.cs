@@ -46,6 +46,8 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         }
 
+        transform.Translate(direction.normalized * distanceInFrame, Space.World);
+
 
 		
 	}

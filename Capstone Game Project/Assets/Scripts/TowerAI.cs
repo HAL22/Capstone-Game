@@ -35,7 +35,7 @@ public class TowerAI : MonoBehaviour
 
             GetTarget();
 
-            if (target != null)
+            if (target != null && target.GetComponent<healthManager>().currentHealth>0)
             {
                 Shoot();
             }
