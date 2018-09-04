@@ -5,12 +5,17 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
 
-    private Transform target;
+    private GameObject target;
     private float speed;
+    private Transform targetPos;
+
+    public float health;
 
 	// Use this for initialization
 	void Start ()
     {
+
+        health = 10.0f;
 		
 	}
 
@@ -25,12 +30,19 @@ public class Bullet : MonoBehaviour
 
         }
 
-        Vector3 direction = target.position - transform.position;
+        Vector3 direction = target.transform.position - transform.position;
 
         float distanceInFrame = speed * Time.deltaTime;
 
         if (direction.magnitude <= distanceInFrame)
         {
+            Vector3 dir = target.transform.position - targetPos.position;
+
+            if (dir.magnitude < 3.0f)
+            {
+                target.GetComponent<healthManager>().Damage(10);
+            }
+
             Destroy(gameObject);
         }
 
@@ -38,9 +50,10 @@ public class Bullet : MonoBehaviour
 		
 	}
 
-    void SetData(Transform target, float speed)
+    public void SetData(GameObject target, float speed)
     {
         this.target = target;
         this.speed = speed;
+        targetPos = target.transform;
     }
 }
