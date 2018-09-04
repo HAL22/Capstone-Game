@@ -38,7 +38,7 @@ public class Bullet : MonoBehaviour
         {
             Vector3 dir = target.transform.position - targetPos.position;
 
-            if (dir.magnitude < 3.0f)
+            if (dir.magnitude < 3.0f && target!=null)
             {
                 target.GetComponent<healthManager>().Damage(10);
             }
