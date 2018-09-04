@@ -8,19 +8,13 @@ public class MinionAI : MonoBehaviour
 {
 
     public GameObject EnemyTower;
-    public GameObject AllyTower;
     public GameObject targetObject;
-    public int AttackPerMinion; // prevent minions from bunching
-    public int howManyMinions; // basically this will count how many minions are attack this minion, prevent bunching
     public LayerMask EnemyLayer;
-    public LayerMask AllyLayer;
-    public LayerMask UILayer;
     public float searchRadius;
     public float attackRadius;
     public float attackDelay = 500;
     public int healthImpact;
     public List<GameObject> Enemies;
-    public Camera cam;
     
     private NavMeshAgent agent;
     private Animator anim;
@@ -36,15 +30,16 @@ public class MinionAI : MonoBehaviour
         attackTimer = attackDelay;
         state = State.Run;
         this.targetObject = this.EnemyTower;
-        howManyMinions = 0;
         Enemies = new List<GameObject>();
         agent = GetComponent<NavMeshAgent>();
         attackDelay = 1f;
 
-        //set layers of unit and healthbar
-        gameObject.layer = (int)Mathf.Log(AllyLayer.value, 2);
-        transform.Find("Healthbar Canvas").gameObject.layer = (int)Mathf.Log(UILayer.value, 2);
-        gameObject.GetComponentInChildren<healthbarFaceCamera>().cam = this.cam;
+        //set layers of healthbar
+        transform.Find("Healthbar Canvas01").gameObject.layer = LayerMask.NameToLayer("Player 1 UI") ;
+        transform.Find("Healthbar Canvas01").gameObject.GetComponent<healthbarFaceCamera>().cam = GameObject.Find("Camera1").GetComponent<Camera>();
+        transform.Find("Healthbar Canvas02").gameObject.layer = LayerMask.NameToLayer("Player 2 UI");
+        transform.Find("Healthbar Canvas02").gameObject.GetComponent<healthbarFaceCamera>().cam = GameObject.Find("Camera2").GetComponent<Camera>();
+
 
         //set starting animation
         anim = GetComponent<Animator>();
@@ -73,28 +68,19 @@ public class MinionAI : MonoBehaviour
         }
     }
 
-    public void setMinionData(GameObject EnemyTower, GameObject AllyTower, LayerMask EnemyLayer, LayerMask AllyLayer, float searchRadius, float attackRadius, int healthImpact, int AttackPerMinion, Camera cam, LayerMask UILayer)
+    public void setMinionData(int team, GameObject EnemyTower,LayerMask EnemyLayer, float searchRadius, float attackRadius, int healthImpact)
     {
         this.EnemyTower = EnemyTower;
-        this.AllyTower = AllyTower;
         this.EnemyLayer = EnemyLayer;
-        this.AllyLayer = AllyLayer;
+        gameObject.layer = 8+team;
         this.searchRadius = searchRadius;
         this.attackRadius = attackRadius;
         this.healthImpact = healthImpact;
-        this.AttackPerMinion = AttackPerMinion;
-        this.cam = cam;
-        this.UILayer = UILayer;
     }
 
     void searchForTarget()
     {
-        //if (targetObject == null) // I know that the target has died or destroyed
-        //{
             targetObject = EnemyTower;
-        //}
-        //else if (targetObject == EnemyTower) // start searching
-        //{
             Enemies.Clear();// start with fresh enemies
             // I check the specified radius for enemies
             Collider[] hitcollider = Physics.OverlapSphere(transform.position, searchRadius, EnemyLayer);
@@ -117,26 +103,11 @@ public class MinionAI : MonoBehaviour
             {
                 if (Enemies[i] != null) // if the gameobject are not null
                 {
-                    if (Enemies[i].GetComponent<gameObjectIdentity>().ID == 0) // if its a minion
-                    {
-                        if (Enemies[i].GetComponent<MinionAI>().howManyMinions < AttackPerMinion)
-                        {
-                            Enemies[i].GetComponent<MinionAI>().targetThisMinion();
-                            targetObject = Enemies[i];
-                            break;
-                        }
-                    }
-                    if (Enemies[i].GetComponent<gameObjectIdentity>().ID != 0)
-                    {
-                        targetObject = Enemies[i];
-                        break;
-                    }
+                    targetObject = Enemies[i];
+                    break;
                 }
             }
-
-        //Debug.Log("Current minion " + targetObject.name);
             Enemies.Clear();
-        //}
     }
 
 
@@ -171,24 +142,6 @@ public class MinionAI : MonoBehaviour
         }
     }
 
-    public void targetThisMinion()
-    {
-        howManyMinions++;
-    }
-
-    public void releaseTarget()
-    {
-        if (this.gameObject != null && howManyMinions > 0)
-        {
-            howManyMinions--;
-        }
-    }
-
-    public int targetsOnMinion()
-    {
-        return howManyMinions;
-    }
-
     static int sortByidentity(GameObject m1,GameObject m2)//sorting priority targets
     {
         int m1ID = m1.GetComponent<gameObjectIdentity>().ID;
@@ -199,10 +152,6 @@ public class MinionAI : MonoBehaviour
 
     public void Die()
     {
-        if (targetObject != null && targetObject.GetComponent<MinionAI>() != null)
-        {
-            targetObject.GetComponent<MinionAI>().releaseTarget();
-        }
         agent.isStopped = true;
         anim.CrossFadeInFixedTime("Death", 0.5f);
         state = State.Dead;
