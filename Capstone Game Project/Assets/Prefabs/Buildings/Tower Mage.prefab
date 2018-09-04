@@ -10,7 +10,7 @@ GameObject:
   - component: {fileID: 491468}
   - component: {fileID: 3338162}
   - component: {fileID: 2319096}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 450010}
   - component: {fileID: 3327652}
   - component: {fileID: 2345950}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Woods
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 409546}
   - component: {fileID: 3386264}
   - component: {fileID: 2373996}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Banners
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,7 +61,7 @@ GameObject:
   - component: {fileID: 458352}
   - component: {fileID: 3328912}
   - component: {fileID: 2327856}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Blocks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 472130}
   - component: {fileID: 3303460}
   - component: {fileID: 2319822}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Enterance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 440698}
   - component: {fileID: 3380440}
   - component: {fileID: 2396884}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Crystal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 114353268871914278}
   - component: {fileID: 114267060248420044}
   - component: {fileID: 136921522172134116}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Tower Mage
   m_TagString: Tower
   m_Icon: {fileID: 0}
@@ -140,8 +140,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 187918}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 55, y: 0, z: 140}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 409546}
@@ -151,6 +151,8 @@ Transform:
   - {fileID: 491468}
   - {fileID: 450010}
   - {fileID: 224972914629379648}
+  - {fileID: 4623662187243606}
+  - {fileID: 4932346690875172}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -505,7 +507,7 @@ GameObject:
   - component: {fileID: 114241970478489200}
   - component: {fileID: 114695153491764228}
   - component: {fileID: 114796524061193202}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Healthbar Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -522,8 +524,38 @@ GameObject:
   - component: {fileID: 224046805675793662}
   - component: {fileID: 222713066235386564}
   - component: {fileID: 114438850413186056}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Healthbar Foreground
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1484706041399738
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4932346690875172}
+  m_Layer: 8
+  m_Name: BulletPos2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1696469031463946
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4623662187243606}
+  m_Layer: 9
+  m_Name: BulletPos2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -539,13 +571,39 @@ GameObject:
   - component: {fileID: 224983166510385098}
   - component: {fileID: 222862747170447170}
   - component: {fileID: 114640041171278166}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Healthbar Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4623662187243606
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1696469031463946}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 411524}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4932346690875172
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1484706041399738}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.497, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 411524}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &114241970478489200
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -579,7 +637,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 150
-  healthBar: {fileID: 224046805675793662}
+  healthBar:
+  - {fileID: 0}
   currentHealth: 150
 --- !u!114 &114353268871914278
 MonoBehaviour:
