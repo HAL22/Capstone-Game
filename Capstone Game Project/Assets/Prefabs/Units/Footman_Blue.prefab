@@ -1069,12 +1069,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   searchRadius: 0
-  attackLength: 0
+  attackRadius: 0
   attackDelay: 500
   healthImpact: 0
   Enemies: []
   cam: {fileID: 0}
-  AttackRadius: 0
 --- !u!114 &114801560614867724
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1111,7 +1110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 50
-  healthBar: {fileID: 224894901664806930}
+  healthBar: {fileID: 224548819746730790}
   currentHealth: 50
 --- !u!114 &114981685250543196
 MonoBehaviour:

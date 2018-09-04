@@ -42,8 +42,17 @@ public class SpawnManager : MonoBehaviour {
     void spawnUnits()
     {
         GameObject unit = Instantiate(knight, spawnPos[0].position, spawnPos[0].rotation);
-        unit.GetComponent<MinionAI>().setMinionData(tower[1], tower[0], unitLayer[1], unitLayer[0], searchRadius, attacklength, healthimpact, attackPerMinion, cam[0], UILayer[0], 1f);
+        unit.GetComponent<MinionAI>().setMinionData(tower[1], tower[0], unitLayer[1], unitLayer[0], searchRadius, attacklength, healthimpact, attackPerMinion, cam[0], UILayer[0]);
+        unit = Instantiate(knight, spawnPos[0].position + new Vector3(1, 0, 0), spawnPos[0].rotation);
+        unit.GetComponent<MinionAI>().setMinionData(tower[1], tower[0], unitLayer[1], unitLayer[0], searchRadius, attacklength, healthimpact, attackPerMinion, cam[0], UILayer[0]);
+        unit = Instantiate(knight, spawnPos[0].position + new Vector3(-1, 0, 0), spawnPos[0].rotation);
+        unit.GetComponent<MinionAI>().setMinionData(tower[1], tower[0], unitLayer[1], unitLayer[0], searchRadius, attacklength, healthimpact, attackPerMinion, cam[0], UILayer[0]);
+
         unit = Instantiate(knight, spawnPos[1].position, spawnPos[1].rotation);
-        unit.GetComponent<MinionAI>().setMinionData(tower[0], tower[1], unitLayer[0], unitLayer[1], searchRadius, attacklength, healthimpact, attackPerMinion, cam[1], UILayer[1], 1f);
+        unit.GetComponent<MinionAI>().setMinionData(tower[0], tower[1], unitLayer[0], unitLayer[1], searchRadius, attacklength, healthimpact, attackPerMinion, cam[1], UILayer[1]);
+        unit = Instantiate(knight, spawnPos[1].position+new Vector3(1,0,0), spawnPos[1].rotation);
+        unit.GetComponent<MinionAI>().setMinionData(tower[0], tower[1], unitLayer[0], unitLayer[1], searchRadius, attacklength, healthimpact, attackPerMinion, cam[1], UILayer[1]);
+        unit = Instantiate(knight, spawnPos[1].position + new Vector3(-1, 0, 0), spawnPos[1].rotation);
+        unit.GetComponent<MinionAI>().setMinionData(tower[0], tower[1], unitLayer[0], unitLayer[1], searchRadius, attacklength, healthimpact, attackPerMinion, cam[1], UILayer[1]);
     }
 }

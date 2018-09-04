@@ -14,5 +14,6 @@ public class healthbarFaceCamera : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         transform.LookAt(cam.transform);
+        transform.rotation = cam.transform.rotation;
     }
 }

@@ -8,7 +8,7 @@ public class healthManager : MonoBehaviour
 
 
     public int maxHealth = 100;
-    public RectTransform healthBar;
+    public RectTransform []healthBar;
     
     public int currentHealth;
 
@@ -51,8 +51,8 @@ public class healthManager : MonoBehaviour
 
                 }
             }
-            healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y);
-            Debug.Log("Damage " + amt + " Current " + currentHealth);
+            healthBar[0].sizeDelta = new Vector2(currentHealth, healthBar[0].sizeDelta.y);
+            healthBar[1].sizeDelta = new Vector2(currentHealth, healthBar[1].sizeDelta.y);
         }
         
     }
