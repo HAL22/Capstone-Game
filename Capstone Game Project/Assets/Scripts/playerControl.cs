@@ -11,12 +11,15 @@ public class playerControl : MonoBehaviour {
     private Rigidbody rigidbody;
     private bool free;
     private float actionTimer;
+    private float deathTimer;
     private bool dead;
+    private Vector3 spawnpoint;
     
 
     public float actionCooldown = 1f;
     public float rotationalSpeed = 1.5f;
     public float walkingSpeed = 10f;
+    public float respawnCooldown = 5f;
     public LayerMask allyLayer;
     public LayerMask enemyLayer;
     public enum Skill { smash, heal };
@@ -39,6 +42,8 @@ public class playerControl : MonoBehaviour {
         free = true;
         actionTimer = actionCooldown;
         dead = false;
+        spawnpoint = transform.position;
+        deathTimer = 0;
     }
 	
 	void Update () {
@@ -46,7 +51,7 @@ public class playerControl : MonoBehaviour {
         free = true;
         rigidbody.velocity = new Vector3(0, 0, 0);
         actionTimer += Time.deltaTime;
-        if (actionTimer > actionCooldown && !dead)//only if not currently 
+        if (actionTimer > actionCooldown && !dead)//only if not currently dead or attacking
         {
             if (Input.GetKey(attack))//ranged attack
             {
@@ -156,6 +161,19 @@ public class playerControl : MonoBehaviour {
                 {
                     anim.CrossFade("free");
                 }
+            }
+        }
+
+        if (dead)
+        {
+            deathTimer += Time.deltaTime;
+            if(deathTimer >= respawnCooldown)
+            {
+                dead = false;
+                transform.position = spawnpoint;
+                GetComponent<healthManager>().resetHealth();
+                anim.CrossFade("free");
+                deathTimer = 0;
             }
         }
 
