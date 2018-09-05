@@ -56,6 +56,7 @@ public class TowerAI : MonoBehaviour
 
     void GetTarget()
     {
+        target = null;
         Enemies.Clear();
         // I check the specified radius for enemies
         Collider[] hitcollider = Physics.OverlapSphere(transform.position, searchRadius, EnemyLayer);
