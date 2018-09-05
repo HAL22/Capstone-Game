@@ -8,16 +8,20 @@ public class Bullet : MonoBehaviour
     private GameObject target;
     private float speed;
     private Transform targetPos;
+    private GameObject effect;
+
 
     public float health;
+    public GameObject fireballEffect; // Will surround the bullet
 
 	// Use this for initialization
 	void Start ()
     {
 
         health = 10.0f;
-		
-	}
+        effect = Instantiate(fireballEffect, transform.position, transform.rotation);
+
+    }
 
     // Update is called once per frame
     void Update()
@@ -27,6 +31,7 @@ public class Bullet : MonoBehaviour
         {
 
             Destroy(gameObject);
+            Destroy(effect);
 
         }
 
@@ -44,6 +49,7 @@ public class Bullet : MonoBehaviour
             }
 
             Destroy(gameObject);
+            Destroy(effect, 0.5f);
         }
 
         transform.Translate(direction.normalized * distanceInFrame, Space.World);

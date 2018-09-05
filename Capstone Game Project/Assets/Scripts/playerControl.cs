@@ -29,7 +29,8 @@ public class playerControl : MonoBehaviour {
     public AudioClip attackSound;
     public AudioClip deathSound;
     //public GameObject magicEffect;
-    //public GameObject dustEffect;
+    public GameObject dustEffect;
+    public GameObject skillEffect;
 
     public KeyCode forward = KeyCode.W;
     public KeyCode backward = KeyCode.S;
@@ -68,7 +69,7 @@ public class playerControl : MonoBehaviour {
                     anim.CrossFade("attack");
                 }
 
-                //StartCoroutine(SpellEffect(0.2f,1f));//fire effect
+                StartCoroutine(DustEffect(0.2f,1f));//fire effect
 
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position + new Vector3(0, 1, 0), transform.TransformDirection(Vector3.forward), out hit, 2.5f, enemyLayer))//determine if attack hits something
@@ -87,7 +88,7 @@ public class playerControl : MonoBehaviour {
                     anim.CrossFade("skill");
                 }
 
-                //StartCoroutine(SpellEffect(0.2f,1f));//fire effect
+                StartCoroutine(SpellEffect(0.2f,1f));//fire effect
 
                 radians = rotation / 360 * 2 * Mathf.PI;
 
@@ -201,7 +202,7 @@ public class playerControl : MonoBehaviour {
         anim.CrossFade("death");
     }
 
-    /*
+    
     private IEnumerator DelayedDestroy(GameObject target, float duration)//destroy hit target after delay
     {     
         yield return new WaitForSeconds(duration);
@@ -214,15 +215,28 @@ public class playerControl : MonoBehaviour {
         Destroy(dust);
     }
 
-    private IEnumerator SpellEffect(float startDelay, float duration)//create fire animation with delay to line up with animation
-    {
-        yield return new WaitForSeconds(startDelay);
-        GameObject spell = Instantiate(magicEffect);
-        radians = rotation / 360 * 2 * Mathf.PI;
-        spell.transform.position = transform.position + new Vector3(Mathf.Sin(radians)*3.5f, -0.1f, Mathf.Cos(radians)*3.5f);
-        spell.transform.rotation = transform.rotation;
-        yield return new WaitForSeconds(duration);
-        Destroy(spell);
-    }
-    */
-            }
+     private IEnumerator SpellEffect(float startDelay, float duration)//create fire animation with delay to line up with animation
+     {
+         yield return new WaitForSeconds(startDelay);
+         GameObject spell = Instantiate(skillEffect);
+         radians = rotation / 360 * 2 * Mathf.PI;
+         spell.transform.position = transform.position + new Vector3(Mathf.Sin(radians)*3.5f, -0.1f, Mathf.Cos(radians)*3.5f);
+         spell.transform.rotation = transform.rotation;
+         yield return new WaitForSeconds(duration);
+         Destroy(spell);
+     }
+     
+
+
+     private IEnumerator DustEffect(float startDelay, float duration)//create fire animation with delay to line up with animation
+       {
+           yield return new WaitForSeconds(startDelay);
+           GameObject spell = Instantiate(dustEffect);
+           radians = rotation / 360 * 2 * Mathf.PI;
+           spell.transform.position = transform.position + new Vector3(Mathf.Sin(radians)*3.5f, -0.1f, Mathf.Cos(radians)*3.5f);
+           spell.transform.rotation = transform.rotation;
+           yield return new WaitForSeconds(duration);
+           Destroy(spell);
+       }
+       
+}
