@@ -50,6 +50,7 @@ public class TowerAI : MonoBehaviour
 
     void Shoot()
     {
+        GetComponent<AudioSource>().Play();
         GameObject shootBullet = (GameObject)Instantiate(bullet, firePos.position, firePos.rotation);
         shootBullet.GetComponent<Bullet>().SetData(target, 70.0f);
     }

@@ -14,6 +14,7 @@ public class playerControl : MonoBehaviour {
     private float deathTimer;
     private bool dead;
     private Vector3 spawnpoint;
+    private AudioSource audio;
     
 
     public float actionCooldown = 1f;
@@ -23,7 +24,10 @@ public class playerControl : MonoBehaviour {
     public LayerMask allyLayer;
     public LayerMask enemyLayer;
     public enum Skill { smash, heal };
-    public Skill skill; 
+    public Skill skill;
+
+    public AudioClip attackSound;
+    public AudioClip deathSound;
     //public GameObject magicEffect;
     //public GameObject dustEffect;
 
@@ -44,6 +48,7 @@ public class playerControl : MonoBehaviour {
         dead = false;
         spawnpoint = transform.position;
         deathTimer = 0;
+        audio = GetComponent<AudioSource>();
     }
 	
 	void Update () {
@@ -56,6 +61,8 @@ public class playerControl : MonoBehaviour {
             if (Input.GetKey(attack))//ranged attack
             {
                 actionTimer = 0;
+                audio.clip = attackSound;
+                audio.Play();
                 if (!anim.IsPlaying("attack"))
                 {
                     anim.CrossFade("attack");
@@ -73,6 +80,8 @@ public class playerControl : MonoBehaviour {
             if (Input.GetKey(special))//ranged attack
             {
                 actionTimer = 0;
+                audio.clip = attackSound;
+                audio.Play();
                 if (!anim.IsPlaying("skill"))
                 {
                     anim.CrossFade("skill");
@@ -186,6 +195,8 @@ public class playerControl : MonoBehaviour {
 
     public void Die()
     {
+        audio.clip = deathSound;
+        audio.Play();
         dead = true;
         anim.CrossFade("death");
     }

@@ -143,6 +143,7 @@ public class MinionAI : MonoBehaviour
                     state = State.Attack;
                     anim.CrossFadeInFixedTime("Attack01", 0.5f);
                     hitcollider[i].gameObject.GetComponent<healthManager>().Damage(this.healthImpact);
+                    GetComponent<AudioSource>().Play();
                     break;
                 }
             }
