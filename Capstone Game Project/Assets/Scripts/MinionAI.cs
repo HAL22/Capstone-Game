@@ -127,7 +127,7 @@ public class MinionAI : MonoBehaviour
 
             for (int i = 0; i < Enemies.Count; i++)
             {
-                if (Enemies[i] != null) // if the gameobject are not null
+                if (Enemies[i] != null && Enemies[i].GetComponent<healthManager>().currentHealth>0) // if the gameobject are not null
                 {
                     targetObject = Enemies[i];
                     break;

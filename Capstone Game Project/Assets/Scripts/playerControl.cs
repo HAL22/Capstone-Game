@@ -72,7 +72,7 @@ public class playerControl : MonoBehaviour {
                 StartCoroutine(DustEffect(0.2f,1f));//fire effect
 
                 RaycastHit hit;
-                if (Physics.Raycast(transform.position + new Vector3(0, 1, 0), transform.TransformDirection(Vector3.forward), out hit, 2.5f, enemyLayer))//determine if attack hits something
+                if (Physics.Raycast(transform.position + new Vector3(0, 1, 0), transform.TransformDirection(Vector3.forward), out hit, 6f, enemyLayer))//determine if attack hits something
                 {
                     hit.transform.gameObject.GetComponent<healthManager>().Damage(10);
                 }
