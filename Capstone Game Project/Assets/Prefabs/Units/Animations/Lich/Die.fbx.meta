@@ -53,7 +53,7 @@ ModelImporter:
     400044: Upper_Leg_L
     400046: Upper_Reg_R
     4300000: LichMesh
-    7400000: die
+    7400000: Death
     9500000: //RootNode
     13700000: LichMesh
   externalObjects: {}
@@ -84,7 +84,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: die
+      name: Death
       takeName: Take 001
       firstFrame: 0
       lastFrame: 28

@@ -167,6 +167,7 @@ public class playerControl : MonoBehaviour {
 
             if (free)
             {
+                rigidbody.velocity = new Vector3(0, 0, 0);
                 if (!anim.IsPlaying("free"))
                 {
                     anim.CrossFade("free");
