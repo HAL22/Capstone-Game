@@ -50,8 +50,8 @@ public class healthManager : MonoBehaviour
 
                 }
             }
-            healthBar[0].sizeDelta = new Vector2(currentHealth, healthBar[0].sizeDelta.y);
-            healthBar[1].sizeDelta = new Vector2(currentHealth, healthBar[1].sizeDelta.y);
+            healthBar[0].sizeDelta = new Vector2((float)(currentHealth) / maxHealth * 50, healthBar[0].sizeDelta.y);
+            healthBar[1].sizeDelta = new Vector2((float)(currentHealth)/ maxHealth * 50, healthBar[1].sizeDelta.y);
         }
         
     }
@@ -59,7 +59,7 @@ public class healthManager : MonoBehaviour
     public void resetHealth()
     {
         currentHealth = maxHealth;
-        healthBar[0].sizeDelta = new Vector2(currentHealth, healthBar[0].sizeDelta.y);
-        healthBar[1].sizeDelta = new Vector2(currentHealth, healthBar[1].sizeDelta.y);
+        healthBar[0].sizeDelta = new Vector2((float)(currentHealth) / maxHealth * 50, healthBar[0].sizeDelta.y);
+        healthBar[1].sizeDelta = new Vector2((float)(currentHealth) / maxHealth * 50, healthBar[1].sizeDelta.y);
     }
 }

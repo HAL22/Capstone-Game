@@ -12,7 +12,7 @@ public class MinionAI : MonoBehaviour
     private NavMeshAgent agent;
     private Animator anim;
     private float attackTimer;
-    private enum State { Run, Attack, Dead };
+    private enum State { Run, Attack, Dead, Fear, Burn };
     private State state;
 
     private GameObject EnemyTower;
@@ -22,6 +22,7 @@ public class MinionAI : MonoBehaviour
     private float attackRadius;
     private float attackDelay;
     private int healthImpact;
+    private float speed;
     private List<GameObject> Enemies;
 
     private GameObject bullet;
@@ -39,7 +40,6 @@ public class MinionAI : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         attackDelay = 1f;
         firePos = transform.Find("BulletPos1");
-        Debug.Log(firePos);
 
         //set layers of healthbar
         transform.Find("Healthbar Canvas01").gameObject.layer = LayerMask.NameToLayer("Player 1 UI") ;
@@ -56,8 +56,6 @@ public class MinionAI : MonoBehaviour
 
         //set starting animation
         anim = GetComponent<Animator>();
-        anim.SetBool("Run", true);
-        anim.SetBool("AttackToRun", true);
         anim.CrossFadeInFixedTime("Run", 0.5f);
     }
 	
@@ -99,6 +97,26 @@ public class MinionAI : MonoBehaviour
             attackRadius = 8;
             healthImpact = 5;
             this.bullet = bullet;
+        }
+        else if (model == 2)//golem
+        {
+            searchRadius = 10;
+            attackRadius = 3;
+            healthImpact = 6;
+            this.bullet = null;
+        }
+        else if (model == 3)//dragon
+        {
+            searchRadius = 10;
+            attackRadius = 6;
+            healthImpact = 6;
+            this.bullet = bullet;
+
+        }
+        else
+        {
+            Debug.Log("Invalid Unit Number");
+            Destroy(this);
         }
 
 
