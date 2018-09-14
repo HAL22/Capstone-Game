@@ -1534,7 +1534,7 @@ Animation:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100102}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Animation: {fileID: 7400000, guid: db834b4988164f04bb3dd45f145ffb03, type: 2}
   m_Animations:
@@ -1834,8 +1834,8 @@ Animator:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100102}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: 9a96a7474eedb644e981724156e7236d, type: 3}
+  m_Controller: {fileID: 9100000, guid: 7db7e524ffd37854c80d9f62a3253f65, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2098,8 +2098,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 6.11
-  m_Center: {x: 0, y: 6.42, z: 0}
+  m_Radius: 0.13
+  m_Center: {x: 0, y: 0.17, z: 0}
 --- !u!195 &195692594327459860
 NavMeshAgent:
   m_ObjectHideFlags: 1
