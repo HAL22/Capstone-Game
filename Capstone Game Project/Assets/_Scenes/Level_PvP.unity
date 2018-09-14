@@ -6199,16 +6199,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 114727353873340360, guid: 089964c7cb0d1f74ebdb3a267fbc0763,
-        type: 2}
-      propertyPath: cam
-      value: 
-      objectReference: {fileID: 2102795353}
     - target: {fileID: 114566419404733448, guid: 089964c7cb0d1f74ebdb3a267fbc0763,
         type: 2}
       propertyPath: cam
       value: 
       objectReference: {fileID: 1275709927}
+    - target: {fileID: 114727353873340360, guid: 089964c7cb0d1f74ebdb3a267fbc0763,
+        type: 2}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 2102795353}
     - target: {fileID: 13600000, guid: 089964c7cb0d1f74ebdb3a267fbc0763, type: 2}
       propertyPath: m_IsTrigger
       value: 0
