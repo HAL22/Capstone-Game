@@ -1232,6 +1232,7 @@ Transform:
   - {fileID: 224456683758845676}
   - {fileID: 224270679465564492}
   - {fileID: 224646488726443472}
+  - {fileID: 4672396285938550}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1287,7 +1288,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100080}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 1.5
   m_Height: 2
@@ -1424,6 +1425,22 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100080}
   m_IsPrefabParent: 1
+--- !u!1 &1038878564175792
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4672396285938550}
+  - component: {fileID: 65379818032793608}
+  m_Layer: 13
+  m_Name: PropCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1205315824501360
 GameObject:
   m_ObjectHideFlags: 1
@@ -1434,7 +1451,7 @@ GameObject:
   - component: {fileID: 224107363620451992}
   - component: {fileID: 222444675451021458}
   - component: {fileID: 114557475944129888}
-  m_Layer: 11
+  m_Layer: 8
   m_Name: Healthbar Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1451,7 +1468,7 @@ GameObject:
   - component: {fileID: 224187098508665352}
   - component: {fileID: 222166053792798282}
   - component: {fileID: 114041103499547440}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Healthbar Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1470,7 +1487,7 @@ GameObject:
   - component: {fileID: 114001551010054260}
   - component: {fileID: 114432279207813868}
   - component: {fileID: 114727353873340360}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Healthbar Canvas01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1488,7 +1505,7 @@ GameObject:
   - component: {fileID: 223656276455672342}
   - component: {fileID: 114040134944886628}
   - component: {fileID: 114237850810995098}
-  m_Layer: 12
+  m_Layer: 8
   m_Name: Player Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1507,7 +1524,7 @@ GameObject:
   - component: {fileID: 114890897653710884}
   - component: {fileID: 114572152453244904}
   - component: {fileID: 114566419404733448}
-  m_Layer: 11
+  m_Layer: 8
   m_Name: Healthbar Canvas02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1524,7 +1541,7 @@ GameObject:
   - component: {fileID: 224894002761431432}
   - component: {fileID: 222965025075494642}
   - component: {fileID: 114806715899146306}
-  m_Layer: 11
+  m_Layer: 8
   m_Name: Healthbar Foreground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1541,7 +1558,7 @@ GameObject:
   - component: {fileID: 224942974334951902}
   - component: {fileID: 222864340622931436}
   - component: {fileID: 114311723877282538}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Healthbar Foreground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1558,13 +1575,26 @@ GameObject:
   - component: {fileID: 224406062551697720}
   - component: {fileID: 222340276032288436}
   - component: {fileID: 114817360940412890}
-  m_Layer: 12
+  m_Layer: 8
   m_Name: Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4672396285938550
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1038878564175792}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.6, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400080}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &54165910735457006
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -1580,6 +1610,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &65379818032793608
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1038878564175792}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.68, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &82734901300925628
 AudioSource:
   m_ObjectHideFlags: 1

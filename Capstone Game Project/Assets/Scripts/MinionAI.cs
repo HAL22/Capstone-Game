@@ -7,7 +7,9 @@ using System;
 
 public class MinionAI : MonoBehaviour
 {
-
+    // For droping gold
+    private int DropGoldAmount;
+    private GameObject Gold;
 
     private NavMeshAgent agent;
     private Animator anim;
@@ -79,10 +81,17 @@ public class MinionAI : MonoBehaviour
         }
     }
 
-    public void setMinionData(int team, GameObject EnemyTower, LayerMask EnemyLayer, int model, GameObject bullet)
+    public void DropGold()
+    {
+        GameObject gold = Instantiate(Gold, transform.position, transform.rotation);
+        gold.GetComponent<Gold>().setAmount(5);
+    }
+
+    public void setMinionData(int team, GameObject EnemyTower, LayerMask EnemyLayer, int model, GameObject bullet,GameObject gold)
     {
         this.EnemyTower = EnemyTower;
         this.EnemyLayer = EnemyLayer;
+        this.Gold = gold;
         gameObject.layer = 8+team;
         if(model==0)//knight
         {
@@ -209,6 +218,7 @@ public class MinionAI : MonoBehaviour
         agent.isStopped = true;
         anim.CrossFadeInFixedTime("Death", 0.5f);
         state = State.Dead;
+        DropGold();
         Destroy(gameObject, 1.5f);
     }
 
