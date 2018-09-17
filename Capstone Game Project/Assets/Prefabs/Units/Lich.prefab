@@ -419,7 +419,7 @@ GameObject:
   - component: {fileID: 82807429963405800}
   - component: {fileID: 136248062215105744}
   m_Layer: 0
-  m_Name: FreeLich
+  m_Name: Lich
   m_TagString: Minion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -96,7 +96,7 @@ public class MinionAI : MonoBehaviour
         if(model==0)//knight
         {
             searchRadius = 10;
-            attackRadius = 2;
+            attackRadius = 4;
             healthImpact = 3;
             this.bullet = null;
         }
@@ -110,7 +110,7 @@ public class MinionAI : MonoBehaviour
         else if (model == 2)//golem
         {
             searchRadius = 10;
-            attackRadius = 3;
+            attackRadius = 4;
             healthImpact = 6;
             this.bullet = null;
         }

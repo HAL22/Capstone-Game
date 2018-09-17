@@ -12,19 +12,15 @@ public class healthManager : MonoBehaviour
     
     public int currentHealth;
 
-    public void MinionDeath()
-    {
-        if (currentHealth <= 0 && gameObject.GetComponent<MinionAI>() != null)
-        {
-            gameObject.GetComponent<MinionAI>().Die();
-        }
-    }
+    private float barSize;
 
 	// Use this for initialization
 	void Start ()
     {
         currentHealth = maxHealth;
-	}
+        barSize = healthBar[0].sizeDelta.x;
+
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -50,8 +46,8 @@ public class healthManager : MonoBehaviour
 
                 }
             }
-            healthBar[0].sizeDelta = new Vector2((float)(currentHealth) / maxHealth * 50, healthBar[0].sizeDelta.y);
-            healthBar[1].sizeDelta = new Vector2((float)(currentHealth)/ maxHealth * 50, healthBar[1].sizeDelta.y);
+            healthBar[0].sizeDelta = new Vector2((float)(currentHealth) / maxHealth * barSize, healthBar[0].sizeDelta.y);
+            healthBar[1].sizeDelta = new Vector2((float)(currentHealth)/ maxHealth * barSize, healthBar[1].sizeDelta.y);
         }
         
     }
@@ -59,7 +55,7 @@ public class healthManager : MonoBehaviour
     public void resetHealth()
     {
         currentHealth = maxHealth;
-        healthBar[0].sizeDelta = new Vector2((float)(currentHealth) / maxHealth * 50, healthBar[0].sizeDelta.y);
-        healthBar[1].sizeDelta = new Vector2((float)(currentHealth) / maxHealth * 50, healthBar[1].sizeDelta.y);
+        healthBar[0].sizeDelta = new Vector2((float)(currentHealth) / maxHealth * barSize, healthBar[0].sizeDelta.y);
+        healthBar[1].sizeDelta = new Vector2((float)(currentHealth) / maxHealth * barSize, healthBar[1].sizeDelta.y);
     }
 }
