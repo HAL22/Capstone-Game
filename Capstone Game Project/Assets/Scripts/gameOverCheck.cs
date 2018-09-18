@@ -22,19 +22,19 @@ public class gameOverCheck : MonoBehaviour {
 	void Update () {
         if (!over)
         {
-            if(tower[0].GetComponent<healthManager>().currentHealth <=0 && tower[1].GetComponent<healthManager>().currentHealth <= 0)
+            if(tower[0].GetComponent<healthManager>().getHealth() <=0 && tower[1].GetComponent<healthManager>().getHealth() <= 0)
             {
                 over = true;
                 text.text = "Game Ends in a Tie!";
                 cam.enabled = true; 
             }
-            else if(tower[0].GetComponent<healthManager>().currentHealth <= 0)
+            else if(tower[0].GetComponent<healthManager>().getHealth() <= 0)
             {
                 over = true;
                 text.text = "Player 1 Wins!!!";
                 cam.enabled = true;
             }
-            else if (tower[1].GetComponent<healthManager>().currentHealth <= 0)
+            else if (tower[1].GetComponent<healthManager>().getHealth() <= 0)
             {
                 over = true;
                 text.text = "Player 2 Wins!!!";

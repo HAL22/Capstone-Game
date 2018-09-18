@@ -37517,7 +37517,6 @@ MonoBehaviour:
   healthBar:
   - {fileID: 1617661805}
   - {fileID: 1231630023}
-  currentHealth: 150
 --- !u!114 &1225871758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39224,6 +39223,7 @@ MonoBehaviour:
   - {fileID: 1760619430152306, guid: 7ed3e345f07e89940ae0c1e00eeb7d1d, type: 2}
   - {fileID: 100044, guid: 569d146a5465be04e879b6494c2e310a, type: 2}
   - {fileID: 100102, guid: ff3dd417bb566b849b752ce57810bbf5, type: 2}
+  - {fileID: 100050, guid: aad05534a7ba0dd49b8c54ce188308ec, type: 2}
   tower:
   - {fileID: 1225871755}
   - {fileID: 1953524696}
@@ -57750,7 +57750,6 @@ MonoBehaviour:
   healthBar:
   - {fileID: 251625772}
   - {fileID: 963454739}
-  currentHealth: 150
 --- !u!114 &1953524699
 MonoBehaviour:
   m_ObjectHideFlags: 0

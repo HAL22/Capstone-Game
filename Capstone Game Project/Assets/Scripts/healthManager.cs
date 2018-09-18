@@ -10,7 +10,7 @@ public class healthManager : MonoBehaviour
     public int maxHealth = 100;
     public RectTransform []healthBar;
     
-    public int currentHealth;
+    private int currentHealth;
 
     private float barSize;
 
@@ -57,5 +57,10 @@ public class healthManager : MonoBehaviour
         currentHealth = maxHealth;
         healthBar[0].sizeDelta = new Vector2((float)(currentHealth) / maxHealth * barSize, healthBar[0].sizeDelta.y);
         healthBar[1].sizeDelta = new Vector2((float)(currentHealth) / maxHealth * barSize, healthBar[1].sizeDelta.y);
+    }
+
+    public int getHealth()
+    {
+        return currentHealth;
     }
 }

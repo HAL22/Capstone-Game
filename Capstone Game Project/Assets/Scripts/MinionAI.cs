@@ -15,9 +15,11 @@ public class MinionAI : MonoBehaviour
     public GameObject skillEffect;
     public GameObject Gold;
 
-    private enum Type { Footman, Lich, Orc, Golem, Dragon };
-    private Type type;
+    public enum Type { Footman, Lich, Orc, Golem, Dragon, Grunt };
+    public Type type;
+
     private float attackTimer;
+
     private Transform firePos;
     private NavMeshAgent agent;
     private Animator anim;
@@ -29,6 +31,10 @@ public class MinionAI : MonoBehaviour
     private GameObject targetObject;
     private LayerMask EnemyLayer;
     private List<GameObject> Enemies;
+
+    private GameObject fearTarget;
+    private float fearDuration;
+    private float fearTimer;
 
     // Use this for initialization
     void Start ()
@@ -64,18 +70,31 @@ public class MinionAI : MonoBehaviour
     {
         attackTimer += Time.deltaTime;
 
-        if (state != State.Dead && attackTimer>attackDelay)//if not currently dead or attacking search and move to target
+        if (state != State.Dead)
         {
-            if (state != State.Run)
+            if (state == State.Fear)
             {
-                state = State.Run;
-                anim.CrossFadeInFixedTime("Run", 0.5f);
+                fearTimer += Time.deltaTime;
+                if(fearTimer >= fearDuration)
+                {
+                    state = State.Run;
+                }
+                agent.SetDestination(transform.position - (fearTarget.transform.position - transform.position));
+                agent.isStopped = false;
             }
-                
-            searchForTarget();
-            moveToTarget();
-            attackWithinRad();
-            
+            else if (attackTimer > attackDelay)//if not currently dead or attacking search and move to target
+            {
+                if (state != State.Run)
+                {
+                    state = State.Run;
+                    anim.CrossFadeInFixedTime("Run", 0.5f);
+                }
+
+                searchForTarget();
+                moveToTarget();
+                attackWithinRad();
+
+            }
         }
     }
 
@@ -115,7 +134,7 @@ public class MinionAI : MonoBehaviour
 
             for (int i = 0; i < Enemies.Count; i++)
             {
-                if (Enemies[i] != null && Enemies[i].GetComponent<healthManager>().currentHealth>0) // if the gameobject are not null
+                if (Enemies[i] != null && Enemies[i].GetComponent<healthManager>().getHealth()>0) // if the gameobject are not null
                 {
                     targetObject = Enemies[i];
                     break;
@@ -158,8 +177,6 @@ public class MinionAI : MonoBehaviour
                         GameObject shootBullet = (GameObject)Instantiate(skillEffect, firePos.position, firePos.rotation);
                         shootBullet.GetComponent<Bullet>().SetData(targetObject, 20.0f);
                     }
-                    
-                    
                     break;
                 }
             }
@@ -181,6 +198,14 @@ public class MinionAI : MonoBehaviour
         state = State.Dead;
         DropGold();
         Destroy(gameObject, 1.5f);
+    }
+
+    public void Fear(float fearDuration, GameObject fearTarget)
+    {
+        this.fearTarget = fearTarget;
+        state = State.Fear;
+        this.fearDuration = fearDuration;
+        fearTimer = 0;
     }
 
 }

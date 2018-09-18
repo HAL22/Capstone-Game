@@ -2030,6 +2030,7 @@ MonoBehaviour:
   healthImpact: 6
   skillEffect: {fileID: 0}
   Gold: {fileID: 1594879466734162, guid: c82411508e9628b4e9f629bf2800542f, type: 2}
+  type: 4
 --- !u!114 &114679984431486390
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2093,7 +2094,6 @@ MonoBehaviour:
   healthBar:
   - {fileID: 224610715331865950}
   - {fileID: 224142477640418970}
-  currentHealth: 100
 --- !u!135 &135873531762994384
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -1062,7 +1062,6 @@ MonoBehaviour:
   healthBar:
   - {fileID: 224326567940948212}
   - {fileID: 224544050873500620}
-  currentHealth: 30
 --- !u!114 &114060132732173772
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1081,6 +1080,7 @@ MonoBehaviour:
   skillEffect: {fileID: 1721468571770808, guid: 427271165e1d5bf4699b21878f6de0f9,
     type: 2}
   Gold: {fileID: 1594879466734162, guid: c82411508e9628b4e9f629bf2800542f, type: 2}
+  type: 1
 --- !u!114 &114063020946738470
 MonoBehaviour:
   m_ObjectHideFlags: 1

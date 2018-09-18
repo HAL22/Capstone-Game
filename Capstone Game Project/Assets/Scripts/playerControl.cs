@@ -18,10 +18,6 @@ public class playerControl : MonoBehaviour {
     // Gold that the player has
     public int GoldAmount;
 
-    // Preventing the error
-
-    public float normalY;
-
     public float actionCooldown = 1f;
     public float rotationalSpeed = 1.5f;
     public float walkingSpeed = 10f;
@@ -82,14 +78,16 @@ public class playerControl : MonoBehaviour {
 
                 StartCoroutine(DustEffect(0.2f,1f));//fire effect
 
-                RaycastHit hit;
-                if (Physics.Raycast(transform.position + new Vector3(0, 1, 0), transform.TransformDirection(Vector3.forward), out hit, 6f, enemyLayer))//determine if attack hits something
+                Collider[] hitColliders = Physics.OverlapSphere(transform.position + new Vector3(Mathf.Sin(radians) * 6f, 0, Mathf.Cos(radians) * 6f), 2f, enemyLayer);
+                int i = 0;
+                while (i < hitColliders.Length)
                 {
-                    hit.transform.gameObject.GetComponent<healthManager>().Damage(10);
+                    hitColliders[i].gameObject.GetComponent<healthManager>().Damage(10);
+                    i++;
                 }
             }
 
-            if (Input.GetKey(special))//ranged attack
+            if (Input.GetKey(special))//special ability
             {
                 actionTimer = 0;
                 audio.clip = attackSound;
