@@ -7,29 +7,28 @@ using System;
 
 public class MinionAI : MonoBehaviour
 {
-    // For droping gold
-    private int DropGoldAmount;
-    private GameObject Gold;
+    
+    public float searchRadius;
+    public float attackRadius;
+    public float attackDelay;
+    public int healthImpact;
+    public GameObject skillEffect;
+    public GameObject Gold;
 
+    private enum Type { Footman, Lich, Orc, Golem, Dragon };
+    private Type type;
+    private float attackTimer;
+    private Transform firePos;
     private NavMeshAgent agent;
     private Animator anim;
-    private float attackTimer;
+
     private enum State { Run, Attack, Dead, Fear, Burn };
     private State state;
 
     private GameObject EnemyTower;
     private GameObject targetObject;
     private LayerMask EnemyLayer;
-    private float searchRadius;
-    private float attackRadius;
-    private float attackDelay;
-    private int healthImpact;
-    private float speed;
     private List<GameObject> Enemies;
-
-    private GameObject bullet;
-    private Transform firePos;
-
 
     // Use this for initialization
     void Start ()
@@ -40,7 +39,6 @@ public class MinionAI : MonoBehaviour
         this.targetObject = this.EnemyTower;
         Enemies = new List<GameObject>();
         agent = GetComponent<NavMeshAgent>();
-        attackDelay = 1f;
         firePos = transform.Find("BulletPos1");
 
         //set layers of healthbar
@@ -87,48 +85,11 @@ public class MinionAI : MonoBehaviour
         gold.GetComponent<Gold>().setAmount(5);
     }
 
-    public void setMinionData(int team, GameObject EnemyTower, LayerMask EnemyLayer, int model, GameObject bullet,GameObject gold)
+    public void setMinionData(int team, GameObject EnemyTower, LayerMask EnemyLayer)
     {
         this.EnemyTower = EnemyTower;
         this.EnemyLayer = EnemyLayer;
-        this.Gold = gold;
         gameObject.layer = 8+team;
-        if(model==0)//knight
-        {
-            searchRadius = 10;
-            attackRadius = 4;
-            healthImpact = 3;
-            this.bullet = null;
-        }
-        else if (model == 1)//lich
-        {
-            searchRadius = 10;
-            attackRadius = 8;
-            healthImpact = 5;
-            this.bullet = bullet;
-        }
-        else if (model == 2)//golem
-        {
-            searchRadius = 10;
-            attackRadius = 4;
-            healthImpact = 6;
-            this.bullet = null;
-        }
-        else if (model == 3)//dragon
-        {
-            searchRadius = 10;
-            attackRadius = 6;
-            healthImpact = 6;
-            this.bullet = bullet;
-
-        }
-        else
-        {
-            Debug.Log("Invalid Unit Number");
-            Destroy(this);
-        }
-
-
     }
 
     void searchForTarget()
@@ -188,13 +149,13 @@ public class MinionAI : MonoBehaviour
                     state = State.Attack;
                     anim.CrossFadeInFixedTime("Attack01", 0.5f);
                     GetComponent<AudioSource>().Play();
-                    if (bullet == null)
+                    if (skillEffect == null)
                     {
                         hitcollider[i].gameObject.GetComponent<healthManager>().Damage(this.healthImpact);
                     }
                     else
                     {
-                        GameObject shootBullet = (GameObject)Instantiate(bullet, firePos.position, firePos.rotation);
+                        GameObject shootBullet = (GameObject)Instantiate(skillEffect, firePos.position, firePos.rotation);
                         shootBullet.GetComponent<Bullet>().SetData(targetObject, 20.0f);
                     }
                     

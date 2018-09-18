@@ -1174,6 +1174,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d93d166fc7cb1ee4ab1d2785b7314a32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  searchRadius: 10
+  attackRadius: 4
+  attackDelay: 1
+  healthImpact: 8
+  skillEffect: {fileID: 0}
+  Gold: {fileID: 1594879466734162, guid: c82411508e9628b4e9f629bf2800542f, type: 2}
 --- !u!114 &114713658965479180
 MonoBehaviour:
   m_ObjectHideFlags: 1

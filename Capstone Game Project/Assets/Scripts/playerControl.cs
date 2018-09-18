@@ -178,7 +178,6 @@ public class playerControl : MonoBehaviour {
 
             if (free)
             {
-                Debug.Log("free");
                 rigidbody.velocity = new Vector3(0, 0, 0);
                 rigidbody.angularVelocity = new Vector3(0, 0, 0);
                 if (!anim.IsPlaying("free"))
