@@ -10,15 +10,19 @@ public class MinionAI : MonoBehaviour
     
     public float searchRadius;
     public float attackRadius;
+    private float attackTimer;
     public float attackDelay;
     public int healthImpact;
+    public GameObject attackEffect;
     public GameObject skillEffect;
+    private float skillTimer;
+    public float skillDelay;
     public GameObject Gold;
 
     public enum Type { Footman, Lich, Orc, Golem, Dragon, Grunt };
     public Type type;
 
-    private float attackTimer;
+    
 
     private Transform firePos;
     private NavMeshAgent agent;
@@ -41,6 +45,7 @@ public class MinionAI : MonoBehaviour
     {
         //set initial variables
         attackTimer = attackDelay;
+        skillTimer = skillDelay;
         state = State.Run;
         this.targetObject = this.EnemyTower;
         Enemies = new List<GameObject>();
@@ -69,6 +74,7 @@ public class MinionAI : MonoBehaviour
 	void Update ()
     {
         attackTimer += Time.deltaTime;
+        skillTimer += Time.deltaTime;
 
         if (state != State.Dead)
         {
@@ -166,17 +172,31 @@ public class MinionAI : MonoBehaviour
                     attackTimer = 0;
                     agent.isStopped = true;
                     state = State.Attack;
-                    anim.CrossFadeInFixedTime("Attack01", 0.5f);
-                    GetComponent<AudioSource>().Play();
-                    if (skillEffect == null)
+                    if ((type == Type.Golem) && skillTimer > skillDelay)//golem does fear instead of attack.
                     {
-                        hitcollider[i].gameObject.GetComponent<healthManager>().Damage(this.healthImpact);
+                        anim.CrossFadeInFixedTime("Skill", 0.5f);
+                        skillTimer = 0;
+                        foreach(Collider scareTarget in hitcollider)
+                        {
+                            scareTarget.gameObject.GetComponent<MinionAI>().Fear(5, gameObject);
+                        }
                     }
                     else
                     {
-                        GameObject shootBullet = (GameObject)Instantiate(skillEffect, firePos.position, firePos.rotation);
-                        shootBullet.GetComponent<Bullet>().SetData(targetObject, 20.0f);
+                        anim.CrossFadeInFixedTime("Attack01", 0.5f);
+                        GetComponent<AudioSource>().Play();
+                        if (attackEffect == null)
+                        {
+                            hitcollider[i].gameObject.GetComponent<healthManager>().Damage(this.healthImpact);
+                        }
+                        else
+                        {
+                            GameObject shootBullet = (GameObject)Instantiate(attackEffect, firePos.position, firePos.rotation);
+                            shootBullet.GetComponent<Bullet>().SetData(targetObject, 20.0f);
+                        }
                     }
+                    
+                    
                     break;
                 }
             }
@@ -202,10 +222,15 @@ public class MinionAI : MonoBehaviour
 
     public void Fear(float fearDuration, GameObject fearTarget)
     {
-        this.fearTarget = fearTarget;
-        state = State.Fear;
-        this.fearDuration = fearDuration;
-        fearTimer = 0;
+        if(type != Type.Golem)//connot fear other golems
+        {
+            this.fearTarget = fearTarget;
+            state = State.Fear;
+            anim.CrossFadeInFixedTime("Run", 0.5f);
+            this.fearDuration = fearDuration;
+            fearTimer = 0;
+        }
+        
     }
 
 }

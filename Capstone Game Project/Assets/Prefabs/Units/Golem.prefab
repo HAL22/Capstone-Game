@@ -1177,7 +1177,10 @@ MonoBehaviour:
   attackRadius: 4
   attackDelay: 1
   healthImpact: 8
-  skillEffect: {fileID: 0}
+  attackEffect: {fileID: 0}
+  skillEffect: {fileID: 1046261188129160, guid: 5d559a2985eeb624bb543d28f8b92d7d,
+    type: 2}
+  skillDelay: 10
   Gold: {fileID: 1594879466734162, guid: c82411508e9628b4e9f629bf2800542f, type: 2}
   type: 3
 --- !u!114 &114713658965479180
