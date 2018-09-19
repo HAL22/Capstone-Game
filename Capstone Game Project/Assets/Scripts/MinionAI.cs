@@ -40,6 +40,9 @@ public class MinionAI : MonoBehaviour
     private float fearDuration;
     private float fearTimer;
 
+    private float burnDuration;
+    private float burnTimer;
+
     // Use this for initialization
     void Start ()
     {
@@ -81,11 +84,21 @@ public class MinionAI : MonoBehaviour
             if (state == State.Fear)
             {
                 fearTimer += Time.deltaTime;
-                if(fearTimer >= fearDuration)
+                if (fearTimer >= fearDuration)
                 {
                     state = State.Run;
                 }
                 agent.SetDestination(transform.position - (fearTarget.transform.position - transform.position));
+                agent.isStopped = false;
+            }
+            else if (state == State.Burn)
+            {
+                burnTimer += Time.deltaTime;
+                if (burnTimer >= burnDuration)
+                {
+                    state = State.Run;
+                }
+                agent.SetDestination(transform.position + new Vector3(UnityEngine.Random.Range(-10.0f, 10.0f), 0, UnityEngine.Random.Range(-10.0f, 10.0f)));
                 agent.isStopped = false;
             }
             else if (attackTimer > attackDelay)//if not currently dead or attacking search and move to target
@@ -176,9 +189,20 @@ public class MinionAI : MonoBehaviour
                     {
                         anim.CrossFadeInFixedTime("Skill", 0.5f);
                         skillTimer = 0;
-                        foreach(Collider scareTarget in hitcollider)
+                        foreach (Collider scareTarget in hitcollider)
                         {
                             scareTarget.gameObject.GetComponent<MinionAI>().Fear(5, gameObject);
+                        }
+                    }
+                    else if ((type == Type.Dragon) && skillTimer > skillDelay)//dragon does burn instead of attack.
+                    {
+                        anim.CrossFadeInFixedTime("Skill", 0.5f);
+                        skillTimer = 0;
+                        float radians = transform.rotation.eulerAngles.y / 360 * 2 * Mathf.PI;
+                        hitcollider = Physics.OverlapSphere(transform.position + new Vector3(Mathf.Sin(radians) * attackRadius, 0, Mathf.Cos(radians) * attackRadius), 3f, EnemyLayer);
+                        foreach (Collider burnTarget in hitcollider)
+                        {
+                            burnTarget.gameObject.GetComponent<MinionAI>().Burn(5);
                         }
                     }
                     else
@@ -231,6 +255,19 @@ public class MinionAI : MonoBehaviour
             fearTimer = 0;
         }
         
+    }
+
+    public void Burn(float burnDuration)
+    {
+        if (type != Type.Golem && type != Type.Dragon)//connot burn golem or dragons
+        {
+            Debug.Log("Burn!");
+            state = State.Burn;
+            anim.CrossFadeInFixedTime("Run", 0.5f);
+            this.burnDuration = burnDuration;
+            burnTimer = 0;
+        }
+
     }
 
 }

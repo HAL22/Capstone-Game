@@ -2025,12 +2025,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   searchRadius: 10
-  attackRadius: 5
+  attackRadius: 6
   attackDelay: 1
   healthImpact: 6
   attackEffect: {fileID: 0}
-  skillEffect: {fileID: 0}
-  skillDelay: 0
+  skillEffect: {fileID: 1234867958912450, guid: 607aba23d498a8f4fb2873df806a21f7,
+    type: 2}
+  skillDelay: 8
   Gold: {fileID: 1594879466734162, guid: c82411508e9628b4e9f629bf2800542f, type: 2}
   type: 4
 --- !u!114 &114679984431486390

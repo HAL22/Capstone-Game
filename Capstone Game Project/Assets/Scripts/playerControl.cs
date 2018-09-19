@@ -77,7 +77,7 @@ public class playerControl : MonoBehaviour {
                 }
 
                 StartCoroutine(DustEffect(0.2f,1f));//fire effect
-
+                radians = rotation / 360 * 2 * Mathf.PI;
                 Collider[] hitColliders = Physics.OverlapSphere(transform.position + new Vector3(Mathf.Sin(radians) * 6f, 0, Mathf.Cos(radians) * 6f), 2f, enemyLayer);
                 int i = 0;
                 while (i < hitColliders.Length)
