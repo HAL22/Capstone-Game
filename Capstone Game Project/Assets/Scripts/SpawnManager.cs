@@ -47,7 +47,7 @@ public class SpawnManager : MonoBehaviour {
         unit.GetComponent<MinionAI>().setMinionData(0, tower[1], unitLayer[1]);
         unit = Instantiate(model[1], spawnPos[0].position + new Vector3(0, 0, -1), spawnPos[0].rotation);
         unit.GetComponent<MinionAI>().setMinionData(0, tower[1], unitLayer[1]);
-        unit = Instantiate(model[2], spawnPos[0].position + new Vector3(0, 0, 2), spawnPos[0].rotation);
+        unit = Instantiate(model[1], spawnPos[0].position + new Vector3(0, 0, 2), spawnPos[0].rotation);
         unit.GetComponent<MinionAI>().setMinionData(0, tower[1], unitLayer[1]);
         unit = Instantiate(model[3], spawnPos[0].position + new Vector3(0, 0, -2), spawnPos[0].rotation);
         unit.GetComponent<MinionAI>().setMinionData(0, tower[1], unitLayer[1]);
