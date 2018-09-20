@@ -18,6 +18,7 @@ public class MinionAI : MonoBehaviour
     private float skillTimer;
     public float skillDelay;
     public GameObject Gold;
+   
 
     public enum Type { Footman, Lich, Orc, Golem, Dragon, Grunt };
     public Type type;
@@ -120,7 +121,7 @@ public class MinionAI : MonoBehaviour
     public void DropGold()
     {
         GameObject gold = Instantiate(Gold, transform.position, transform.rotation);
-        gold.GetComponent<Gold>().setAmount(5);
+        gold.GetComponent<Gold>().setAmount(5,EnemyLayer);
     }
 
     public void setMinionData(int team, GameObject EnemyTower, LayerMask EnemyLayer)

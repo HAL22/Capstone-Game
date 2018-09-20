@@ -37,7 +37,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4147114331781828}
   - component: {fileID: 95643549688268718}
-  - component: {fileID: 65034325233554912}
   - component: {fileID: 114153926877350614}
   m_Layer: 13
   m_Name: gold_01
@@ -114,18 +113,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1307691931256934}
   m_Mesh: {fileID: 4300000, guid: 825dc207bf01b7e4bab4a7b500b96d1e, type: 3}
---- !u!65 &65034325233554912
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1594879466734162}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.16, y: 0.19, z: 0.43}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &95643549688268718
 Animator:
   serializedVersion: 3
@@ -154,3 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a201219c19785164f96c6eb64de21f82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Resources:
+    serializedVersion: 2
+    m_Bits: 8192
+  rad: 5

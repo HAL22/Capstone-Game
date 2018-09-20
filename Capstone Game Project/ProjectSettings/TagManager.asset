@@ -7,6 +7,7 @@ TagManager:
   - Minion
   - Tower
   - player2
+  - Fire
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Player 1 UI
   - Player 2 UI
   - Minimap UI
-  - 
+  - Resources
   - 
   - 
   - 
