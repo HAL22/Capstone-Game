@@ -182,12 +182,15 @@ public class MinionAI : MonoBehaviour
             {
                 if (hitcollider[i].gameObject == targetObject)
                 {
+                    transform.LookAt(targetObject.transform);
                     attackTimer = 0;
                     agent.isStopped = true;
                     state = State.Attack;
                     if ((type == Type.Golem) && skillTimer > skillDelay)//golem does fear instead of attack.
                     {
                         anim.CrossFadeInFixedTime("Skill", 0.5f);
+                        GameObject effect = Instantiate(skillEffect, transform.position, transform.rotation);
+                        Destroy(effect, 2f);
                         skillTimer = 0;
                         foreach (Collider scareTarget in hitcollider)
                         {
@@ -197,6 +200,8 @@ public class MinionAI : MonoBehaviour
                     else if ((type == Type.Dragon) && skillTimer > skillDelay)//dragon does burn instead of attack.
                     {
                         anim.CrossFadeInFixedTime("Skill", 0.5f);
+                        GameObject effect = Instantiate(skillEffect, transform.position, transform.rotation);
+                        Destroy(effect, 2f);
                         skillTimer = 0;
                         float radians = transform.rotation.eulerAngles.y / 360 * 2 * Mathf.PI;
                         hitcollider = Physics.OverlapSphere(transform.position + new Vector3(Mathf.Sin(radians) * attackRadius, 0, Mathf.Cos(radians) * attackRadius), 3f, EnemyLayer);
