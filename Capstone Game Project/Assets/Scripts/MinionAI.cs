@@ -18,6 +18,7 @@ public class MinionAI : MonoBehaviour
     private float skillTimer;
     public float skillDelay;
     public GameObject Gold;
+    public int CurrencyLayer;
    
 
     public enum Type { Footman, Lich, Orc, Golem, Dragon, Grunt };
@@ -55,6 +56,7 @@ public class MinionAI : MonoBehaviour
         Enemies = new List<GameObject>();
         agent = GetComponent<NavMeshAgent>();
         firePos = transform.Find("BulletPos1");
+       // CurrencyLayer = 15;
 
         //set layers of healthbar
         transform.Find("Healthbar Canvas01").gameObject.layer = LayerMask.NameToLayer("Player 1 UI") ;
@@ -121,14 +123,16 @@ public class MinionAI : MonoBehaviour
     public void DropGold()
     {
         GameObject gold = Instantiate(Gold, transform.position, transform.rotation);
-        gold.GetComponent<Gold>().setAmount(5,EnemyLayer);
+        gold.GetComponent<Gold>().setAmount(5,EnemyLayer,CurrencyLayer);
     }
 
     public void setMinionData(int team, GameObject EnemyTower, LayerMask EnemyLayer)
     {
+        CurrencyLayer = 15;
         this.EnemyTower = EnemyTower;
         this.EnemyLayer = EnemyLayer;
         gameObject.layer = 8+team;
+        CurrencyLayer = CurrencyLayer - team;
     }
 
     void searchForTarget()

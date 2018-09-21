@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4327178240586742}
   - component: {fileID: 33538737721711158}
   - component: {fileID: 23966149840506458}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: gold_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4147114331781828}
   - component: {fileID: 95643549688268718}
   - component: {fileID: 114153926877350614}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: gold_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,14 +51,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1594879466734162}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.1279254, y: 5.09, z: 29.727081}
+  m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
+  m_LocalPosition: {x: -16.949867, y: 1.5117149, z: 2.01017}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 4327178240586742}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 90, z: 0}
 --- !u!4 &4327178240586742
 Transform:
   m_ObjectHideFlags: 1
@@ -141,7 +141,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a201219c19785164f96c6eb64de21f82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Resources:
-    serializedVersion: 2
-    m_Bits: 8192
-  rad: 5
+  rad: 3
+  AnimateCooldown: 0
