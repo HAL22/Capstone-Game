@@ -9,6 +9,7 @@ public class PowerUpManger : MonoBehaviour
     public GameObject[] PowerUps;
     public int Interval;
     public int HealthIncrease;
+    public int DamageIncrease;
     
     //private variable
     private int currentPos;
@@ -38,11 +39,14 @@ public class PowerUpManger : MonoBehaviour
 
             // geting the pos
             currentPos = Random.Range(0, spawnPoints.Length - 1);
+           
 
             // getting the power-up
             currentPowerUp = Random.Range(0, PowerUps.Length-1);
 
-            Spawn(currentPowerUp, PowerUps[currentPowerUp],spawnPoints[currentPos]);
+            
+
+            Spawn(1, PowerUps[1],spawnPoints[currentPos]);
 
 
 
@@ -52,6 +56,7 @@ public class PowerUpManger : MonoBehaviour
 
     private void Spawn(int type,GameObject powerup,Transform pos)
     {
+        Debug.Log("The type here: " + type);
 
         // health
         if (type == 0)
@@ -59,6 +64,17 @@ public class PowerUpManger : MonoBehaviour
             GameObject Power = Instantiate(powerup, pos.position, pos.rotation);
             Power.GetComponent<PowerUp>().PowerUpSetUp(type, HealthIncrease);
         }
+
+        // damage increase
+
+       else if (type == 1)
+        {
+            
+            GameObject Power = Instantiate(powerup, pos.position, pos.rotation);
+            Power.GetComponent<PowerUp>().PowerUpSetUp(type, DamageIncrease);
+        }
+
+
 
         // type not recognised
         else

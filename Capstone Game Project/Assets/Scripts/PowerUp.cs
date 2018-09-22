@@ -29,22 +29,40 @@ public class PowerUp : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("This is the type: " + Type);
         // Health power-up
         if (Type == 0)
         {
             if (other.gameObject.GetComponentInParent<healthManager>() != null)
             {
                 other.gameObject.GetComponentInParent<healthManager>().Damage(-1*IntegerIncrease);
+
+                Destroy(gameObject);
             }
 
-            Destroy(gameObject);
+            
 
         }
+
+        if (Type == 1)
+        {
+            if (other.gameObject.GetComponentInParent<playerControl>() != null)
+            {
+                other.gameObject.GetComponentInParent<playerControl>().IncreaseDamageStrength(IntegerIncrease);
+
+                Destroy(gameObject);
+
+            }
+
+            
+        }
+
+
 
         // An error
         else
         {
-            Debug.Log("Not a power up");
+            Debug.Log("Not a power up: "+Type);
             Destroy(gameObject);
         }
         

@@ -1076,7 +1076,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -1100,7 +1100,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
 --- !u!114 &114009822994132328
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1164,8 +1164,11 @@ MonoBehaviour:
   attackRadius: 5
   attackDelay: 1
   healthImpact: 6
+  attackEffect: {fileID: 0}
   skillEffect: {fileID: 0}
+  skillDelay: 0
   Gold: {fileID: 1594879466734162, guid: c82411508e9628b4e9f629bf2800542f, type: 2}
+  CurrencyLayer: 0
   type: 5
 --- !u!114 &114520614482956626
 MonoBehaviour:

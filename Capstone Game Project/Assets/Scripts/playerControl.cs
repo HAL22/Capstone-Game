@@ -15,9 +15,9 @@ public class playerControl : MonoBehaviour {
     private bool dead;
     private Vector3 spawnpoint;
     private AudioSource audio;
+
     // Gold that the player has
     public int GoldAmount;
-
     public float actionCooldown = 1f;
     public float rotationalSpeed = 1.5f;
     public float walkingSpeed = 10f;
@@ -26,6 +26,11 @@ public class playerControl : MonoBehaviour {
     public LayerMask enemyLayer;
     public enum Skill { smash, heal };
     public Skill skill;
+
+    //Power-ups
+    public int powerupTime;
+    public int DamageStrength;
+    public int OriginalDamageStrength;
 
     
 
@@ -54,6 +59,7 @@ public class playerControl : MonoBehaviour {
         deathTimer = 0;
         audio = GetComponent<AudioSource>();
         GoldAmount = 0;
+        OriginalDamageStrength = DamageStrength;
         
     }
 	
@@ -82,7 +88,7 @@ public class playerControl : MonoBehaviour {
                 int i = 0;
                 while (i < hitColliders.Length)
                 {
-                    hitColliders[i].gameObject.GetComponent<healthManager>().Damage(10);
+                    hitColliders[i].gameObject.GetComponent<healthManager>().Damage(DamageStrength);
                     i++;
                 }
             }
@@ -107,7 +113,7 @@ public class playerControl : MonoBehaviour {
                     int i = 0;
                     while (i < hitColliders.Length)
                     {
-                        hitColliders[i].gameObject.GetComponent<healthManager>().Damage(10);
+                        hitColliders[i].gameObject.GetComponent<healthManager>().Damage(DamageStrength);
                         i++;
                     }
                 }
@@ -218,6 +224,39 @@ public class playerControl : MonoBehaviour {
             GoldAmount -= amount;
         }
     }
+
+    // Power-ups
+
+    // Strength update
+
+    public void IncreaseDamageStrength(int amount)
+    {
+        DamageStrength += amount;
+
+        // start the timer;
+
+        StartCoroutine(EndPowerUp(1, amount));
+
+    }
+
+    private IEnumerator EndPowerUp(int type,int amount)
+    {
+        if (type == 1)
+        {
+            yield return new WaitForSeconds(powerupTime);
+
+            DamageStrength = Mathf.Max(OriginalDamageStrength, DamageStrength - amount);
+
+
+        }
+    }
+
+    
+
+
+
+
+
 
 
 
