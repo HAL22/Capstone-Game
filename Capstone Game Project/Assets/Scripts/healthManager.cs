@@ -52,6 +52,8 @@ public class healthManager : MonoBehaviour
         
     }
 
+    
+
     public void resetHealth()
     {
         currentHealth = maxHealth;
