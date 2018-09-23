@@ -38,15 +38,15 @@ public class PowerUpManger : MonoBehaviour
             yield return new WaitForSeconds(Interval);
 
             // geting the pos
-            currentPos = Random.Range(0, spawnPoints.Length - 1);
+            currentPos = Random.Range(0, spawnPoints.Length);
            
 
             // getting the power-up
-            currentPowerUp = Random.Range(0, PowerUps.Length-1);
+            currentPowerUp = Random.Range(0, PowerUps.Length);
 
             
-
-            Spawn(1, PowerUps[1],spawnPoints[currentPos]);
+            Debug.Log("The power up is: "+currentPowerUp);
+            Spawn(currentPowerUp, PowerUps[currentPowerUp],spawnPoints[currentPos]);
 
 
 

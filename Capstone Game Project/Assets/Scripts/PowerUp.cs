@@ -78,4 +78,6 @@ public class PowerUp : MonoBehaviour
         transform.Rotate(Vector3.up, 100 * Time.deltaTime);
 
     }
+
+    
 }
