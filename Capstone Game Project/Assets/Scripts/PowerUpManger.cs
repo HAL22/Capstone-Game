@@ -6,14 +6,17 @@ public class PowerUpManger : MonoBehaviour
 {
     //public variables
     public Transform[] spawnPoints;
+    public int[] OccupiedSpawnPoints;
     public GameObject[] PowerUps;
     public int Interval;
     public int HealthIncrease;
     public int DamageIncrease;
+    public int positionPerPowerUp;
     
     //private variable
     private int currentPos;
     private int currentPowerUp;
+    
 
     
 	// Use this for initialization
@@ -39,14 +42,17 @@ public class PowerUpManger : MonoBehaviour
 
             // geting the pos
             currentPos = Random.Range(0, spawnPoints.Length);
-           
 
             // getting the power-up
             currentPowerUp = Random.Range(0, PowerUps.Length);
 
             
-            Debug.Log("The power up is: "+currentPowerUp);
-            Spawn(currentPowerUp, PowerUps[currentPowerUp],spawnPoints[currentPos]);
+            if (OccupiedSpawnPoints[currentPos] < positionPerPowerUp)
+            {
+                Spawn(currentPowerUp, PowerUps[currentPowerUp], spawnPoints[currentPos]);
+                OccupiedSpawnPoints[currentPos]++;
+            }
+               
 
 
 
@@ -62,7 +68,7 @@ public class PowerUpManger : MonoBehaviour
         if (type == 0)
         {
             GameObject Power = Instantiate(powerup, pos.position, pos.rotation);
-            Power.GetComponent<PowerUp>().PowerUpSetUp(type, HealthIncrease);
+            Power.GetComponent<PowerUp>().PowerUpSetUp(type, HealthIncrease,currentPos,gameObject);
         }
 
         // damage increase
@@ -71,7 +77,7 @@ public class PowerUpManger : MonoBehaviour
         {
             
             GameObject Power = Instantiate(powerup, pos.position, pos.rotation);
-            Power.GetComponent<PowerUp>().PowerUpSetUp(type, DamageIncrease);
+            Power.GetComponent<PowerUp>().PowerUpSetUp(type, DamageIncrease,currentPos,gameObject);
         }
 
 
@@ -83,6 +89,15 @@ public class PowerUpManger : MonoBehaviour
         }
 
         
+    }
+
+    public void ReleaseSpawnPoint(int spawnpoint)
+    {
+        if (OccupiedSpawnPoints[spawnpoint] > 0)
+        {
+            OccupiedSpawnPoints[spawnpoint]--;
+        }
+
     }
 
    

@@ -9,14 +9,26 @@ public class PowerUp : MonoBehaviour
     private int IntegerIncrease; // will increase any integer data eg health, damage etc
     private float len;
     private float speed;
+    private int spawnpos; // position in the array in powerupmanger;
 
-    public void PowerUpSetUp(int type,int integerincrease)
+    // public variables
+    private GameObject powerUpManager;
+    public int lifetime; // life time of a power up
+
+    public void PowerUpSetUp(int type,int integerincrease, int spawnpos, GameObject powerUpManager)
     {
         Type = type;
         IntegerIncrease = integerincrease;
         len = 3;
         speed = 5;
+        this.spawnpos = spawnpos;
+        this.powerUpManager = powerUpManager;
 
+    }
+
+    private void Start()
+    {
+        StartCoroutine(killPowerUp());
     }
 
     private void Update()
@@ -37,6 +49,8 @@ public class PowerUp : MonoBehaviour
             {
                 other.gameObject.GetComponentInParent<healthManager>().Damage(-1*IntegerIncrease);
 
+                powerUpManager.GetComponent<PowerUpManger>().ReleaseSpawnPoint(spawnpos);
+
                 Destroy(gameObject);
             }
 
@@ -49,6 +63,8 @@ public class PowerUp : MonoBehaviour
             if (other.gameObject.GetComponentInParent<playerControl>() != null)
             {
                 other.gameObject.GetComponentInParent<playerControl>().IncreaseDamageStrength(IntegerIncrease);
+
+                powerUpManager.GetComponent<PowerUpManger>().ReleaseSpawnPoint(spawnpos);
 
                 Destroy(gameObject);
 
@@ -63,6 +79,7 @@ public class PowerUp : MonoBehaviour
         else
         {
             Debug.Log("Not a power up: "+Type);
+            powerUpManager.GetComponent<PowerUpManger>().ReleaseSpawnPoint(spawnpos);
             Destroy(gameObject);
         }
         
@@ -76,6 +93,17 @@ public class PowerUp : MonoBehaviour
         transform.position = pos;
 
         transform.Rotate(Vector3.up, 100 * Time.deltaTime);
+
+    }
+
+    IEnumerator killPowerUp()
+    {
+        yield return new WaitForSeconds(lifetime);
+
+        powerUpManager.GetComponent<PowerUpManger>().ReleaseSpawnPoint(spawnpos);
+
+        Destroy(gameObject);
+
 
     }
 
