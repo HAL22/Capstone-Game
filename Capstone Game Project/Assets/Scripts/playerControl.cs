@@ -33,6 +33,7 @@ public class playerControl : MonoBehaviour {
     public int OriginalDamageStrength;
     public int OriginalLayer; // for invisible 
     public int invisiblityTime;
+    public float OriginalWalkingspeed;
 
     
 
@@ -63,13 +64,13 @@ public class playerControl : MonoBehaviour {
         GoldAmount = 0;
         OriginalDamageStrength = DamageStrength;
         invisiblityTime = 0;
+        OriginalWalkingspeed = walkingSpeed;
        
     }
 	
 	void Update () {
 
        
-
         free = true;
         rigidbody.velocity = new Vector3(0, 0, 0);
         actionTimer += Time.deltaTime;
@@ -252,6 +253,13 @@ public class playerControl : MonoBehaviour {
 
     }
 
+    public void IncreaseSpeed(float speed)
+    {
+        walkingSpeed += speed;
+
+        StartCoroutine(EndPowerUp(3,(int)speed));
+    }
+
     private IEnumerator EndPowerUp(int type,int amount)
     {
         if (type == 1)
@@ -274,6 +282,14 @@ public class playerControl : MonoBehaviour {
                 gameObject.layer = OriginalLayer;
                 invisiblityTime = 0;
             }
+
+        }
+
+        if (type == 3)
+        {
+            yield return new WaitForSeconds(powerupTime);
+
+            walkingSpeed = Mathf.Max(OriginalWalkingspeed, walkingSpeed - amount);
 
         }
     }

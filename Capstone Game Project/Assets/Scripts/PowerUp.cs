@@ -7,8 +7,8 @@ public class PowerUp : MonoBehaviour
     // private variables
     private int Type;// type of power-up
     private int IntegerIncrease; // will increase any integer data eg health, damage etc
-    private float len;
-    private float speed;
+    private float len; // for animation
+    private float speed; // for the animation
     private int spawnpos; // position in the array in powerupmanger;
     private int layer; //  for the invisibilty power-up
 
@@ -84,6 +84,23 @@ public class PowerUp : MonoBehaviour
             if (other.gameObject.GetComponentInParent<playerControl>() != null)
             {
                 other.gameObject.GetComponentInParent<playerControl>().MakeInVisible(layer);
+
+                powerUpManager.GetComponent<PowerUpManger>().ReleaseSpawnPoint(spawnpos);
+
+                Destroy(gameObject);
+
+            }
+
+        }
+
+        // speed up
+
+        if (Type == 3)
+        {
+
+            if (other.gameObject.GetComponentInParent<playerControl>() != null)
+            {
+                other.gameObject.GetComponentInParent<playerControl>().IncreaseSpeed(IntegerIncrease);
 
                 powerUpManager.GetComponent<PowerUpManger>().ReleaseSpawnPoint(spawnpos);
 

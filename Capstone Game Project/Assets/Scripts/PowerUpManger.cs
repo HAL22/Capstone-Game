@@ -11,6 +11,7 @@ public class PowerUpManger : MonoBehaviour
     public int Interval;
     public int HealthIncrease;
     public int DamageIncrease;
+    public int SpeedIncrease;
     public int positionPerPowerUp;
     
     //private variable
@@ -86,6 +87,15 @@ public class PowerUpManger : MonoBehaviour
         {
             GameObject Power = Instantiate(powerup, pos.position, pos.rotation);
             Power.GetComponent<PowerUp>().PowerUpSetUp(type, 0, currentPos, gameObject);
+
+        }
+
+        // Speed up
+
+        else if (type==3)
+        {
+            GameObject Power = Instantiate(powerup, pos.position, pos.rotation);
+            Power.GetComponent<PowerUp>().PowerUpSetUp(type, SpeedIncrease, currentPos, gameObject);
 
         }
 
