@@ -10,6 +10,7 @@ public class PowerUp : MonoBehaviour
     private float len;
     private float speed;
     private int spawnpos; // position in the array in powerupmanger;
+    private int layer; //  for the invisibilty power-up
 
     // public variables
     private GameObject powerUpManager;
@@ -23,6 +24,8 @@ public class PowerUp : MonoBehaviour
         speed = 5;
         this.spawnpos = spawnpos;
         this.powerUpManager = powerUpManager;
+        layer = 13;
+        lifetime = 10;
 
     }
 
@@ -58,6 +61,7 @@ public class PowerUp : MonoBehaviour
 
         }
 
+        // Strength power-up
         if (Type == 1)
         {
             if (other.gameObject.GetComponentInParent<playerControl>() != null)
@@ -73,12 +77,28 @@ public class PowerUp : MonoBehaviour
             
         }
 
+        // invisiblity 
+
+        if (Type == 2)
+        {
+            if (other.gameObject.GetComponentInParent<playerControl>() != null)
+            {
+                other.gameObject.GetComponentInParent<playerControl>().MakeInVisible(layer);
+
+                powerUpManager.GetComponent<PowerUpManger>().ReleaseSpawnPoint(spawnpos);
+
+                Destroy(gameObject);
+
+            }
+
+        }
+
 
 
         // An error
         else
         {
-            Debug.Log("Not a power up: "+Type);
+            Debug.Log("Not a power up: " + Type);
             powerUpManager.GetComponent<PowerUpManger>().ReleaseSpawnPoint(spawnpos);
             Destroy(gameObject);
         }

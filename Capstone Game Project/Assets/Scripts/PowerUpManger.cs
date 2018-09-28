@@ -68,16 +68,25 @@ public class PowerUpManger : MonoBehaviour
         if (type == 0)
         {
             GameObject Power = Instantiate(powerup, pos.position, pos.rotation);
-            Power.GetComponent<PowerUp>().PowerUpSetUp(type, HealthIncrease,currentPos,gameObject);
+            Power.GetComponent<PowerUp>().PowerUpSetUp(type, HealthIncrease, currentPos, gameObject);
         }
 
         // damage increase
 
-       else if (type == 1)
+        else if (type == 1)
         {
-            
+
             GameObject Power = Instantiate(powerup, pos.position, pos.rotation);
-            Power.GetComponent<PowerUp>().PowerUpSetUp(type, DamageIncrease,currentPos,gameObject);
+            Power.GetComponent<PowerUp>().PowerUpSetUp(type, DamageIncrease, currentPos, gameObject);
+        }
+
+        // Invisibility
+
+        else if (type == 2)
+        {
+            GameObject Power = Instantiate(powerup, pos.position, pos.rotation);
+            Power.GetComponent<PowerUp>().PowerUpSetUp(type, 0, currentPos, gameObject);
+
         }
 
 

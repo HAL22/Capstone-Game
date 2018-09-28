@@ -31,6 +31,8 @@ public class playerControl : MonoBehaviour {
     public int powerupTime;
     public int DamageStrength;
     public int OriginalDamageStrength;
+    public int OriginalLayer; // for invisible 
+    public int invisiblityTime;
 
     
 
@@ -60,7 +62,8 @@ public class playerControl : MonoBehaviour {
         audio = GetComponent<AudioSource>();
         GoldAmount = 0;
         OriginalDamageStrength = DamageStrength;
-        
+        invisiblityTime = 0;
+       
     }
 	
 	void Update () {
@@ -239,6 +242,16 @@ public class playerControl : MonoBehaviour {
 
     }
 
+    public void MakeInVisible(int Newlayer)
+    {
+        gameObject.layer = Newlayer;
+        invisiblityTime += powerupTime;
+
+        StartCoroutine(EndPowerUp(2,0));
+
+
+    }
+
     private IEnumerator EndPowerUp(int type,int amount)
     {
         if (type == 1)
@@ -247,6 +260,20 @@ public class playerControl : MonoBehaviour {
 
             DamageStrength = Mathf.Max(OriginalDamageStrength, DamageStrength - amount);
 
+
+        }
+
+        if (type == 2)
+        {
+            yield return new WaitForSeconds(powerupTime);
+
+            invisiblityTime -= powerupTime;
+
+            if (invisiblityTime <= 0)
+            {
+                gameObject.layer = OriginalLayer;
+                invisiblityTime = 0;
+            }
 
         }
     }
