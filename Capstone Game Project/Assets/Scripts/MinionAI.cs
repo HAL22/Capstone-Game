@@ -44,6 +44,7 @@ public class MinionAI : MonoBehaviour
 
     private float burnDuration;
     private float burnTimer;
+    private int burnCounter;
 
     // Use this for initialization
     void Start ()
@@ -97,6 +98,11 @@ public class MinionAI : MonoBehaviour
             else if (state == State.Burn)
             {
                 burnTimer += Time.deltaTime;
+                if(burnTimer > burnCounter)
+                {
+                    this.GetComponent<healthManager>().Damage(3);
+                    burnCounter++;
+                }
                 if (burnTimer >= burnDuration)
                 {
                     state = State.Run;
@@ -191,7 +197,7 @@ public class MinionAI : MonoBehaviour
                     attackTimer = 0;
                     agent.isStopped = true;
                     state = State.Attack;
-                    if ((type == Type.Golem) && skillTimer > skillDelay)//golem does fear instead of attack.
+                    if ((type == Type.Golem) && skillTimer > skillDelay && hitcollider.Length >2)//golem does fear instead of attack.
                     {
                         anim.CrossFadeInFixedTime("Skill", 0.5f);
                         GameObject effect = Instantiate(skillEffect, transform.position, transform.rotation);
@@ -276,6 +282,7 @@ public class MinionAI : MonoBehaviour
             anim.CrossFadeInFixedTime("Run", 0.5f);
             this.burnDuration = burnDuration;
             burnTimer = 0;
+            burnCounter = 0;
         }
 
     }
