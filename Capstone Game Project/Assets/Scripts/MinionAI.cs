@@ -126,12 +126,6 @@ public class MinionAI : MonoBehaviour
         }
     }
 
-    public void DropGold()
-    {
-        GameObject gold = Instantiate(Gold, transform.position, transform.rotation);
-        gold.GetComponent<Gold>().setAmount(5,EnemyLayer,CurrencyLayer);
-    }
-
     public void setMinionData(int team, GameObject EnemyTower, LayerMask EnemyLayer)
     {
         CurrencyLayer = 15;
@@ -197,6 +191,16 @@ public class MinionAI : MonoBehaviour
                     attackTimer = 0;
                     agent.isStopped = true;
                     state = State.Attack;
+
+                    Collider[] flamecollider = new Collider[0];
+
+                    if (type == Type.Dragon && skillTimer > skillDelay)
+                    {
+                        float radians = transform.rotation.eulerAngles.y / 360 * 2 * Mathf.PI;
+                        flamecollider = Physics.OverlapSphere(transform.position + new Vector3(Mathf.Sin(radians) * attackRadius, 0, Mathf.Cos(radians) * attackRadius), 3f, EnemyLayer);
+                    }
+
+
                     if ((type == Type.Golem) && skillTimer > skillDelay && hitcollider.Length >2)//golem does fear instead of attack.
                     {
                         anim.CrossFadeInFixedTime("Skill", 0.5f);
@@ -208,15 +212,13 @@ public class MinionAI : MonoBehaviour
                             scareTarget.gameObject.GetComponent<MinionAI>().Fear(5, gameObject);
                         }
                     }
-                    else if ((type == Type.Dragon) && skillTimer > skillDelay)//dragon does burn instead of attack.
+                    else if ((type == Type.Dragon) && skillTimer > skillDelay && flamecollider.Length > 2)//dragon does burn instead of attack.
                     {
                         anim.CrossFadeInFixedTime("Skill", 0.5f);
                         GameObject effect = Instantiate(skillEffect, transform.position, transform.rotation);
                         Destroy(effect, 2f);
                         skillTimer = 0;
-                        float radians = transform.rotation.eulerAngles.y / 360 * 2 * Mathf.PI;
-                        hitcollider = Physics.OverlapSphere(transform.position + new Vector3(Mathf.Sin(radians) * attackRadius, 0, Mathf.Cos(radians) * attackRadius), 3f, EnemyLayer);
-                        foreach (Collider burnTarget in hitcollider)
+                        foreach (Collider burnTarget in flamecollider)
                         {
                             burnTarget.gameObject.GetComponent<MinionAI>().Burn(5);
                         }
@@ -277,7 +279,6 @@ public class MinionAI : MonoBehaviour
     {
         if (type != Type.Golem && type != Type.Dragon)//connot burn golem or dragons
         {
-            Debug.Log("Burn!");
             state = State.Burn;
             anim.CrossFadeInFixedTime("Run", 0.5f);
             this.burnDuration = burnDuration;
@@ -285,6 +286,22 @@ public class MinionAI : MonoBehaviour
             burnCounter = 0;
         }
 
+    }
+
+    public void DropGold()
+    {
+        GameObject gold = Instantiate(Gold, transform.position, transform.rotation);
+        if(gameObject.layer == 9)
+        {
+            gold.layer = LayerMask.NameToLayer("Currency 1");
+            gold.transform.Find("gold_bar").gameObject.layer = LayerMask.NameToLayer("Currency 1");
+        }
+        else
+        {
+            gold.layer = LayerMask.NameToLayer("Currency 2");
+            gold.transform.Find("gold_bar").gameObject.layer = LayerMask.NameToLayer("Currency 2");
+        }
+        gold.GetComponent<Gold>().setAmount(5, EnemyLayer, CurrencyLayer);
     }
 
 }

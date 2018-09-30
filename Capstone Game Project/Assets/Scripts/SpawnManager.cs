@@ -41,7 +41,7 @@ public class SpawnManager : MonoBehaviour {
     {
         GameObject unit = Instantiate(model[0], spawnPos[0].position, spawnPos[0].rotation);
         unit.GetComponent<MinionAI>().setMinionData(0, tower[1], unitLayer[1]);//generate a knight
-        unit = Instantiate(model[0], spawnPos[0].position + new Vector3(1, 0, 0), spawnPos[0].rotation);
+        /*unit = Instantiate(model[0], spawnPos[0].position + new Vector3(1, 0, 0), spawnPos[0].rotation);
         unit.GetComponent<MinionAI>().setMinionData(0, tower[1], unitLayer[1]);
         unit = Instantiate(model[0], spawnPos[0].position + new Vector3(-1, 0, 0), spawnPos[0].rotation);
         unit.GetComponent<MinionAI>().setMinionData(0, tower[1], unitLayer[1]);
@@ -50,18 +50,18 @@ public class SpawnManager : MonoBehaviour {
         unit = Instantiate(model[1], spawnPos[0].position + new Vector3(0, 0, 2), spawnPos[0].rotation);
         unit.GetComponent<MinionAI>().setMinionData(0, tower[1], unitLayer[1]);
         unit = Instantiate(model[3], spawnPos[0].position + new Vector3(0, 0, -2), spawnPos[0].rotation);
-        unit.GetComponent<MinionAI>().setMinionData(0, tower[1], unitLayer[1]);
+        unit.GetComponent<MinionAI>().setMinionData(0, tower[1], unitLayer[1]);*/
 
-       /* unit = Instantiate(model[0], spawnPos[1].position, spawnPos[1].rotation);
+        unit = Instantiate(model[0], spawnPos[1].position, spawnPos[1].rotation);
         unit.GetComponent<MinionAI>().setMinionData(1, tower[0], unitLayer[0]);//generate a knight
         unit = Instantiate(model[0], spawnPos[1].position + new Vector3(1, 0, 0), spawnPos[1].rotation);
-        unit.GetComponent<MinionAI>().setMinionData(1, tower[0], unitLayer[0]]);
+        unit.GetComponent<MinionAI>().setMinionData(1, tower[0], unitLayer[0]);
         unit = Instantiate(model[0], spawnPos[1].position + new Vector3(-1, 0, 0), spawnPos[1].rotation);
         unit.GetComponent<MinionAI>().setMinionData(1, tower[0], unitLayer[0]);
         unit = Instantiate(model[1], spawnPos[1].position + new Vector3(0, 0, -1), spawnPos[1].rotation);
         unit.GetComponent<MinionAI>().setMinionData(1, tower[0], unitLayer[0]);
         unit = Instantiate(model[4], spawnPos[1].position + new Vector3(0, 0, 2), spawnPos[1].rotation);
-        unit.GetComponent<MinionAI>().setMinionData(1, tower[0], unitLayer[0]);*/
+        unit.GetComponent<MinionAI>().setMinionData(1, tower[0], unitLayer[0]);
         unit = Instantiate(model[3], spawnPos[1].position + new Vector3(0, 0, -2), spawnPos[1].rotation);
         unit.GetComponent<MinionAI>().setMinionData(1, tower[0], unitLayer[0]);
 

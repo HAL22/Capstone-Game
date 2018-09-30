@@ -45,7 +45,7 @@ public class Bullet : MonoBehaviour
 
             if (dir.magnitude < 1.0f && target!=null)
             {
-                target.GetComponent<healthManager>().Damage(10);
+                target.GetComponent<healthManager>().Damage(5);
             }
 
             Destroy(gameObject);

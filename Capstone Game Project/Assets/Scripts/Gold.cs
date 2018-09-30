@@ -28,7 +28,7 @@ public class Gold : MonoBehaviour
         amountOfGold = amount;
         collected = false;
         this.Layer = Layer;
-        gameObject.layer = team;
+        //gameObject.layer = team;
         action1 = 1f;
         action2 = 0.0f;
         reset = transform;

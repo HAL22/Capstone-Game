@@ -48,6 +48,12 @@ public class healthManager : MonoBehaviour
             }
             healthBar[0].sizeDelta = new Vector2((float)(currentHealth) / maxHealth * barSize, healthBar[0].sizeDelta.y);
             healthBar[1].sizeDelta = new Vector2((float)(currentHealth)/ maxHealth * barSize, healthBar[1].sizeDelta.y);
+            try
+            {
+                healthBar[2].sizeDelta = new Vector2((float)(currentHealth) / maxHealth * barSize, healthBar[2].sizeDelta.y);
+            }
+            catch { }
+            
         }
         
     }

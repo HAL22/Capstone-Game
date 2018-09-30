@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33538737721711158}
   - component: {fileID: 23966149840506458}
   m_Layer: 0
-  m_Name: gold_001
+  m_Name: gold_bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -142,4 +142,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rad: 3
-  AnimateCooldown: 0
