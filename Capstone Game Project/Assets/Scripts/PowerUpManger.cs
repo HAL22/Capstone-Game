@@ -63,7 +63,6 @@ public class PowerUpManger : MonoBehaviour
 
     private void Spawn(int type,GameObject powerup,Transform pos)
     {
-        Debug.Log("The type here: " + type);
 
         // health
         if (type == 0)

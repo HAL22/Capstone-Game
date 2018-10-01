@@ -7,15 +7,15 @@ public class goldManager : MonoBehaviour {
 
     public RectTransform goldBar;
     public Text goldText;
+    public int maxGold = 100;
 
     private int goldAmount;
-    private int maxGold;
     private float barSize;
 
     // Use this for initialization
     void Start () {
         goldAmount = 0;
-        barSize = goldBar.sizeDelta.x;
+        barSize = goldBar.sizeDelta.y;
         updateGold();
 
     }
@@ -47,7 +47,7 @@ public class goldManager : MonoBehaviour {
 
     private void updateGold()
     {
-        goldBar.sizeDelta = new Vector2((float)(goldAmount) / maxGold * barSize, goldBar.sizeDelta.y);
-        goldText.text = "" + goldAmount;
+        goldBar.sizeDelta = new Vector2(goldBar.sizeDelta.x, (float)(goldAmount) / maxGold * barSize);
+        goldText.text = goldAmount + "/" + maxGold; ;
     }
 }

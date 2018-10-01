@@ -220,7 +220,8 @@ public class MinionAI : MonoBehaviour
                         skillTimer = 0;
                         foreach (Collider burnTarget in flamecollider)
                         {
-                            burnTarget.gameObject.GetComponent<MinionAI>().Burn(5);
+                            if(burnTarget!=null)
+                                burnTarget.gameObject.GetComponent<MinionAI>().Burn(5);
                         }
                     }
                     else
