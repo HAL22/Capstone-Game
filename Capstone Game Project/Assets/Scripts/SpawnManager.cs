@@ -47,10 +47,6 @@ public class SpawnManager : MonoBehaviour {
         unit.GetComponent<MinionAI>().setMinionData(0, tower[1], unitLayer[1]);
         unit = Instantiate(model[1], spawnPos[0].position + new Vector3(0, 0, -1), spawnPos[0].rotation);
         unit.GetComponent<MinionAI>().setMinionData(0, tower[1], unitLayer[1]);
-        unit = Instantiate(model[1], spawnPos[0].position + new Vector3(0, 0, 2), spawnPos[0].rotation);
-        unit.GetComponent<MinionAI>().setMinionData(0, tower[1], unitLayer[1]);
-        unit = Instantiate(model[3], spawnPos[0].position + new Vector3(0, 0, -2), spawnPos[0].rotation);
-        unit.GetComponent<MinionAI>().setMinionData(0, tower[1], unitLayer[1]);
 
         unit = Instantiate(model[0], spawnPos[1].position, spawnPos[1].rotation);
         unit.GetComponent<MinionAI>().setMinionData(1, tower[0], unitLayer[0]);//generate a knight
@@ -60,10 +56,13 @@ public class SpawnManager : MonoBehaviour {
         unit.GetComponent<MinionAI>().setMinionData(1, tower[0], unitLayer[0]);
         unit = Instantiate(model[1], spawnPos[1].position + new Vector3(0, 0, -1), spawnPos[1].rotation);
         unit.GetComponent<MinionAI>().setMinionData(1, tower[0], unitLayer[0]);
-        unit = Instantiate(model[4], spawnPos[1].position + new Vector3(0, 0, 2), spawnPos[1].rotation);
-        unit.GetComponent<MinionAI>().setMinionData(1, tower[0], unitLayer[0]);
-        unit = Instantiate(model[3], spawnPos[1].position + new Vector3(0, 0, -2), spawnPos[1].rotation);
-        unit.GetComponent<MinionAI>().setMinionData(1, tower[0], unitLayer[0]);
 
+
+    }
+
+    public void spawnUnit(Transform target, int modelNo, int team)
+    {
+        GameObject unit = Instantiate(model[modelNo], target.position, target.rotation);
+        unit.GetComponent<MinionAI>().setMinionData(team, tower[Mathf.Abs(1-team)], unitLayer[Mathf.Abs(1-team)]);
     }
 }

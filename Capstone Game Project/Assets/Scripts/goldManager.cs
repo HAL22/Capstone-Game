@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class goldManager : MonoBehaviour {
+public class GoldManager : MonoBehaviour {
 
     public RectTransform goldBar;
     public Text goldText;

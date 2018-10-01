@@ -15,6 +15,7 @@ public class playerControl : MonoBehaviour {
     private bool dead;
     private Vector3 spawnpoint;
     private AudioSource audio;
+    private GoldManager goldManager;
 
     public float actionCooldown = 1f;
     public float rotationalSpeed = 1.5f;
@@ -24,6 +25,7 @@ public class playerControl : MonoBehaviour {
     public LayerMask enemyLayer;
     public enum Skill { smash, heal };
     public Skill skill;
+    public SpawnManager spawnManager;
 
     //Power-ups
     public int powerupTime;
@@ -47,6 +49,9 @@ public class playerControl : MonoBehaviour {
     public KeyCode rotRight = KeyCode.D;
     public KeyCode attack = KeyCode.Q;
     public KeyCode special = KeyCode.E;
+    public KeyCode spawnOne = KeyCode.Alpha1;
+    public KeyCode spawnTwo = KeyCode.Alpha2;
+    public KeyCode spawnThree = KeyCode.Alpha3;
 
     // Use this for initialization
     void Start () {
@@ -59,6 +64,7 @@ public class playerControl : MonoBehaviour {
         spawnpoint = transform.position;
         deathTimer = 0;
         audio = GetComponent<AudioSource>();
+        goldManager = GetComponent<GoldManager>();
         OriginalDamageStrength = DamageStrength;
         invisiblityTime = 0;
         OriginalWalkingspeed = walkingSpeed;
@@ -179,6 +185,15 @@ public class playerControl : MonoBehaviour {
             if (Input.GetKey(KeyCode.Escape))
             {
                 Application.Quit();
+            }
+
+            if (Input.GetKey(spawnOne))
+            {
+                if (goldManager.spendGold(20))
+                {
+                    spawnManager.spawnUnit(transform, 2, gameObject.layer - 8);
+                }
+
             }
 
             if (free)

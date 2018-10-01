@@ -69,7 +69,7 @@ public class Gold : MonoBehaviour
 
             if (Heroes[0].gameObject != null && Heroes[0].GetComponent<playerControl>() != null)
             {
-                Heroes[0].gameObject.GetComponent<goldManager>().addGold(amountOfGold);
+                Heroes[0].gameObject.GetComponent<GoldManager>().addGold(amountOfGold);
                 collected = true;
 
             }
