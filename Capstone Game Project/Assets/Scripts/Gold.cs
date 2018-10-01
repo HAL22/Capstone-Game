@@ -64,14 +64,11 @@ public class Gold : MonoBehaviour
         Collider[] Heroes = Physics.OverlapSphere(transform.position, rad, Layer);
 
         if (Heroes.Length > 0)
-        {
-            
-
+        {        
             if (Heroes[0].gameObject != null && Heroes[0].GetComponent<playerControl>() != null)
             {
                 Heroes[0].gameObject.GetComponent<GoldManager>().addGold(amountOfGold);
                 collected = true;
-
             }
            
         }

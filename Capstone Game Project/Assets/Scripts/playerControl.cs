@@ -25,7 +25,17 @@ public class playerControl : MonoBehaviour {
     public LayerMask enemyLayer;
     public enum Skill { smash, heal };
     public Skill skill;
+
+    //unit spawners
     public SpawnManager spawnManager;
+    public RectTransform[] cooldownIndicator;
+    public float maxSpawnTimer1 = 3;
+    public float maxSpawnTimer2 = 5;
+    public float maxSpawnTimer3 = 8;
+    private float spawnTimer1;
+    private float spawnTimer2;
+    private float spawnTimer3;
+    private float barSize;
 
     //Power-ups
     public int powerupTime;
@@ -34,8 +44,6 @@ public class playerControl : MonoBehaviour {
     public int OriginalLayer; // for invisible 
     public int invisiblityTime;
     public float OriginalWalkingspeed;
-
-    
 
     public AudioClip attackSound;
     public AudioClip deathSound;
@@ -65,6 +73,11 @@ public class playerControl : MonoBehaviour {
         deathTimer = 0;
         audio = GetComponent<AudioSource>();
         goldManager = GetComponent<GoldManager>();
+
+        spawnTimer1 = maxSpawnTimer1;
+        spawnTimer2 = maxSpawnTimer2;
+        spawnTimer3 = maxSpawnTimer3;
+        barSize = cooldownIndicator[0].sizeDelta.y;
         OriginalDamageStrength = DamageStrength;
         invisiblityTime = 0;
         OriginalWalkingspeed = walkingSpeed;
@@ -73,10 +86,14 @@ public class playerControl : MonoBehaviour {
 	
 	void Update () {
 
-       
         free = true;
         rigidbody.velocity = new Vector3(0, 0, 0);
         actionTimer += Time.deltaTime;
+        spawnTimer1 = Mathf.Min(maxSpawnTimer1, spawnTimer1 + Time.deltaTime);
+        spawnTimer2 = Mathf.Min(maxSpawnTimer2, spawnTimer2 + Time.deltaTime);
+        spawnTimer3 = Mathf.Min(maxSpawnTimer3, spawnTimer3 + Time.deltaTime);
+        cooldownUpdate();
+
         if (actionTimer > actionCooldown && !dead)//only if not currently dead or attacking
         {
             if (Input.GetKey(attack))//ranged attack
@@ -187,15 +204,6 @@ public class playerControl : MonoBehaviour {
                 Application.Quit();
             }
 
-            if (Input.GetKey(spawnOne))
-            {
-                if (goldManager.spendGold(20))
-                {
-                    spawnManager.spawnUnit(transform, 2, gameObject.layer - 8);
-                }
-
-            }
-
             if (free)
             {
                 rigidbody.velocity = new Vector3(0, 0, 0);
@@ -205,6 +213,36 @@ public class playerControl : MonoBehaviour {
                     anim.CrossFade("free");
                 }
             }
+        }
+
+        if (Input.GetKey(spawnOne) && spawnTimer1==maxSpawnTimer1)
+        {
+            if (goldManager.spendGold(20))
+            {
+                spawnManager.spawnUnit(transform, 2, gameObject.layer - 8);
+                spawnTimer1 = 0;
+            }
+
+        }
+
+        if (Input.GetKey(spawnTwo) && spawnTimer2 == maxSpawnTimer2)
+        {
+            if (goldManager.spendGold(40))
+            {
+                spawnManager.spawnUnit(transform, 3, gameObject.layer - 8);
+                spawnTimer2 = 0;
+            }
+
+        }
+
+        if (Input.GetKey(spawnThree) && spawnTimer3 == maxSpawnTimer3)
+        {
+            if (goldManager.spendGold(60))
+            {
+                spawnManager.spawnUnit(transform, 4, gameObject.layer - 8);
+                spawnTimer3 = 0;
+            }
+
         }
 
         if (dead)
@@ -290,6 +328,13 @@ public class playerControl : MonoBehaviour {
             walkingSpeed = Mathf.Max(OriginalWalkingspeed, walkingSpeed - amount);
 
         }
+    }
+
+    public void cooldownUpdate()
+    {
+        cooldownIndicator[0].sizeDelta = new Vector2(cooldownIndicator[0].sizeDelta.x, (float)(maxSpawnTimer1 - spawnTimer1) / maxSpawnTimer1 * barSize);
+        cooldownIndicator[1].sizeDelta = new Vector2(cooldownIndicator[1].sizeDelta.x, (float)(maxSpawnTimer2 - spawnTimer2) / maxSpawnTimer2 * barSize);
+        cooldownIndicator[2].sizeDelta = new Vector2(cooldownIndicator[2].sizeDelta.x, (float)(maxSpawnTimer3 - spawnTimer3) / maxSpawnTimer3 * barSize);
     }
 
     public void Die()
