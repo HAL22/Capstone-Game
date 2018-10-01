@@ -16,8 +16,6 @@ public class playerControl : MonoBehaviour {
     private Vector3 spawnpoint;
     private AudioSource audio;
 
-    // Gold that the player has
-    public int GoldAmount;
     public float actionCooldown = 1f;
     public float rotationalSpeed = 1.5f;
     public float walkingSpeed = 10f;
@@ -61,7 +59,6 @@ public class playerControl : MonoBehaviour {
         spawnpoint = transform.position;
         deathTimer = 0;
         audio = GetComponent<AudioSource>();
-        GoldAmount = 0;
         OriginalDamageStrength = DamageStrength;
         invisiblityTime = 0;
         OriginalWalkingspeed = walkingSpeed;
@@ -215,20 +212,6 @@ public class playerControl : MonoBehaviour {
         transform.rotation = Quaternion.Euler(0, rotation, 0);
     }
 
-    public void addGold(int amount)
-    {
-        GoldAmount += amount;
-
-    }
-
-    public void useGold(int amount)
-    {
-        if (GoldAmount >= amount)
-        {
-            GoldAmount -= amount;
-        }
-    }
-
     // Power-ups
 
     // Strength update
@@ -293,15 +276,6 @@ public class playerControl : MonoBehaviour {
 
         }
     }
-
-    
-
-
-
-
-
-
-
 
     public void Die()
     {

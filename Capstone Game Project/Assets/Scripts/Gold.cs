@@ -9,7 +9,6 @@ public class Gold : MonoBehaviour
     private int amountOfGold; // the amount of gold a minion has
     private bool collected;
     private LayerMask Layer; //  checks which hero to give the gold to
-    private Transform reset;
     private float len;
     private float speed;
     private float cooldown = 1.0f;
@@ -31,7 +30,6 @@ public class Gold : MonoBehaviour
         //gameObject.layer = team;
         action1 = 1f;
         action2 = 0.0f;
-        reset = transform;
     }
 
     private void Start()
@@ -71,7 +69,7 @@ public class Gold : MonoBehaviour
 
             if (Heroes[0].gameObject != null && Heroes[0].GetComponent<playerControl>() != null)
             {
-                Heroes[0].gameObject.GetComponent<playerControl>().addGold(amountOfGold);
+                Heroes[0].gameObject.GetComponent<goldManager>().addGold(amountOfGold);
                 collected = true;
 
             }
