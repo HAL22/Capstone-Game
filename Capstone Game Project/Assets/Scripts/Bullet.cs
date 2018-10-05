@@ -19,7 +19,7 @@ public class Bullet : MonoBehaviour
     {
 
         health = 10.0f;
-        effect = Instantiate(fireballEffect, transform.position, transform.rotation);
+        
 
     }
 
@@ -31,7 +31,7 @@ public class Bullet : MonoBehaviour
         {
 
             Destroy(gameObject);
-            Destroy(effect);
+            //Destroy(effect);
 
         }
 
@@ -48,8 +48,12 @@ public class Bullet : MonoBehaviour
                 target.GetComponent<healthManager>().Damage(5);
             }
 
-            Destroy(gameObject);
+            if (fireballEffect != null)
+            {
+                effect = Instantiate(fireballEffect, transform.position, transform.rotation);     
+            }
             Destroy(effect, 0.5f);
+            Destroy(gameObject);
         }
 
         transform.Translate(direction.normalized * distanceInFrame, Space.World);

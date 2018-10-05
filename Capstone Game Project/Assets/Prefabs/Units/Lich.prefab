@@ -1077,11 +1077,15 @@ MonoBehaviour:
   attackRadius: 8
   attackDelay: 1
   healthImpact: 5
-  attackEffect: {fileID: 1721468571770808, guid: 427271165e1d5bf4699b21878f6de0f9,
+  attackEffect: {fileID: 1451389407598482, guid: 63752355a0d5ac64c88973b583ff282e,
     type: 2}
   skillEffect: {fileID: 0}
+  burnEffect: {fileID: 0}
   skillDelay: 0
   Gold: {fileID: 1594879466734162, guid: c82411508e9628b4e9f629bf2800542f, type: 2}
+  CurrencyLayer: 0
+  attackSound: {fileID: 8300000, guid: 429899e296a50e140b0373766007da31, type: 3}
+  skillSound: {fileID: 0}
   type: 1
 --- !u!114 &114063020946738470
 MonoBehaviour:

@@ -250,7 +250,7 @@ public class MinionAI : MonoBehaviour
                         else
                         {
                             GameObject shootBullet = (GameObject)Instantiate(attackEffect, firePos.position, firePos.rotation);
-                            shootBullet.GetComponent<Bullet>().SetData(targetObject, 20.0f);
+                            shootBullet.GetComponent<Bullet>().SetData(targetObject, 15.0f);
                         }
                     }
                     
