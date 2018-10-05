@@ -15,16 +15,18 @@ public class MinionAI : MonoBehaviour
     public int healthImpact;
     public GameObject attackEffect;
     public GameObject skillEffect;
+    public GameObject burnEffect;
     private float skillTimer;
     public float skillDelay;
     public GameObject Gold;
     public int CurrencyLayer;
-   
+
+    public AudioClip attackSound;
+    public AudioClip skillSound;
+    private AudioSource audio;
 
     public enum Type { Footman, Lich, Orc, Golem, Dragon, Grunt };
     public Type type;
-
-    
 
     private Transform firePos;
     private NavMeshAgent agent;
@@ -75,6 +77,8 @@ public class MinionAI : MonoBehaviour
         //set starting animation
         anim = GetComponent<Animator>();
         anim.CrossFadeInFixedTime("Run", 0.5f);
+
+        audio = GetComponent<AudioSource>();
     }
 	
 	// Update is called once per frame
@@ -204,7 +208,9 @@ public class MinionAI : MonoBehaviour
                     if ((type == Type.Golem) && skillTimer > skillDelay && hitcollider.Length >2)//golem does fear instead of attack.
                     {
                         anim.CrossFadeInFixedTime("Skill", 0.5f);
-                        GameObject effect = Instantiate(skillEffect, transform.position, transform.rotation);
+                        audio.clip = skillSound;
+                        audio.Play();
+                        GameObject effect = Instantiate(skillEffect, transform.position+ new Vector3(0,2.5f,0), transform.rotation);
                         Destroy(effect, 2f);
                         skillTimer = 0;
                         foreach (Collider scareTarget in hitcollider)
@@ -215,18 +221,27 @@ public class MinionAI : MonoBehaviour
                     else if ((type == Type.Dragon) && skillTimer > skillDelay && flamecollider.Length > 2)//dragon does burn instead of attack.
                     {
                         anim.CrossFadeInFixedTime("Skill", 0.5f);
-                        GameObject effect = Instantiate(skillEffect, transform.position, transform.rotation);
+                        audio.clip = skillSound;
+                        audio.Play();
+                        GameObject effect = Instantiate(skillEffect, transform.position+new Vector3(0,2.0f,0), transform.rotation);
                         Destroy(effect, 2f);
                         skillTimer = 0;
                         foreach (Collider burnTarget in flamecollider)
                         {
-                            if(burnTarget!=null)
+                            if (burnTarget != null)
+                            {
+                                GameObject burn = Instantiate(burnEffect, burnTarget.transform.position+new Vector3(0,2.5f,0), burnTarget.transform.rotation, burnTarget.transform);
+                                Destroy(burn, 5f);
                                 burnTarget.gameObject.GetComponent<MinionAI>().Burn(5);
+                            }
+                                
                         }
                     }
                     else
                     {
                         anim.CrossFadeInFixedTime("Attack01", 0.5f);
+                        audio.clip = attackSound;
+                        audio.Play();
                         GetComponent<AudioSource>().Play();
                         if (attackEffect == null)
                         {

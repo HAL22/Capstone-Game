@@ -1755,8 +1755,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: e9ba5b61ded3e484384e4151bfab37ab, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -2029,10 +2029,14 @@ MonoBehaviour:
   attackDelay: 1
   healthImpact: 6
   attackEffect: {fileID: 0}
-  skillEffect: {fileID: 1234867958912450, guid: 607aba23d498a8f4fb2873df806a21f7,
+  skillEffect: {fileID: 1061033073774108, guid: 942c55c352940c14bbde256cdf5c0be8,
     type: 2}
+  burnEffect: {fileID: 1185145119154676, guid: 7373a8fa90e1c7f4392bb6d16b90632d, type: 2}
   skillDelay: 8
   Gold: {fileID: 1594879466734162, guid: c82411508e9628b4e9f629bf2800542f, type: 2}
+  CurrencyLayer: 0
+  attackSound: {fileID: 8300000, guid: 31318e5d7684a4c46a4973438c81910e, type: 3}
+  skillSound: {fileID: 8300000, guid: db8bd0a25717be743b3c02c5ba597ffe, type: 3}
   type: 4
 --- !u!114 &114679984431486390
 MonoBehaviour:

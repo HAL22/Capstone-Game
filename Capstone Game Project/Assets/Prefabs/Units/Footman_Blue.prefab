@@ -1281,8 +1281,14 @@ MonoBehaviour:
   attackRadius: 4
   attackDelay: 1
   healthImpact: 3
+  attackEffect: {fileID: 0}
   skillEffect: {fileID: 0}
+  skillDelay: 0
   Gold: {fileID: 1594879466734162, guid: c82411508e9628b4e9f629bf2800542f, type: 2}
+  CurrencyLayer: 0
+  attackSound: {fileID: 8300000, guid: 85439582a29c078418575c5a9fd956f7, type: 3}
+  skillSound: {fileID: 0}
+  type: 0
 --- !u!114 &114801560614867724
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1322,7 +1328,6 @@ MonoBehaviour:
   healthBar:
   - {fileID: 224469169983432962}
   - {fileID: 224548819746730790}
-  currentHealth: 50
 --- !u!114 &114981685250543196
 MonoBehaviour:
   m_ObjectHideFlags: 1

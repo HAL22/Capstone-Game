@@ -1088,7 +1088,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -1166,9 +1166,12 @@ MonoBehaviour:
   healthImpact: 6
   attackEffect: {fileID: 0}
   skillEffect: {fileID: 0}
+  burnEffect: {fileID: 0}
   skillDelay: 0
   Gold: {fileID: 1594879466734162, guid: c82411508e9628b4e9f629bf2800542f, type: 2}
   CurrencyLayer: 0
+  attackSound: {fileID: 0}
+  skillSound: {fileID: 0}
   type: 5
 --- !u!114 &114520614482956626
 MonoBehaviour:
