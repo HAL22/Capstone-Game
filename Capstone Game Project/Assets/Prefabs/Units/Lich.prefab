@@ -1077,7 +1077,7 @@ MonoBehaviour:
   attackRadius: 8
   attackDelay: 1
   healthImpact: 5
-  attackEffect: {fileID: 1451389407598482, guid: 63752355a0d5ac64c88973b583ff282e,
+  attackEffect: {fileID: 1129449743414602, guid: 63752355a0d5ac64c88973b583ff282e,
     type: 2}
   skillEffect: {fileID: 0}
   burnEffect: {fileID: 0}

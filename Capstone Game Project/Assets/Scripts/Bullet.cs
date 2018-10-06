@@ -52,7 +52,7 @@ public class Bullet : MonoBehaviour
             {
                 effect = Instantiate(fireballEffect, transform.position, transform.rotation);     
             }
-            Destroy(effect, 0.5f);
+            Destroy(effect, 0.75f);
             Destroy(gameObject);
         }
 

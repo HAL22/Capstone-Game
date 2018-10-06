@@ -48,11 +48,11 @@ public class SpawnManager : MonoBehaviour {
         unit = Instantiate(model[1], spawnPos[0].position + new Vector3(0, 0, -1), spawnPos[0].rotation);
         unit.GetComponent<MinionAI>().setMinionData(0, tower[1], unitLayer[1]);*/
 
-        unit = Instantiate(model[1], spawnPos[1].position, spawnPos[1].rotation);
+        unit = Instantiate(model[0], spawnPos[1].position, spawnPos[1].rotation);
         unit.GetComponent<MinionAI>().setMinionData(1, tower[0], unitLayer[0]);//generate a knight
-        unit = Instantiate(model[1], spawnPos[1].position + new Vector3(1, 0, 0), spawnPos[1].rotation);
+        unit = Instantiate(model[0], spawnPos[1].position + new Vector3(1, 0, 0), spawnPos[1].rotation);
         unit.GetComponent<MinionAI>().setMinionData(1, tower[0], unitLayer[0]);
-        unit = Instantiate(model[1], spawnPos[1].position + new Vector3(-1, 0, 0), spawnPos[1].rotation);
+        unit = Instantiate(model[0], spawnPos[1].position + new Vector3(-1, 0, 0), spawnPos[1].rotation);
         unit.GetComponent<MinionAI>().setMinionData(1, tower[0], unitLayer[0]);
         unit = Instantiate(model[1], spawnPos[1].position + new Vector3(0, 0, -1), spawnPos[1].rotation);
         unit.GetComponent<MinionAI>().setMinionData(1, tower[0], unitLayer[0]);

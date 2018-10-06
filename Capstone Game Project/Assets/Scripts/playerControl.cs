@@ -45,8 +45,12 @@ public class playerControl : MonoBehaviour {
     public int invisiblityTime;
     public float OriginalWalkingspeed;
 
+
+    //sound effects
     public AudioClip attackSound;
     public AudioClip deathSound;
+    public AudioClip respawnSound;
+    public AudioClip skillSound;
     //public GameObject magicEffect;
     public GameObject dustEffect;
     public GameObject skillEffect;
@@ -133,6 +137,9 @@ public class playerControl : MonoBehaviour {
 
                 if (skill == Skill.smash)
                 {
+                    audio.clip = skillSound;
+                    audio.Play();
+
                     Collider[] hitColliders = Physics.OverlapSphere(transform.position + new Vector3(Mathf.Sin(radians) * 2.5f, 1, Mathf.Cos(radians) * 2.5f), 2f, enemyLayer);
                     int i = 0;
                     while (i < hitColliders.Length)
@@ -143,6 +150,8 @@ public class playerControl : MonoBehaviour {
                 }
                 else if(skill == Skill.heal)
                 {
+                    audio.clip = skillSound;
+                    audio.Play();
                     Collider[] hitColliders = Physics.OverlapSphere(transform.position + new Vector3(Mathf.Sin(radians) * 2.5f, 1, Mathf.Cos(radians) * 2.5f), 2f, allyLayer);
                     int i = 0;
                     while (i < hitColliders.Length)
@@ -252,6 +261,8 @@ public class playerControl : MonoBehaviour {
             {
                 dead = false;
                 transform.position = spawnpoint;
+                audio.clip = respawnSound;
+                audio.Play();
                 GetComponent<healthManager>().resetHealth();
                 anim.CrossFade("free");
                 deathTimer = 0;
