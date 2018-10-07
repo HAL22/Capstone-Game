@@ -43,17 +43,11 @@ public class Gold : MonoBehaviour
 
     private void Update()
     {
-        if (collected)
+        if (!collected)
         {
-            Destroy(gameObject);
+            animateObject();
+            checkForHero();
         }
-
-        
-
-        animateObject();
-
-        
-        checkForHero();
 
      
 
@@ -64,12 +58,19 @@ public class Gold : MonoBehaviour
         Collider[] Heroes = Physics.OverlapSphere(transform.position, rad, Layer);
 
         if (Heroes.Length > 0)
-        {        
-            if (Heroes[0].gameObject != null && Heroes[0].GetComponent<playerControl>() != null)
+        {
+            for(int i=0; i< Heroes.Length; i++)
             {
-                Heroes[0].gameObject.GetComponent<GoldManager>().addGold(amountOfGold);
-                collected = true;
+                if (Heroes[i].gameObject != null && Heroes[i].GetComponent<playerControl>() != null && !Heroes[i].gameObject.GetComponent<GoldManager>().reachedMaxGold())
+                {
+                    Heroes[i].gameObject.GetComponent<GoldManager>().addGold(amountOfGold);
+                    collected = true;
+                    GetComponent<AudioSource>().Play();
+                    Destroy(gameObject, 0.5f);
+                    break;
+                }
             }
+
            
         }
 

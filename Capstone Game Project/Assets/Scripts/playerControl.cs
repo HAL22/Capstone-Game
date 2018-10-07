@@ -51,9 +51,13 @@ public class playerControl : MonoBehaviour {
     public AudioClip deathSound;
     public AudioClip respawnSound;
     public AudioClip skillSound;
+
     //public GameObject magicEffect;
-    public GameObject dustEffect;
+    public GameObject attackEffect;
     public GameObject skillEffect;
+    public GameObject strengthAura;
+    public GameObject invisibleAura;
+    public GameObject speedAura;
 
     public KeyCode forward = KeyCode.W;
     public KeyCode backward = KeyCode.S;
@@ -110,7 +114,9 @@ public class playerControl : MonoBehaviour {
                     anim.CrossFade("attack");
                 }
 
-                StartCoroutine(DustEffect(0.2f,1f));//fire effect
+                //StartCoroutine(DustEffect(0.2f,1f));//fire effect
+                GameObject hitEffect = Instantiate(attackEffect, transform.position, transform.rotation);
+                Destroy(hitEffect, 0.7f);
                 radians = rotation / 360 * 2 * Mathf.PI;
                 Collider[] hitColliders = Physics.OverlapSphere(transform.position + new Vector3(Mathf.Sin(radians) * 6f, 0, Mathf.Cos(radians) * 6f), 2f, enemyLayer);
                 int i = 0;
@@ -131,7 +137,8 @@ public class playerControl : MonoBehaviour {
                     anim.CrossFade("skill");
                 }
 
-                StartCoroutine(SpellEffect(0.2f,1f));//fire effect
+                //StartCoroutine(SpellEffect(0.2f,1f));//fire effect
+                
 
                 radians = rotation / 360 * 2 * Mathf.PI;
 
@@ -139,6 +146,9 @@ public class playerControl : MonoBehaviour {
                 {
                     audio.clip = skillSound;
                     audio.Play();
+
+                    GameObject spellEffect = Instantiate(skillEffect, transform.position + new Vector3(Mathf.Sin(radians) * 3.5f, 0, Mathf.Cos(radians) * 3.5f), transform.rotation);
+                    Destroy(spellEffect, 1f);
 
                     Collider[] hitColliders = Physics.OverlapSphere(transform.position + new Vector3(Mathf.Sin(radians) * 2.5f, 1, Mathf.Cos(radians) * 2.5f), 2f, enemyLayer);
                     int i = 0;
@@ -152,6 +162,10 @@ public class playerControl : MonoBehaviour {
                 {
                     audio.clip = skillSound;
                     audio.Play();
+
+                    GameObject spellEffect = Instantiate(skillEffect, transform.position + new Vector3(Mathf.Sin(radians) * 3.5f, 3, Mathf.Cos(radians) * 3.5f), transform.rotation);
+                    Destroy(spellEffect, 1.2f);
+
                     Collider[] hitColliders = Physics.OverlapSphere(transform.position + new Vector3(Mathf.Sin(radians) * 2.5f, 1, Mathf.Cos(radians) * 2.5f), 2f, allyLayer);
                     int i = 0;
                     while (i < hitColliders.Length)
@@ -311,8 +325,10 @@ public class playerControl : MonoBehaviour {
     {
         if (type == 1)
         {
+            Debug.Log("start Aura");
+            GameObject aura = Instantiate(strengthAura, transform.position+new Vector3(0,1,0), transform.rotation, transform);
             yield return new WaitForSeconds(powerupTime);
-
+            Destroy(aura);
             DamageStrength = Mathf.Max(OriginalDamageStrength, DamageStrength - amount);
 
 
@@ -357,7 +373,7 @@ public class playerControl : MonoBehaviour {
     }
 
     
-    private IEnumerator DelayedDestroy(GameObject target, float duration)//destroy hit target after delay
+    /*private IEnumerator DelayedDestroy(GameObject target, float duration)//destroy hit target after delay
     {     
         yield return new WaitForSeconds(duration);
         GameObject dust = Instantiate(dustEffect);
@@ -385,12 +401,12 @@ public class playerControl : MonoBehaviour {
      private IEnumerator DustEffect(float startDelay, float duration)//create fire animation with delay to line up with animation
        {
            yield return new WaitForSeconds(startDelay);
-           GameObject spell = Instantiate(dustEffect);
+           GameObject spell = Instantiate(attackEffect);
            radians = rotation / 360 * 2 * Mathf.PI;
            spell.transform.position = transform.position + new Vector3(Mathf.Sin(radians)*3.5f, -0.1f, Mathf.Cos(radians)*3.5f);
            spell.transform.rotation = transform.rotation;
            yield return new WaitForSeconds(duration);
            Destroy(spell);
-       }
+       }*/
        
 }

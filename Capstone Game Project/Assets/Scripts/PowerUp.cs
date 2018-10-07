@@ -15,6 +15,7 @@ public class PowerUp : MonoBehaviour
     // public variables
     private GameObject powerUpManager;
     public int lifetime; // life time of a power up
+    public GameObject collectEffect;
 
     public void PowerUpSetUp(int type,int integerincrease, int spawnpos, GameObject powerUpManager)
     {
@@ -45,6 +46,9 @@ public class PowerUp : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("This is the type: " + Type);
+        GameObject effect = Instantiate(collectEffect, transform.position+new Vector3(0,1,0), transform.rotation);
+        Destroy(effect, 1f);
+
         // Health power-up
         if (Type == 0)
         {
@@ -62,7 +66,7 @@ public class PowerUp : MonoBehaviour
         }
 
         // Strength power-up
-        if (Type == 1)
+        else if (Type == 1)
         {
             if (other.gameObject.GetComponentInParent<playerControl>() != null)
             {
@@ -79,7 +83,7 @@ public class PowerUp : MonoBehaviour
 
         // invisiblity 
 
-        if (Type == 2)
+        else if (Type == 2)
         {
             if (other.gameObject.GetComponentInParent<playerControl>() != null)
             {
@@ -95,7 +99,7 @@ public class PowerUp : MonoBehaviour
 
         // speed up
 
-        if (Type == 3)
+        else if (Type == 3)
         {
 
             if (other.gameObject.GetComponentInParent<playerControl>() != null)

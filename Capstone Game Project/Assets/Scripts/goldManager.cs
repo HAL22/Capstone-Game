@@ -50,4 +50,9 @@ public class GoldManager : MonoBehaviour {
         goldBar.sizeDelta = new Vector2(goldBar.sizeDelta.x, (float)(goldAmount) / maxGold * barSize);
         goldText.text = goldAmount + "/" + maxGold; ;
     }
+
+    public bool reachedMaxGold()
+    {
+        return goldAmount == maxGold;
+    }
 }
