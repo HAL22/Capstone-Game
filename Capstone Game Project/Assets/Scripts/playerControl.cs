@@ -35,7 +35,9 @@ public class playerControl : MonoBehaviour {
     private float spawnTimer1;
     private float spawnTimer2;
     private float spawnTimer3;
-    private float barSize;
+    private float minionBarSize;
+    private float attackBarSize;
+    private float skillBarSize;
 
     //Power-ups
     public int powerupTime;
@@ -85,7 +87,9 @@ public class playerControl : MonoBehaviour {
         spawnTimer1 = maxSpawnTimer1;
         spawnTimer2 = maxSpawnTimer2;
         spawnTimer3 = maxSpawnTimer3;
-        barSize = cooldownIndicator[0].sizeDelta.y;
+        minionBarSize = cooldownIndicator[0].sizeDelta.y;
+        attackBarSize = cooldownIndicator[3].sizeDelta.y;
+        skillBarSize = cooldownIndicator[4].sizeDelta.y;
         OriginalDamageStrength = DamageStrength;
         invisiblityTime = 0;
         OriginalWalkingspeed = walkingSpeed;
@@ -325,12 +329,10 @@ public class playerControl : MonoBehaviour {
     {
         if (type == 1)
         {
-            Debug.Log("start Aura");
             GameObject aura = Instantiate(strengthAura, transform.position+new Vector3(0,1,0), transform.rotation, transform);
             yield return new WaitForSeconds(powerupTime);
             Destroy(aura);
             DamageStrength = Mathf.Max(OriginalDamageStrength, DamageStrength - amount);
-
 
         }
 
@@ -359,9 +361,12 @@ public class playerControl : MonoBehaviour {
 
     public void cooldownUpdate()
     {
-        cooldownIndicator[0].sizeDelta = new Vector2(cooldownIndicator[0].sizeDelta.x, (float)(maxSpawnTimer1 - spawnTimer1) / maxSpawnTimer1 * barSize);
-        cooldownIndicator[1].sizeDelta = new Vector2(cooldownIndicator[1].sizeDelta.x, (float)(maxSpawnTimer2 - spawnTimer2) / maxSpawnTimer2 * barSize);
-        cooldownIndicator[2].sizeDelta = new Vector2(cooldownIndicator[2].sizeDelta.x, (float)(maxSpawnTimer3 - spawnTimer3) / maxSpawnTimer3 * barSize);
+        cooldownIndicator[0].sizeDelta = new Vector2(cooldownIndicator[0].sizeDelta.x, (float)(maxSpawnTimer1 - spawnTimer1) / maxSpawnTimer1 * minionBarSize);
+        cooldownIndicator[1].sizeDelta = new Vector2(cooldownIndicator[1].sizeDelta.x, (float)(maxSpawnTimer2 - spawnTimer2) / maxSpawnTimer2 * minionBarSize);
+        cooldownIndicator[2].sizeDelta = new Vector2(cooldownIndicator[2].sizeDelta.x, (float)(maxSpawnTimer3 - spawnTimer3) / maxSpawnTimer3 * minionBarSize);
+        cooldownIndicator[3].sizeDelta = new Vector2(cooldownIndicator[3].sizeDelta.x, (float)(actionCooldown - actionTimer) / actionCooldown * attackBarSize);
+        cooldownIndicator[4].sizeDelta = new Vector2(cooldownIndicator[4].sizeDelta.x, (float)(actionCooldown - actionTimer) / actionCooldown * skillBarSize);
+
     }
 
     public void Die()
