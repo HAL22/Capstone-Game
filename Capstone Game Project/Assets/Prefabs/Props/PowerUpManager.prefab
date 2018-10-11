@@ -171,9 +171,12 @@ MonoBehaviour:
   - {fileID: 4651008416547352}
   OccupiedSpawnPoints: 00000000
   PowerUps:
-  - {fileID: 1676855931928320, guid: 0e0ffe614c6a184429243316c49e2efd, type: 2}
+  - {fileID: 100000, guid: 52cf2a42de425c04dbad2326efa3be14, type: 2}
   - {fileID: 1000011799270622, guid: 23d2f61651b26c24d999b508a4457b7e, type: 2}
+  - {fileID: 1676855931928320, guid: 0e0ffe614c6a184429243316c49e2efd, type: 2}
+  - {fileID: 1000011005798232, guid: 1cd75c9c91c40b8479b32025f3028802, type: 2}
   Interval: 5
   HealthIncrease: 10
   DamageIncrease: 10
+  SpeedIncrease: 10
   positionPerPowerUp: 1

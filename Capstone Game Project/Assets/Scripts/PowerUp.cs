@@ -10,7 +10,6 @@ public class PowerUp : MonoBehaviour
     private float len; // for animation
     private float speed; // for the animation
     private int spawnpos; // position in the array in powerupmanger;
-    private int layer; //  for the invisibilty power-up
 
     // public variables
     private GameObject powerUpManager;
@@ -25,7 +24,6 @@ public class PowerUp : MonoBehaviour
         speed = 5;
         this.spawnpos = spawnpos;
         this.powerUpManager = powerUpManager;
-        layer = 13;
         lifetime = 10;
 
     }
@@ -45,7 +43,6 @@ public class PowerUp : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("This is the type: " + Type);
         GameObject effect = Instantiate(collectEffect, transform.position+new Vector3(0,1,0), transform.rotation);
         Destroy(effect, 1f);
 
@@ -87,7 +84,7 @@ public class PowerUp : MonoBehaviour
         {
             if (other.gameObject.GetComponentInParent<playerControl>() != null)
             {
-                other.gameObject.GetComponentInParent<playerControl>().MakeInVisible(layer);
+                other.gameObject.GetComponentInParent<playerControl>().MakeInVisible();
 
                 powerUpManager.GetComponent<PowerUpManger>().ReleaseSpawnPoint(spawnpos);
 

@@ -308,9 +308,12 @@ public class playerControl : MonoBehaviour {
 
     }
 
-    public void MakeInVisible(int Newlayer)
+    public void MakeInVisible()
     {
-        gameObject.layer = Newlayer;
+        
+        transform.Find("bodyModel").gameObject.layer = (gameObject.layer + 8);
+        transform.Find("weaponModel").gameObject.layer = (gameObject.layer + 8);
+        gameObject.layer = (gameObject.layer + 8);
         invisiblityTime += powerupTime;
 
         StartCoroutine(EndPowerUp(2,0));
@@ -329,7 +332,7 @@ public class playerControl : MonoBehaviour {
     {
         if (type == 1)
         {
-            GameObject aura = Instantiate(strengthAura, transform.position+new Vector3(0,1,0), transform.rotation, transform);
+            GameObject aura = Instantiate(strengthAura, transform.position+new Vector3(0,2.74f,0), transform.rotation, transform);
             yield return new WaitForSeconds(powerupTime);
             Destroy(aura);
             DamageStrength = Mathf.Max(OriginalDamageStrength, DamageStrength - amount);
@@ -338,13 +341,16 @@ public class playerControl : MonoBehaviour {
 
         if (type == 2)
         {
+            GameObject aura = Instantiate(invisibleAura, transform.position + new Vector3(0, 2.74f, 0), transform.rotation, transform);
             yield return new WaitForSeconds(powerupTime);
-
+            Destroy(aura);
             invisiblityTime -= powerupTime;
 
             if (invisiblityTime <= 0)
             {
-                gameObject.layer = OriginalLayer;
+                transform.Find("bodyModel").gameObject.layer = (gameObject.layer - 8);
+                transform.Find("weaponModel").gameObject.layer = (gameObject.layer - 8);
+                gameObject.layer = (gameObject.layer - 8);
                 invisiblityTime = 0;
             }
 
@@ -352,8 +358,9 @@ public class playerControl : MonoBehaviour {
 
         if (type == 3)
         {
+            GameObject aura = Instantiate(speedAura, transform.position + new Vector3(0, 2.74f, 0), transform.rotation, transform);
             yield return new WaitForSeconds(powerupTime);
-
+            Destroy(aura);
             walkingSpeed = Mathf.Max(OriginalWalkingspeed, walkingSpeed - amount);
 
         }

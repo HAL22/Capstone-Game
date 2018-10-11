@@ -11,9 +11,9 @@ public class Gold : MonoBehaviour
     private LayerMask Layer; //  checks which hero to give the gold to
     private float len;
     private float speed;
-    private float cooldown = 1.0f;
-    private float action1;
-    private float action2;
+    //private float cooldown = 1.0f;
+    //private float action1;
+    //private float action2;
 
 
     //Public variable
@@ -28,8 +28,8 @@ public class Gold : MonoBehaviour
         collected = false;
         this.Layer = Layer;
         //gameObject.layer = team;
-        action1 = 1f;
-        action2 = 0.0f;
+       // action1 = 1f;
+       // action2 = 0.0f;
     }
 
     private void Start()

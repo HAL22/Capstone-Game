@@ -215,7 +215,8 @@ public class MinionAI : MonoBehaviour
                         skillTimer = 0;
                         foreach (Collider scareTarget in hitcollider)
                         {
-                            scareTarget.gameObject.GetComponent<MinionAI>().Fear(5, gameObject);
+                            if (scareTarget != null)
+                                scareTarget.gameObject.GetComponent<MinionAI>().Fear(5, gameObject);
                         }
                     }
                     else if ((type == Type.Dragon) && skillTimer > skillDelay && flamecollider.Length > 2)//dragon does burn instead of attack.
