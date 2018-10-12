@@ -15,33 +15,47 @@ public class TowerAI : MonoBehaviour
     public int healthImpact;
     public List<GameObject> Enemies;
     public float attackTimer;
+    public GameObject deathEffect;
+
+    private enum State { alive, dead };
+    private State state;
+    private healthManager health;
 
 
     // Use this for initialization
     void Start ()
     {
+        state = State.alive;
         Enemies = new List<GameObject>();
         target = null;
+        health = GetComponent<healthManager>();
 		
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-        attackTimer += Time.deltaTime;
-
-        if (attackTimer > attackDelay)
+        if (state == State.alive)
         {
+            attackTimer += Time.deltaTime;
 
-            GetTarget();
-
-            if (target != null && target.GetComponent<healthManager>().getHealth()>0)
+            if (attackTimer > attackDelay)
             {
-                Shoot();
+
+                GetTarget();
+
+                if (target != null && target.GetComponent<healthManager>().getHealth() > 0)
+                {
+                    Shoot();
+                }
+                attackTimer = 0.0f;
             }
 
-            attackTimer = 0.0f;
-
+            checkDeath();
+        }
+        else
+        {
+            transform.position = transform.position - new Vector3(0, 1, 0);
         }
 
         
@@ -95,5 +109,13 @@ public class TowerAI : MonoBehaviour
         int m2ID = m2.GetComponent<gameObjectIdentity>().ID;
 
         return m1ID.CompareTo(m2ID);
+    }
+
+    void checkDeath()
+    {
+        if (health.getHealth() <= 0) {
+            state = State.dead;
+            GameObject death = Instantiate(deathEffect, transform.position + new Vector3(0,2,0), transform.rotation);
+        }
     }
 }

@@ -13,12 +13,18 @@ public class healthManager : MonoBehaviour
     private int currentHealth;
 
     private float barSize;
+    private float thirdBarSize;
 
 	// Use this for initialization
 	void Start ()
     {
         currentHealth = maxHealth;
         barSize = healthBar[0].sizeDelta.x;
+        try
+        {
+            thirdBarSize = healthBar[2].sizeDelta.x;
+        }
+        catch { }
 
     }
 	
@@ -50,7 +56,7 @@ public class healthManager : MonoBehaviour
             healthBar[1].sizeDelta = new Vector2((float)(currentHealth)/ maxHealth * barSize, healthBar[1].sizeDelta.y);
             try
             {
-                healthBar[2].sizeDelta = new Vector2((float)(currentHealth) / maxHealth * barSize, healthBar[2].sizeDelta.y);
+                healthBar[2].sizeDelta = new Vector2((float)(currentHealth) / maxHealth * thirdBarSize, healthBar[2].sizeDelta.y);
             }
             catch { }
             

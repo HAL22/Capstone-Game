@@ -7,14 +7,16 @@ using UnityEngine.SceneManagement;
 public class gameOverCheck : MonoBehaviour {
 
     public GameObject[] tower;
+    public Transform[] towerFocus;
     public Text text;
-    public Camera cam;
+    public Camera gameOverCam;
+    public Camera [] playerCamera;
 
     private bool over;
 
 	// Use this for initialization
 	void Start () {
-        cam.enabled = false;
+        gameOverCam.enabled = false;
         over = false;
 	}
 	
@@ -26,19 +28,23 @@ public class gameOverCheck : MonoBehaviour {
             {
                 over = true;
                 text.text = "Game Ends in a Tie!";
-                cam.enabled = true; 
+                gameOverCam.enabled = true;
+                playerCamera[0].gameObject.GetComponent<followLook>().target = towerFocus[0];
+                playerCamera[1].gameObject.GetComponent<followLook>().target = towerFocus[1];
             }
-            else if(tower[0].GetComponent<healthManager>().getHealth() <= 0)
+            else if(tower[1].GetComponent<healthManager>().getHealth() <= 0)
             {
                 over = true;
                 text.text = "Player 1 Wins!!!";
-                cam.enabled = true;
+                gameOverCam.enabled = true;
+                playerCamera[1].gameObject.GetComponent<followLook>().target = towerFocus[1];
             }
-            else if (tower[1].GetComponent<healthManager>().getHealth() <= 0)
+            else if (tower[0].GetComponent<healthManager>().getHealth() <= 0)
             {
                 over = true;
                 text.text = "Player 2 Wins!!!";
-                cam.enabled = true;
+                gameOverCam.enabled = true;
+                playerCamera[0].gameObject.GetComponent<followLook>().target = towerFocus[0];
             }
         }
 
