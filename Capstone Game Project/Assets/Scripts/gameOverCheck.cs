@@ -11,6 +11,8 @@ public class gameOverCheck : MonoBehaviour {
     public Text text;
     public Camera gameOverCam;
     public Camera [] playerCamera;
+    public AudioSource gameMusic;
+    public AudioClip victoryMusic;
 
     private bool over;
 
@@ -31,6 +33,7 @@ public class gameOverCheck : MonoBehaviour {
                 gameOverCam.enabled = true;
                 playerCamera[0].gameObject.GetComponent<followLook>().target = towerFocus[0];
                 playerCamera[1].gameObject.GetComponent<followLook>().target = towerFocus[1];
+                playVictory();
             }
             else if(tower[1].GetComponent<healthManager>().getHealth() <= 0)
             {
@@ -38,6 +41,7 @@ public class gameOverCheck : MonoBehaviour {
                 text.text = "Player 1 Wins!!!";
                 gameOverCam.enabled = true;
                 playerCamera[1].gameObject.GetComponent<followLook>().target = towerFocus[1];
+                playVictory();
             }
             else if (tower[0].GetComponent<healthManager>().getHealth() <= 0)
             {
@@ -45,6 +49,7 @@ public class gameOverCheck : MonoBehaviour {
                 text.text = "Player 2 Wins!!!";
                 gameOverCam.enabled = true;
                 playerCamera[0].gameObject.GetComponent<followLook>().target = towerFocus[0];
+                playVictory();
             }
         }
 
@@ -54,5 +59,11 @@ public class gameOverCheck : MonoBehaviour {
     public void Restart(string name)
     {
         SceneManager.LoadScene(name);
+    }
+
+    public void playVictory()
+    {
+        gameMusic.clip = victoryMusic;
+        gameMusic.Play();
     }
 }

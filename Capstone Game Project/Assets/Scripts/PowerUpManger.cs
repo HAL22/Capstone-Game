@@ -13,6 +13,7 @@ public class PowerUpManger : MonoBehaviour
     public int DamageIncrease;
     public int SpeedIncrease;
     public int positionPerPowerUp;
+    public float lifetime;
     
     //private variable
     private int currentPos;
@@ -45,8 +46,7 @@ public class PowerUpManger : MonoBehaviour
             currentPos = Random.Range(0, spawnPoints.Length);
 
             // getting the power-up
-            //currentPowerUp = Random.Range(0, PowerUps.Length);
-            currentPowerUp =3;
+            currentPowerUp = Random.Range(0, PowerUps.Length);
             
             if (OccupiedSpawnPoints[currentPos] < positionPerPowerUp)
             {
@@ -68,7 +68,7 @@ public class PowerUpManger : MonoBehaviour
         if (type == 0)
         {
             GameObject Power = Instantiate(powerup, pos.position, pos.rotation);
-            Power.GetComponent<PowerUp>().PowerUpSetUp(type, HealthIncrease, currentPos, gameObject);
+            Power.GetComponent<PowerUp>().PowerUpSetUp(type, HealthIncrease, currentPos, gameObject, lifetime);
         }
 
         // damage increase
@@ -77,7 +77,7 @@ public class PowerUpManger : MonoBehaviour
         {
 
             GameObject Power = Instantiate(powerup, pos.position, pos.rotation);
-            Power.GetComponent<PowerUp>().PowerUpSetUp(type, DamageIncrease, currentPos, gameObject);
+            Power.GetComponent<PowerUp>().PowerUpSetUp(type, DamageIncrease, currentPos, gameObject, lifetime);
         }
 
         // Invisibility
@@ -85,7 +85,7 @@ public class PowerUpManger : MonoBehaviour
         else if (type == 2)
         {
             GameObject Power = Instantiate(powerup, pos.position, pos.rotation);
-            Power.GetComponent<PowerUp>().PowerUpSetUp(type, 0, currentPos, gameObject);
+            Power.GetComponent<PowerUp>().PowerUpSetUp(type, 0, currentPos, gameObject, lifetime);
 
         }
 
@@ -94,7 +94,7 @@ public class PowerUpManger : MonoBehaviour
         else if (type==3)
         {
             GameObject Power = Instantiate(powerup, pos.position, pos.rotation);
-            Power.GetComponent<PowerUp>().PowerUpSetUp(type, SpeedIncrease, currentPos, gameObject);
+            Power.GetComponent<PowerUp>().PowerUpSetUp(type, SpeedIncrease, currentPos, gameObject, lifetime);
 
         }
 

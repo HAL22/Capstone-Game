@@ -56,7 +56,7 @@ public class playerControl : MonoBehaviour {
     public AudioClip respawnSound;
     public AudioClip skillSound;
 
-    //public GameObject magicEffect;
+    public GameObject gold;
     public GameObject attackEffect;
     public GameObject skillEffect;
     public GameObject strengthAura;
@@ -387,43 +387,29 @@ public class playerControl : MonoBehaviour {
         audio.Play();
         dead = true;
         anim.CrossFade("death");
+        GameObject cash = Instantiate(gold, transform.position + new Vector3(1,0,0), transform.rotation);
+        setGold(cash);
+        cash = Instantiate(gold, transform.position + new Vector3(-1, 0, 0), transform.rotation);
+        setGold(cash);
+        cash = Instantiate(gold, transform.position + new Vector3(0, 0, 1), transform.rotation);
+        setGold(cash);
+        cash =Instantiate(gold, transform.position + new Vector3(0, 0, -1), transform.rotation);
+        setGold(cash);
     }
 
-    
-    /*private IEnumerator DelayedDestroy(GameObject target, float duration)//destroy hit target after delay
-    {     
-        yield return new WaitForSeconds(duration);
-        GameObject dust = Instantiate(dustEffect);
-        dust.transform.position = target.transform.position + new Vector3(0,1,0);
-        dust.transform.localScale = target.transform.localScale*100;
-        dust.transform.rotation = transform.rotation;
-        Destroy(target);
-        yield return new WaitForSeconds(1f);
-        Destroy(dust);
+    public void setGold(GameObject gold)
+    {
+        if (gameObject.layer == 11)
+        {
+            gold.layer = LayerMask.NameToLayer("Currency 1");
+            gold.transform.Find("gold_bar").gameObject.layer = LayerMask.NameToLayer("Currency 1");
+        }
+        else
+        {
+            gold.layer = LayerMask.NameToLayer("Currency 2");
+            gold.transform.Find("gold_bar").gameObject.layer = LayerMask.NameToLayer("Currency 2");
+        }
+        gold.GetComponent<Gold>().setAmount(5, enemyLayer);
     }
-
-     private IEnumerator SpellEffect(float startDelay, float duration)//create fire animation with delay to line up with animation
-     {
-         yield return new WaitForSeconds(startDelay);
-         GameObject spell = Instantiate(skillEffect);
-         radians = rotation / 360 * 2 * Mathf.PI;
-         spell.transform.position = transform.position + new Vector3(Mathf.Sin(radians)*3.5f, -0.1f, Mathf.Cos(radians)*3.5f);
-         spell.transform.rotation = transform.rotation;
-         yield return new WaitForSeconds(duration);
-         Destroy(spell);
-     }
-     
-
-
-     private IEnumerator DustEffect(float startDelay, float duration)//create fire animation with delay to line up with animation
-       {
-           yield return new WaitForSeconds(startDelay);
-           GameObject spell = Instantiate(attackEffect);
-           radians = rotation / 360 * 2 * Mathf.PI;
-           spell.transform.position = transform.position + new Vector3(Mathf.Sin(radians)*3.5f, -0.1f, Mathf.Cos(radians)*3.5f);
-           spell.transform.rotation = transform.rotation;
-           yield return new WaitForSeconds(duration);
-           Destroy(spell);
-       }*/
        
 }

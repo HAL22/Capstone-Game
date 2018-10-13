@@ -12,6 +12,7 @@ public class Bullet : MonoBehaviour
 
 
     public float health;
+    public int damage;
     public GameObject fireballEffect; // Will surround the bullet
 
 	// Use this for initialization
@@ -45,7 +46,7 @@ public class Bullet : MonoBehaviour
 
             if (dir.magnitude < 1.0f && target!=null)
             {
-                target.GetComponent<healthManager>().Damage(5);
+                target.GetComponent<healthManager>().Damage(damage);
             }
 
             if (fireballEffect != null)

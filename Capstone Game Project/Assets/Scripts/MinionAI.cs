@@ -19,7 +19,7 @@ public class MinionAI : MonoBehaviour
     private float skillTimer;
     public float skillDelay;
     public GameObject Gold;
-    public int CurrencyLayer;
+    //public int CurrencyLayer;
 
     public AudioClip attackSound;
     public AudioClip skillSound;
@@ -132,11 +132,11 @@ public class MinionAI : MonoBehaviour
 
     public void setMinionData(int team, GameObject EnemyTower, LayerMask EnemyLayer)
     {
-        CurrencyLayer = 15;
+        //CurrencyLayer = 15;
         this.EnemyTower = EnemyTower;
         this.EnemyLayer = EnemyLayer;
         gameObject.layer = 8+team;
-        CurrencyLayer = CurrencyLayer - team;
+        //CurrencyLayer = CurrencyLayer - team;
     }
 
     void searchForTarget()
@@ -318,7 +318,7 @@ public class MinionAI : MonoBehaviour
             gold.layer = LayerMask.NameToLayer("Currency 2");
             gold.transform.Find("gold_bar").gameObject.layer = LayerMask.NameToLayer("Currency 2");
         }
-        gold.GetComponent<Gold>().setAmount(5, EnemyLayer, CurrencyLayer);
+        gold.GetComponent<Gold>().setAmount(5, EnemyLayer);
     }
 
 }

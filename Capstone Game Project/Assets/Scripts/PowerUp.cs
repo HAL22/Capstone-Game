@@ -13,10 +13,10 @@ public class PowerUp : MonoBehaviour
 
     // public variables
     private GameObject powerUpManager;
-    public int lifetime; // life time of a power up
+    public float lifetime; // life time of a power up
     public GameObject collectEffect;
 
-    public void PowerUpSetUp(int type,int integerincrease, int spawnpos, GameObject powerUpManager)
+    public void PowerUpSetUp(int type,int integerincrease, int spawnpos, GameObject powerUpManager, float lifetime)
     {
         Type = type;
         IntegerIncrease = integerincrease;
@@ -24,7 +24,8 @@ public class PowerUp : MonoBehaviour
         speed = 5;
         this.spawnpos = spawnpos;
         this.powerUpManager = powerUpManager;
-        lifetime = 10;
+
+        this.lifetime = lifetime;
 
     }
 

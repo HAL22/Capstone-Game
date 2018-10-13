@@ -22,14 +22,11 @@ public class Gold : MonoBehaviour
     
 
 
-    public void setAmount(int amount, LayerMask Layer,int team)
+    public void setAmount(int amount, LayerMask Layer)
     {
         amountOfGold = amount;
         collected = false;
         this.Layer = Layer;
-        //gameObject.layer = team;
-       // action1 = 1f;
-       // action2 = 0.0f;
     }
 
     private void Start()

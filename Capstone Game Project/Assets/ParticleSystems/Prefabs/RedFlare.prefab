@@ -117,6 +117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
+  damage: 20
   fireballEffect: {fileID: 1000011128802252, guid: 662f647c42f70a849ac85959df4dd684,
     type: 2}
 --- !u!135 &135798772935283016

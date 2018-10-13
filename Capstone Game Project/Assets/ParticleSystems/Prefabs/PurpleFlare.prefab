@@ -117,6 +117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
+  damage: 5
   fireballEffect: {fileID: 0}
 --- !u!135 &135626699915993574
 SphereCollider:
