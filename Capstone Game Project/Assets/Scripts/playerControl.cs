@@ -11,6 +11,7 @@ public class playerControl : MonoBehaviour {
     private Rigidbody rigidbody;
     private bool free;
     private float actionTimer;
+    private float skillTimer;
     private float deathTimer;
     private bool dead;
     private Vector3 spawnpoint;
@@ -18,6 +19,7 @@ public class playerControl : MonoBehaviour {
     private GoldManager goldManager;
 
     public float actionCooldown = 1f;
+    public float skillCooldown = 5f;
     public float rotationalSpeed = 1.5f;
     public float walkingSpeed = 10f;
     public float respawnCooldown = 5f;
@@ -78,6 +80,7 @@ public class playerControl : MonoBehaviour {
         rigidbody = GetComponent<Rigidbody>();
         free = true;
         actionTimer = actionCooldown;
+        skillTimer = skillCooldown;
         dead = false;
         spawnpoint = transform.position;
         deathTimer = 0;
@@ -101,6 +104,7 @@ public class playerControl : MonoBehaviour {
         free = true;
         rigidbody.velocity = new Vector3(0, 0, 0);
         actionTimer += Time.deltaTime;
+        skillTimer += Time.deltaTime;
         spawnTimer1 = Mathf.Min(maxSpawnTimer1, spawnTimer1 + Time.deltaTime);
         spawnTimer2 = Mathf.Min(maxSpawnTimer2, spawnTimer2 + Time.deltaTime);
         spawnTimer3 = Mathf.Min(maxSpawnTimer3, spawnTimer3 + Time.deltaTime);
@@ -131,9 +135,10 @@ public class playerControl : MonoBehaviour {
                 }
             }
 
-            if (Input.GetKey(special))//special ability
+            if (Input.GetKey(special) && skillTimer>skillCooldown)//special ability
             {
                 actionTimer = 0;
+                skillTimer = 0;
                 audio.clip = attackSound;
                 audio.Play();
                 if (!anim.IsPlaying("skill"))
@@ -372,7 +377,7 @@ public class playerControl : MonoBehaviour {
         cooldownIndicator[1].sizeDelta = new Vector2(cooldownIndicator[1].sizeDelta.x, (float)(maxSpawnTimer2 - spawnTimer2) / maxSpawnTimer2 * minionBarSize);
         cooldownIndicator[2].sizeDelta = new Vector2(cooldownIndicator[2].sizeDelta.x, (float)(maxSpawnTimer3 - spawnTimer3) / maxSpawnTimer3 * minionBarSize);
         cooldownIndicator[3].sizeDelta = new Vector2(cooldownIndicator[3].sizeDelta.x, (float)(actionCooldown - actionTimer) / actionCooldown * attackBarSize);
-        cooldownIndicator[4].sizeDelta = new Vector2(cooldownIndicator[4].sizeDelta.x, (float)(actionCooldown - actionTimer) / actionCooldown * skillBarSize);
+        cooldownIndicator[4].sizeDelta = new Vector2(cooldownIndicator[4].sizeDelta.x, (float)(skillCooldown - skillTimer) / skillCooldown * skillBarSize);
 
     }
 

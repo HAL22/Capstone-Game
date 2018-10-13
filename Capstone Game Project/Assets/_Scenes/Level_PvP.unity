@@ -43681,6 +43681,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actionCooldown: 1
+  skillCooldown: 2.5
   rotationalSpeed: 1.5
   walkingSpeed: 10
   respawnCooldown: 5
@@ -60143,6 +60144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actionCooldown: 1
+  skillCooldown: 5
   rotationalSpeed: 1.5
   walkingSpeed: 10
   respawnCooldown: 5
@@ -60186,8 +60188,8 @@ MonoBehaviour:
   backward: 274
   rotLeft: 276
   rotRight: 275
-  attack: 47
-  special: 257
+  attack: 303
+  special: 13
   spawnOne: 49
   spawnTwo: 50
   spawnThree: 51
