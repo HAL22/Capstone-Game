@@ -55,6 +55,7 @@ public class playerControl : MonoBehaviour {
     public AudioClip deathSound;
     public AudioClip respawnSound;
     public AudioClip skillSound;
+    public AudioClip minionSpawn;
 
     public GameObject gold;
     public GameObject attackEffect;
@@ -103,6 +104,7 @@ public class playerControl : MonoBehaviour {
 
         free = true;
         rigidbody.velocity = new Vector3(0, 0, 0);
+        rigidbody.angularVelocity = new Vector3(0, 0, 0);
         actionTimer += Time.deltaTime;
         skillTimer += Time.deltaTime;
         spawnTimer1 = Mathf.Min(maxSpawnTimer1, spawnTimer1 + Time.deltaTime);
@@ -145,8 +147,6 @@ public class playerControl : MonoBehaviour {
                 {
                     anim.CrossFade("skill");
                 }
-
-                //StartCoroutine(SpellEffect(0.2f,1f));//fire effect
                 
 
                 radians = rotation / 360 * 2 * Mathf.PI;
@@ -238,8 +238,6 @@ public class playerControl : MonoBehaviour {
 
             if (free)
             {
-                rigidbody.velocity = new Vector3(0, 0, 0);
-                rigidbody.angularVelocity = new Vector3(0, 0, 0);
                 if (!anim.IsPlaying("free"))
                 {
                     anim.CrossFade("free");

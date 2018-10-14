@@ -11,8 +11,7 @@ public class SpawnManager : MonoBehaviour {
     public GameObject[] tower;
     public LayerMask[] unitLayer;
     public LayerMask[] UILayer;
-    public GameObject[] projectile;
-    public GameObject[] Props;
+    public GameObject spawnEffect;
 
     public Camera[] cam;
 
@@ -64,5 +63,8 @@ public class SpawnManager : MonoBehaviour {
     {
         GameObject unit = Instantiate(model[modelNo], target.position, target.rotation);
         unit.GetComponent<MinionAI>().setMinionData(team, tower[Mathf.Abs(1-team)], unitLayer[Mathf.Abs(1-team)]);
+        GameObject effect = Instantiate(spawnEffect, target.position + new Vector3(0,1,0), Quaternion.Euler(-90,0,0),unit.transform);
+        Destroy(effect, 5);
+
     }
 }

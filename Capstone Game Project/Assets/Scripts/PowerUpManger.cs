@@ -6,13 +6,12 @@ public class PowerUpManger : MonoBehaviour
 {
     //public variables
     public Transform[] spawnPoints;
-    public int[] OccupiedSpawnPoints;
+    private bool[] OccupiedSpawnPoints;
     public GameObject[] PowerUps;
     public int Interval;
     public int HealthIncrease;
     public int DamageIncrease;
     public int SpeedIncrease;
-    public int positionPerPowerUp;
     public float lifetime;
     
     //private variable
@@ -24,6 +23,7 @@ public class PowerUpManger : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
+        OccupiedSpawnPoints = new bool[spawnPoints.Length];
         StartCoroutine(SpawnPowerUp());
 		
 	}
@@ -40,18 +40,17 @@ public class PowerUpManger : MonoBehaviour
 
         while (true)
         {
-            yield return new WaitForSeconds(Interval);
-
             // geting the pos
             currentPos = Random.Range(0, spawnPoints.Length);
 
             // getting the power-up
             currentPowerUp = Random.Range(0, PowerUps.Length);
             
-            if (OccupiedSpawnPoints[currentPos] < positionPerPowerUp)
+            if (!OccupiedSpawnPoints[currentPos])//empty powerup spawnpoint
             {
+                yield return new WaitForSeconds(Interval);//wait so many seonds so power up doesn't spawn as soon as previous one was collected
                 Spawn(currentPowerUp, PowerUps[currentPowerUp], spawnPoints[currentPos]);
-                OccupiedSpawnPoints[currentPos]++;
+                OccupiedSpawnPoints[currentPos] = true;
             }
                
 
@@ -63,7 +62,6 @@ public class PowerUpManger : MonoBehaviour
 
     private void Spawn(int type,GameObject powerup,Transform pos)
     {
-
         // health
         if (type == 0)
         {
@@ -111,9 +109,9 @@ public class PowerUpManger : MonoBehaviour
 
     public void ReleaseSpawnPoint(int spawnpoint)
     {
-        if (OccupiedSpawnPoints[spawnpoint] > 0)
+        if (OccupiedSpawnPoints[spawnpoint])
         {
-            OccupiedSpawnPoints[spawnpoint]--;
+            OccupiedSpawnPoints[spawnpoint] = false;
         }
 
     }
