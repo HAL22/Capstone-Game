@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 198205263022503368}
   - component: {fileID: 199586882893866902}
   m_Layer: 0
-  m_Name: Flames
+  m_Name: DragonBreathFlames
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

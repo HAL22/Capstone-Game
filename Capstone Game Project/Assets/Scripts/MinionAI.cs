@@ -71,6 +71,7 @@ public class MinionAI : MonoBehaviour
         {
             transform.Find("Healthbar Canvas01/Healthbar Background/Healthbar Foreground").gameObject.GetComponent<Image>().color = new Color32(255, 0,0,255);
             transform.Find("Healthbar Canvas02/Healthbar Background/Healthbar Foreground").gameObject.GetComponent<Image>().color = new Color32(255, 0, 0, 255);
+            transform.Find("Minion Indicator/Indicator").gameObject.GetComponent<Image>().color = new Color32(255, 0, 0, 255);
         }
 
 

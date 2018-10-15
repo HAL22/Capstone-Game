@@ -13,12 +13,14 @@ public class gameOverCheck : MonoBehaviour {
     public Camera [] playerCamera;
     public AudioSource gameMusic;
     public AudioClip victoryMusic;
+    public GameObject endClick;
 
     private bool over;
 
 	// Use this for initialization
 	void Start () {
         gameOverCam.enabled = false;
+        endClick.SetActive(false);
         over = false;
 	}
 	
@@ -31,6 +33,7 @@ public class gameOverCheck : MonoBehaviour {
                 over = true;
                 text.text = "Game Ends in a Tie!";
                 gameOverCam.enabled = true;
+                endClick.SetActive(true);
                 playerCamera[0].gameObject.GetComponent<followLook>().target = towerFocus[0];
                 playerCamera[1].gameObject.GetComponent<followLook>().target = towerFocus[1];
                 playVictory();
@@ -40,6 +43,7 @@ public class gameOverCheck : MonoBehaviour {
                 over = true;
                 text.text = "Player 1 Wins!!!";
                 gameOverCam.enabled = true;
+                endClick.SetActive(true);
                 playerCamera[1].gameObject.GetComponent<followLook>().target = towerFocus[1];
                 playVictory();
             }
@@ -48,6 +52,7 @@ public class gameOverCheck : MonoBehaviour {
                 over = true;
                 text.text = "Player 2 Wins!!!";
                 gameOverCam.enabled = true;
+                endClick.SetActive(true);
                 playerCamera[0].gameObject.GetComponent<followLook>().target = towerFocus[0];
                 playVictory();
             }

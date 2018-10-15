@@ -21383,6 +21383,7 @@ MonoBehaviour:
   - {fileID: 1275709927}
   gameMusic: {fileID: 1873074564}
   victoryMusic: {fileID: 8300000, guid: 207ea2f5a126cb04289a2fb947cce8e6, type: 3}
+  endClick: {fileID: 1520575879}
 --- !u!4 &612505157
 Transform:
   m_ObjectHideFlags: 0
@@ -50608,7 +50609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ad9bc9a388c77429c05ffc2a716384, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 1275709927}
+  cam: {fileID: 2102795353}
 --- !u!114 &1543403017
 MonoBehaviour:
   m_ObjectHideFlags: 0
