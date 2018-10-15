@@ -44,8 +44,7 @@ public class PowerUpManager : MonoBehaviour
             currentPos = Random.Range(0, spawnPoints.Length);
 
             // getting the power-up
-            //currentPowerUp = Random.Range(0, PowerUps.Length);
-            currentPowerUp = 2;
+            currentPowerUp = Random.Range(0, PowerUps.Length);
             
             if (!OccupiedSpawnPoints[currentPos])//empty powerup spawnpoint
             {

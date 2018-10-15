@@ -2029,12 +2029,11 @@ MonoBehaviour:
   attackDelay: 1
   healthImpact: 6
   attackEffect: {fileID: 0}
-  skillEffect: {fileID: 1061033073774108, guid: 942c55c352940c14bbde256cdf5c0be8,
+  skillEffect: {fileID: 1061033073774108, guid: 1e3198b1204d211498486c3eb008fdf5,
     type: 2}
-  burnEffect: {fileID: 1185145119154676, guid: 7373a8fa90e1c7f4392bb6d16b90632d, type: 2}
+  burnEffect: {fileID: 1185145119154676, guid: 185bfb03a604d784b9f0609f4ab794b0, type: 2}
   skillDelay: 8
   Gold: {fileID: 1594879466734162, guid: c82411508e9628b4e9f629bf2800542f, type: 2}
-  CurrencyLayer: 0
   attackSound: {fileID: 8300000, guid: 31318e5d7684a4c46a4973438c81910e, type: 3}
   skillSound: {fileID: 8300000, guid: db8bd0a25717be743b3c02c5ba597ffe, type: 3}
   type: 4
