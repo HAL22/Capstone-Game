@@ -46,7 +46,6 @@ public class playerControl : MonoBehaviour {
     public int powerupTime;
     public int DamageStrength;
     public int OriginalDamageStrength;
-    public int OriginalLayer; // for invisible 
     public float OriginalWalkingspeed;
 
 
@@ -124,7 +123,6 @@ public class playerControl : MonoBehaviour {
                     anim.CrossFade("attack");
                 }
 
-                //StartCoroutine(DustEffect(0.2f,1f));//fire effect
                 GameObject hitEffect = Instantiate(attackEffect, transform.position, transform.rotation);
                 Destroy(hitEffect, 0.7f);
                 radians = rotation / 360 * 2 * Mathf.PI;
@@ -163,7 +161,7 @@ public class playerControl : MonoBehaviour {
                     int i = 0;
                     while (i < hitColliders.Length)
                     {
-                        hitColliders[i].gameObject.GetComponent<healthManager>().Damage(DamageStrength);
+                        hitColliders[i].gameObject.GetComponent<healthManager>().Damage(DamageStrength*2);
                         i++;
                     }
                 }
@@ -179,7 +177,7 @@ public class playerControl : MonoBehaviour {
                     int i = 0;
                     while (i < hitColliders.Length)
                     {
-                        hitColliders[i].gameObject.GetComponent<healthManager>().Damage(-25);
+                        hitColliders[i].gameObject.GetComponent<healthManager>().Damage(-15);
                         i++;
                     }
                 }

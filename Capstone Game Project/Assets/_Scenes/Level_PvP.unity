@@ -44505,7 +44505,6 @@ MonoBehaviour:
   powerupTime: 15
   DamageStrength: 10
   OriginalDamageStrength: 0
-  OriginalLayer: 8
   OriginalWalkingspeed: 0
   attackSound: {fileID: 8300000, guid: afce58a16edc1a047a5d36b048b8e7dd, type: 3}
   deathSound: {fileID: 8300000, guid: 8e27d671faf6e114d9f1e05f4bce7267, type: 3}
@@ -61423,7 +61422,6 @@ MonoBehaviour:
   powerupTime: 15
   DamageStrength: 10
   OriginalDamageStrength: 0
-  OriginalLayer: 9
   OriginalWalkingspeed: 0
   attackSound: {fileID: 8300000, guid: afce58a16edc1a047a5d36b048b8e7dd, type: 3}
   deathSound: {fileID: 8300000, guid: 4e71fccea4057544189bb6ca320d4778, type: 3}
