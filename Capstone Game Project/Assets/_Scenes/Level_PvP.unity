@@ -15687,6 +15687,73 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 493494, guid: 7dfb9be508786a245abba96dfd10223f, type: 2}
   m_PrefabInternal: {fileID: 465838769}
+--- !u!1001 &471128898
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 558135245}
+    m_Modifications:
+    - target: {fileID: 4437318494891276, guid: 67e16c67b0b2dd44daba32fab06e0bda, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 10.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 4437318494891276, guid: 67e16c67b0b2dd44daba32fab06e0bda, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.54999995
+      objectReference: {fileID: 0}
+    - target: {fileID: 4437318494891276, guid: 67e16c67b0b2dd44daba32fab06e0bda, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 74.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 4437318494891276, guid: 67e16c67b0b2dd44daba32fab06e0bda, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0.000000016930741
+      objectReference: {fileID: 0}
+    - target: {fileID: 4437318494891276, guid: 67e16c67b0b2dd44daba32fab06e0bda, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0.63237816
+      objectReference: {fileID: 0}
+    - target: {fileID: 4437318494891276, guid: 67e16c67b0b2dd44daba32fab06e0bda, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0.000000013821067
+      objectReference: {fileID: 0}
+    - target: {fileID: 4437318494891276, guid: 67e16c67b0b2dd44daba32fab06e0bda, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.7746599
+      objectReference: {fileID: 0}
+    - target: {fileID: 4437318494891276, guid: 67e16c67b0b2dd44daba32fab06e0bda, type: 2}
+      propertyPath: m_RootOrder
+      value: 736
+      objectReference: {fileID: 0}
+    - target: {fileID: 1523270764807884, guid: 67e16c67b0b2dd44daba32fab06e0bda, type: 2}
+      propertyPath: m_Name
+      value: Rock_4 (91)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4437318494891276, guid: 67e16c67b0b2dd44daba32fab06e0bda, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 5.51359
+      objectReference: {fileID: 0}
+    - target: {fileID: 4437318494891276, guid: 67e16c67b0b2dd44daba32fab06e0bda, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 5.51359
+      objectReference: {fileID: 0}
+    - target: {fileID: 4437318494891276, guid: 67e16c67b0b2dd44daba32fab06e0bda, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 5.51359
+      objectReference: {fileID: 0}
+    - target: {fileID: 4437318494891276, guid: 67e16c67b0b2dd44daba32fab06e0bda, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -78.452
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 67e16c67b0b2dd44daba32fab06e0bda, type: 2}
+  m_IsPrefabParent: 0
+--- !u!4 &471128899 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4437318494891276, guid: 67e16c67b0b2dd44daba32fab06e0bda,
+    type: 2}
+  m_PrefabInternal: {fileID: 471128898}
 --- !u!1 &471151306
 GameObject:
   m_ObjectHideFlags: 0
@@ -19501,6 +19568,7 @@ Transform:
   - {fileID: 372460475}
   - {fileID: 1943742187}
   - {fileID: 2070742771}
+  - {fileID: 471128899}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -38374,7 +38442,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1150591066
 Transform:
   m_ObjectHideFlags: 0
@@ -40563,7 +40631,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 1251783976099696, guid: baebf945ddf26564b979836c41ff6dd1, type: 2}
   firePos: {fileID: 543363351}
-  target: {fileID: 0}
   EnemyLayer:
     serializedVersion: 2
     m_Bits: 512
@@ -40571,7 +40638,6 @@ MonoBehaviour:
   attackRadius: 0
   attackDelay: 1
   healthImpact: 10
-  Enemies: []
   attackTimer: 500
   deathEffect: {fileID: 1863489693083884, guid: b914be438bcff4241b948743e56a9f04,
     type: 2}
@@ -42522,16 +42588,8 @@ MonoBehaviour:
     m_Bits: 256
   - serializedVersion: 2
     m_Bits: 512
-  UILayer:
-  - serializedVersion: 2
-    m_Bits: 1024
-  - serializedVersion: 2
-    m_Bits: 2048
   spawnEffect: {fileID: 1376218418438466, guid: 0f705ad00487c594095e2af031d9af0c,
     type: 2}
-  cam:
-  - {fileID: 2102795353}
-  - {fileID: 1275709927}
   spawnTime: 30
 --- !u!4 &1296620570
 Transform:
@@ -63149,7 +63207,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 1251783976099696, guid: baebf945ddf26564b979836c41ff6dd1, type: 2}
   firePos: {fileID: 543903093}
-  target: {fileID: 0}
   EnemyLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -63157,7 +63214,6 @@ MonoBehaviour:
   attackRadius: 0
   attackDelay: 1
   healthImpact: 10
-  Enemies: []
   attackTimer: 500
   deathEffect: {fileID: 1863489693083884, guid: b914be438bcff4241b948743e56a9f04,
     type: 2}
