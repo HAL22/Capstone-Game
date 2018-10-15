@@ -1169,7 +1169,6 @@ MonoBehaviour:
   burnEffect: {fileID: 0}
   skillDelay: 0
   Gold: {fileID: 1594879466734162, guid: c82411508e9628b4e9f629bf2800542f, type: 2}
-  CurrencyLayer: 0
   attackSound: {fileID: 8300000, guid: a5137e968e9ca89429cc3fcd32f83e00, type: 3}
   skillSound: {fileID: 0}
   type: 5
