@@ -17,6 +17,7 @@ public class playerControl : MonoBehaviour {
     private Vector3 spawnpoint;
     private AudioSource audio;
     private GoldManager goldManager;
+    private healthManager health;
 
     public float actionCooldown = 1f;
     public float skillCooldown = 5f;
@@ -46,7 +47,6 @@ public class playerControl : MonoBehaviour {
     public int DamageStrength;
     public int OriginalDamageStrength;
     public int OriginalLayer; // for invisible 
-    public int invisiblityTime;
     public float OriginalWalkingspeed;
 
 
@@ -61,7 +61,7 @@ public class playerControl : MonoBehaviour {
     public GameObject attackEffect;
     public GameObject skillEffect;
     public GameObject strengthAura;
-    public GameObject invisibleAura;
+    public GameObject invulnAura;
     public GameObject speedAura;
 
     public KeyCode forward = KeyCode.W;
@@ -87,6 +87,7 @@ public class playerControl : MonoBehaviour {
         deathTimer = 0;
         audio = GetComponent<AudioSource>();
         goldManager = GetComponent<GoldManager>();
+        health = GetComponent<healthManager>();
 
         spawnTimer1 = maxSpawnTimer1;
         spawnTimer2 = maxSpawnTimer2;
@@ -95,7 +96,6 @@ public class playerControl : MonoBehaviour {
         attackBarSize = cooldownIndicator[3].sizeDelta.y;
         skillBarSize = cooldownIndicator[4].sizeDelta.y;
         OriginalDamageStrength = DamageStrength;
-        invisiblityTime = 0;
         OriginalWalkingspeed = walkingSpeed;
        
     }
@@ -159,7 +159,7 @@ public class playerControl : MonoBehaviour {
                     GameObject spellEffect = Instantiate(skillEffect, transform.position + new Vector3(Mathf.Sin(radians) * 3.5f, 0, Mathf.Cos(radians) * 3.5f), transform.rotation);
                     Destroy(spellEffect, 1f);
 
-                    Collider[] hitColliders = Physics.OverlapSphere(transform.position + new Vector3(Mathf.Sin(radians) * 2.5f, 1, Mathf.Cos(radians) * 2.5f), 2f, enemyLayer);
+                    Collider[] hitColliders = Physics.OverlapSphere(transform.position + new Vector3(Mathf.Sin(radians) * 3.5f, 1, Mathf.Cos(radians) * 3.5f), 3f, enemyLayer);
                     int i = 0;
                     while (i < hitColliders.Length)
                     {
@@ -175,11 +175,11 @@ public class playerControl : MonoBehaviour {
                     GameObject spellEffect = Instantiate(skillEffect, transform.position + new Vector3(Mathf.Sin(radians) * 3.5f, 3, Mathf.Cos(radians) * 3.5f), transform.rotation);
                     Destroy(spellEffect, 1.2f);
 
-                    Collider[] hitColliders = Physics.OverlapSphere(transform.position + new Vector3(Mathf.Sin(radians) * 2.5f, 1, Mathf.Cos(radians) * 2.5f), 2f, allyLayer);
+                    Collider[] hitColliders = Physics.OverlapSphere(transform.position + new Vector3(Mathf.Sin(radians) * 3.5f, 1, Mathf.Cos(radians) * 3.5f), 3.5f, allyLayer);
                     int i = 0;
                     while (i < hitColliders.Length)
                     {
-                        hitColliders[i].gameObject.GetComponent<healthManager>().Damage(-10);
+                        hitColliders[i].gameObject.GetComponent<healthManager>().Damage(-25);
                         i++;
                     }
                 }
@@ -311,14 +311,9 @@ public class playerControl : MonoBehaviour {
 
     }
 
-    public void MakeInVisible()
+    public void MakeInvuln()
     {
-        
-        transform.Find("bodyModel").gameObject.layer = (gameObject.layer + 8);
-        transform.Find("weaponModel").gameObject.layer = (gameObject.layer + 8);
-        gameObject.layer = (gameObject.layer + 8);
-        invisiblityTime += powerupTime;
-
+        health.makeInvulnerable(true);
         StartCoroutine(EndPowerUp(2,0));
 
 
@@ -344,18 +339,10 @@ public class playerControl : MonoBehaviour {
 
         if (type == 2)
         {
-            GameObject aura = Instantiate(invisibleAura, transform.position + new Vector3(0, 2.74f, 0), transform.rotation, transform);
+            GameObject aura = Instantiate(invulnAura, transform.position + new Vector3(0, 2.74f, 0), transform.rotation, transform);
             yield return new WaitForSeconds(powerupTime);
             Destroy(aura);
-            invisiblityTime -= powerupTime;
-
-            if (invisiblityTime <= 0)
-            {
-                transform.Find("bodyModel").gameObject.layer = (gameObject.layer - 8);
-                transform.Find("weaponModel").gameObject.layer = (gameObject.layer - 8);
-                gameObject.layer = (gameObject.layer - 8);
-                invisiblityTime = 0;
-            }
+            health.makeInvulnerable(false);
 
         }
 
@@ -397,7 +384,7 @@ public class playerControl : MonoBehaviour {
 
     public void setGold(GameObject gold)
     {
-        if (gameObject.layer == 11)
+        if (gameObject.layer == 9)
         {
             gold.layer = LayerMask.NameToLayer("Currency 1");
             gold.transform.Find("gold_bar").gameObject.layer = LayerMask.NameToLayer("Currency 1");

@@ -14,12 +14,14 @@ public class healthManager : MonoBehaviour
 
     private float barSize;
     private float thirdBarSize;
+    private bool invulnerable;
 
 	// Use this for initialization
 	void Start ()
     {
         currentHealth = maxHealth;
         barSize = healthBar[0].sizeDelta.x;
+        invulnerable = false;
         try
         {
             thirdBarSize = healthBar[2].sizeDelta.x;
@@ -36,7 +38,7 @@ public class healthManager : MonoBehaviour
 
     public void Damage(int amt)
     {
-        if(currentHealth > 0)
+        if(currentHealth > 0 && !invulnerable)
         {
             currentHealth -= amt;
             currentHealth = Mathf.Min(currentHealth, maxHealth);
@@ -64,7 +66,10 @@ public class healthManager : MonoBehaviour
         
     }
 
-    
+    public void makeInvulnerable(bool b)
+    {
+        invulnerable = b;
+    }
 
     public void resetHealth()
     {

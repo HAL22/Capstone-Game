@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerUpManger : MonoBehaviour
+public class PowerUpManager : MonoBehaviour
 {
     //public variables
     public Transform[] spawnPoints;
@@ -44,7 +44,8 @@ public class PowerUpManger : MonoBehaviour
             currentPos = Random.Range(0, spawnPoints.Length);
 
             // getting the power-up
-            currentPowerUp = Random.Range(0, PowerUps.Length);
+            //currentPowerUp = Random.Range(0, PowerUps.Length);
+            currentPowerUp = 2;
             
             if (!OccupiedSpawnPoints[currentPos])//empty powerup spawnpoint
             {

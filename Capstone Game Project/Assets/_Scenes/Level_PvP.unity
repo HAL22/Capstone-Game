@@ -27716,7 +27716,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 40
+  m_Text: 60
 --- !u!222 &823666096
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -44506,7 +44506,6 @@ MonoBehaviour:
   DamageStrength: 10
   OriginalDamageStrength: 0
   OriginalLayer: 8
-  invisiblityTime: 0
   OriginalWalkingspeed: 0
   attackSound: {fileID: 8300000, guid: afce58a16edc1a047a5d36b048b8e7dd, type: 3}
   deathSound: {fileID: 8300000, guid: 8e27d671faf6e114d9f1e05f4bce7267, type: 3}
@@ -44520,8 +44519,7 @@ MonoBehaviour:
     type: 2}
   strengthAura: {fileID: 1330128623126606, guid: 30aa17fbf8dbd294c9124a5484d93127,
     type: 2}
-  invisibleAura: {fileID: 1084305558939656, guid: fcc11a97a5e813d4e8d4a44960ad2830,
-    type: 2}
+  invulnAura: {fileID: 100000, guid: 8ee7402afbefc424b9a477b5594da483, type: 2}
   speedAura: {fileID: 1068626697805132, guid: b5488d00aee9da441b079b6fadaf31d4, type: 2}
   forward: 119
   backward: 115
@@ -57141,7 +57139,7 @@ MonoBehaviour:
   m_UVRect:
     serializedVersion: 2
     x: 0
-    y: 0
+    y: -0.001
     width: 1
     height: 1
 --- !u!222 &1745429585
@@ -61426,7 +61424,6 @@ MonoBehaviour:
   DamageStrength: 10
   OriginalDamageStrength: 0
   OriginalLayer: 9
-  invisiblityTime: 0
   OriginalWalkingspeed: 0
   attackSound: {fileID: 8300000, guid: afce58a16edc1a047a5d36b048b8e7dd, type: 3}
   deathSound: {fileID: 8300000, guid: 4e71fccea4057544189bb6ca320d4778, type: 3}
@@ -61440,8 +61437,7 @@ MonoBehaviour:
     type: 2}
   strengthAura: {fileID: 1330128623126606, guid: 30aa17fbf8dbd294c9124a5484d93127,
     type: 2}
-  invisibleAura: {fileID: 1084305558939656, guid: fcc11a97a5e813d4e8d4a44960ad2830,
-    type: 2}
+  invulnAura: {fileID: 100000, guid: 8ee7402afbefc424b9a477b5594da483, type: 2}
   speedAura: {fileID: 1068626697805132, guid: b5488d00aee9da441b079b6fadaf31d4, type: 2}
   forward: 273
   backward: 274
