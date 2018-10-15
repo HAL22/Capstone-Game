@@ -2,11 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerUpManager : MonoBehaviour
+/* BATTLE LANE
+ * for CSC3020H Capestone Game
+ * Steven Mare - MRXSTE008
+ * Thethela Faltien - FLTTHE004
+ */
+
+public class PowerUpManager : MonoBehaviour//manages the spawning of powerups and initial powerup states
 {
     //public variables
     public Transform[] spawnPoints;
-    private bool[] OccupiedSpawnPoints;
+    private bool[] OccupiedSpawnPoints;//used to check if spawn points are open or not
     public GameObject[] PowerUps;
     public int Interval;
     public int HealthIncrease;
@@ -34,7 +40,7 @@ public class PowerUpManager : MonoBehaviour
 		
 	}
 
-    private IEnumerator SpawnPowerUp()
+    private IEnumerator SpawnPowerUp()//after regular intervals, spawn a powerup
     {
         
 
@@ -46,7 +52,7 @@ public class PowerUpManager : MonoBehaviour
             // getting the power-up
             currentPowerUp = Random.Range(0, PowerUps.Length);
             
-            if (!OccupiedSpawnPoints[currentPos])//empty powerup spawnpoint
+            if (!OccupiedSpawnPoints[currentPos])//if an empty powerup spawnpoint
             {
                 yield return new WaitForSeconds(Interval);//wait so many seonds so power up doesn't spawn as soon as previous one was collected
                 Spawn(currentPowerUp, PowerUps[currentPowerUp], spawnPoints[currentPos]);
@@ -60,7 +66,7 @@ public class PowerUpManager : MonoBehaviour
         }
     }
 
-    private void Spawn(int type,GameObject powerup,Transform pos)
+    private void Spawn(int type,GameObject powerup,Transform pos)//spawn powerup of specified type and intitial data
     {
         // health
         if (type == 0)
@@ -73,7 +79,6 @@ public class PowerUpManager : MonoBehaviour
 
         else if (type == 1)
         {
-
             GameObject Power = Instantiate(powerup, pos.position, pos.rotation);
             Power.GetComponent<PowerUp>().PowerUpSetUp(type, DamageIncrease, currentPos, gameObject, lifetime);
         }
@@ -107,7 +112,7 @@ public class PowerUpManager : MonoBehaviour
         
     }
 
-    public void ReleaseSpawnPoint(int spawnpoint)
+    public void ReleaseSpawnPoint(int spawnpoint)//used when a power up is destroyed or collected to free the spawnpoint up
     {
         if (OccupiedSpawnPoints[spawnpoint])
         {

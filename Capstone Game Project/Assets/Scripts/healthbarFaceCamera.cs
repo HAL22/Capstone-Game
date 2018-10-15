@@ -2,7 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class healthbarFaceCamera : MonoBehaviour {
+/* BATTLE LANE
+ * for CSC3020H Capestone Game
+ * Steven Mare - MRXSTE008
+ * Thethela Faltien - FLTTHE004
+ */
+
+public class healthbarFaceCamera : MonoBehaviour {//used by healthbars on ui to always face the appropriate camera
 
     public Camera cam;
 

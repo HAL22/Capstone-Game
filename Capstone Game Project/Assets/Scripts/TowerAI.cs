@@ -2,21 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/* BATTLE LANE
+ * for CSC3020H Capestone Game
+ * Steven Mare - MRXSTE008
+ * Thethela Faltien - FLTTHE004
+ */
+
 public class TowerAI : MonoBehaviour
 {
 
     public GameObject bullet;
-    public Transform firePos;
-    public GameObject target;
+    public Transform firePos;//position bullet fires from
     public LayerMask EnemyLayer;
     public float searchRadius;
     public float attackRadius;
     public float attackDelay;
     public int healthImpact;
-    public List<GameObject> Enemies;
     public float attackTimer;
     public GameObject deathEffect;
 
+    private GameObject target;
+    private List<GameObject> Enemies;
     private enum State { alive, dead };
     private State state;
     private healthManager health;
@@ -35,25 +41,25 @@ public class TowerAI : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        if (state == State.alive)
+        if (state == State.alive)//if tower still alive
         {
             attackTimer += Time.deltaTime;
 
-            if (attackTimer > attackDelay)
+            if (attackTimer > attackDelay)//it attack cooldown passed
             {
 
-                GetTarget();
+                GetTarget();//find target
 
-                if (target != null && target.GetComponent<healthManager>().getHealth() > 0)
+                if (target != null && target.GetComponent<healthManager>().getHealth() > 0)//shoot at target is there and not dead
                 {
                     Shoot();
                 }
                 attackTimer = 0.0f;
             }
 
-            checkDeath();
+            checkDeath();//check if tower has died
         }
-        else
+        else//if tower dead move it throguh the ground
         {
             transform.position = transform.position - new Vector3(0, 1, 0);
         }
@@ -62,14 +68,14 @@ public class TowerAI : MonoBehaviour
 
     }
 
-    void Shoot()
+    void Shoot()//shoot bullet at target and play shoot noise
     {
         GetComponent<AudioSource>().Play();
         GameObject shootBullet = (GameObject)Instantiate(bullet, firePos.position, firePos.rotation);
         shootBullet.GetComponent<Bullet>().SetData(target, 70.0f);
     }
 
-    void GetTarget()
+    void GetTarget()//look for target
     {
         target = null;
         Enemies.Clear();
@@ -78,19 +84,19 @@ public class TowerAI : MonoBehaviour
 
         if (hitcollider.Length > 0)
         {
-            for (int i = 0; i < hitcollider.Length; i++)
+            for (int i = 0; i < hitcollider.Length; i++)//add all enemies in search radies to array
             {
                 Enemies.Add(hitcollider[i].gameObject);
             }
 
-            if (Enemies.Count > 0)
+            if (Enemies.Count > 0)//sort enemies by priority order
             {
                 Enemies.Sort(sortByidentity);
             }
         }
 
 
-        for (int i = 0; i < Enemies.Count; i++)
+        for (int i = 0; i < Enemies.Count; i++)//find first feesible target
         {
             if (Enemies[i] != null) // if the gameobject are not null
             {
@@ -111,7 +117,7 @@ public class TowerAI : MonoBehaviour
         return m1ID.CompareTo(m2ID);
     }
 
-    void checkDeath()
+    void checkDeath()// if tower is dead play explosion and set state to dead
     {
         if (health.getHealth() <= 0) {
             state = State.dead;

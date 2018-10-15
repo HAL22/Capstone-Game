@@ -2,25 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+/* BATTLE LANE
+ * for CSC3020H Capestone Game
+ * Steven Mare - MRXSTE008
+ * Thethela Faltien - FLTTHE004
+ */
+
+public class Bullet : MonoBehaviour //projectile object script
 {
 
     private GameObject target;
     private float speed;
     private Transform targetPos;
-    private GameObject effect;
+    private GameObject effect;//local instance of fireballEffect
 
-
-    public float health;
     public int damage;
-    public GameObject fireballEffect; // Will surround the bullet
+    public GameObject fireballEffect; // particle effect on death
 
 	// Use this for initialization
 	void Start ()
-    {
-
-        health = 10.0f;
-        
+    {  
 
     }
 
@@ -28,28 +29,27 @@ public class Bullet : MonoBehaviour
     void Update()
     {
 
-        if (speed<=0.0f || target == null)
+        if (speed<=0.0f || target == null)//destroy if stopped or target is gone
         {
-
             Destroy(gameObject);
-            //Destroy(effect);
-
         }
+
+
 
         Vector3 direction = target.transform.position - transform.position;
 
         float distanceInFrame = speed * Time.deltaTime;
 
-        if (direction.magnitude <= distanceInFrame)
+        if (direction.magnitude <= distanceInFrame)//if reached target
         {
             Vector3 dir = target.transform.position - targetPos.position;
 
-            if (dir.magnitude < 1.0f && target!=null)
+            if (dir.magnitude < 1.0f && target!=null)//if hit target
             {
                 target.GetComponent<healthManager>().Damage(damage);
             }
 
-            if (fireballEffect != null)
+            if (fireballEffect != null)//if bullet has a death effect
             {
                 effect = Instantiate(fireballEffect, transform.position, transform.rotation);     
             }
@@ -57,13 +57,13 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         }
 
-        transform.Translate(direction.normalized * distanceInFrame, Space.World);
+        transform.Translate(direction.normalized * distanceInFrame, Space.World);//move bullet
 
 
 		
 	}
 
-    public void SetData(GameObject target, float speed)
+    public void SetData(GameObject target, float speed)//sets data when bullet instantiated
     {
         this.target = target;
         this.speed = speed;

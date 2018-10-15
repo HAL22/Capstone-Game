@@ -2,9 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/* BATTLE LANE
+ * for CSC3020H Capestone Game
+ * Steven Mare - MRXSTE008
+ * Thethela Faltien - FLTTHE004
+ */
+
 public class playerControl : MonoBehaviour {
 
-
+    //model details
     private float rotation;
     private float radians;
     private Animation anim;
@@ -19,6 +25,7 @@ public class playerControl : MonoBehaviour {
     private GoldManager goldManager;
     private healthManager health;
 
+    //hero player details
     public float actionCooldown = 1f;
     public float skillCooldown = 5f;
     public float rotationalSpeed = 1.5f;
@@ -29,7 +36,7 @@ public class playerControl : MonoBehaviour {
     public enum Skill { smash, heal };
     public Skill skill;
 
-    //unit spawners
+    //minion spawner details and HUD indicators
     public SpawnManager spawnManager;
     public RectTransform[] cooldownIndicator;
     public float maxSpawnTimer1 = 3;
@@ -42,20 +49,21 @@ public class playerControl : MonoBehaviour {
     private float attackBarSize;
     private float skillBarSize;
 
-    //Power-ups
+    //Used for Power-ups
     public int powerupTime;
     public int DamageStrength;
     public int OriginalDamageStrength;
     public float OriginalWalkingspeed;
 
 
-    //sound effects
+    //Sound Effects
     public AudioClip attackSound;
     public AudioClip deathSound;
     public AudioClip respawnSound;
     public AudioClip skillSound;
     public AudioClip minionSpawn;
 
+    //game objects like gold and effects
     public GameObject gold;
     public GameObject attackEffect;
     public GameObject skillEffect;
@@ -63,6 +71,8 @@ public class playerControl : MonoBehaviour {
     public GameObject invulnAura;
     public GameObject speedAura;
 
+
+    //keys for player input
     public KeyCode forward = KeyCode.W;
     public KeyCode backward = KeyCode.S;
     public KeyCode rotLeft = KeyCode.A;
@@ -101,19 +111,23 @@ public class playerControl : MonoBehaviour {
 	
 	void Update () {
 
-        free = true;
+        free = true;//set state to free before checking for inputs
+
+        //resolve rigidbody inconsistencies
         rigidbody.velocity = new Vector3(0, 0, 0);
         rigidbody.angularVelocity = new Vector3(0, 0, 0);
+
+        //incrmeent cooldown timers
         actionTimer += Time.deltaTime;
         skillTimer += Time.deltaTime;
         spawnTimer1 = Mathf.Min(maxSpawnTimer1, spawnTimer1 + Time.deltaTime);
         spawnTimer2 = Mathf.Min(maxSpawnTimer2, spawnTimer2 + Time.deltaTime);
         spawnTimer3 = Mathf.Min(maxSpawnTimer3, spawnTimer3 + Time.deltaTime);
-        cooldownUpdate();
+        cooldownUpdate();//update cooldown ui
 
         if (actionTimer > actionCooldown && !dead)//only if not currently dead or attacking
         {
-            if (Input.GetKey(attack))//ranged attack
+            if (Input.GetKey(attack))//basic attack
             {
                 actionTimer = 0;
                 audio.clip = attackSound;
@@ -123,8 +137,11 @@ public class playerControl : MonoBehaviour {
                     anim.CrossFade("attack");
                 }
 
+                //create hit effect
                 GameObject hitEffect = Instantiate(attackEffect, transform.position, transform.rotation);
                 Destroy(hitEffect, 0.7f);
+
+                //hits in small radius in front of hero
                 radians = rotation / 360 * 2 * Mathf.PI;
                 Collider[] hitColliders = Physics.OverlapSphere(transform.position + new Vector3(Mathf.Sin(radians) * 6f, 0, Mathf.Cos(radians) * 6f), 2f, enemyLayer);
                 int i = 0;
@@ -149,14 +166,17 @@ public class playerControl : MonoBehaviour {
 
                 radians = rotation / 360 * 2 * Mathf.PI;
 
-                if (skill == Skill.smash)
+
+                if (skill == Skill.smash)//if skill is smash attack
                 {
+                    //sound
                     audio.clip = skillSound;
                     audio.Play();
-
+                    //particle effect
                     GameObject spellEffect = Instantiate(skillEffect, transform.position + new Vector3(Mathf.Sin(radians) * 3.5f, 0, Mathf.Cos(radians) * 3.5f), transform.rotation);
                     Destroy(spellEffect, 1f);
 
+                    //hits in larger radius in front of hero
                     Collider[] hitColliders = Physics.OverlapSphere(transform.position + new Vector3(Mathf.Sin(radians) * 3.5f, 1, Mathf.Cos(radians) * 3.5f), 3f, enemyLayer);
                     int i = 0;
                     while (i < hitColliders.Length)
@@ -165,14 +185,16 @@ public class playerControl : MonoBehaviour {
                         i++;
                     }
                 }
-                else if(skill == Skill.heal)
+                else if(skill == Skill.heal)//if skill is heal effect
                 {
+                    //sound
                     audio.clip = skillSound;
                     audio.Play();
-
+                    //particle effect
                     GameObject spellEffect = Instantiate(skillEffect, transform.position + new Vector3(Mathf.Sin(radians) * 3.5f, 3, Mathf.Cos(radians) * 3.5f), transform.rotation);
                     Destroy(spellEffect, 1.2f);
 
+                    //heal in radius in front of player
                     Collider[] hitColliders = Physics.OverlapSphere(transform.position + new Vector3(Mathf.Sin(radians) * 3.5f, 1, Mathf.Cos(radians) * 3.5f), 3.5f, allyLayer);
                     int i = 0;
                     while (i < hitColliders.Length)
@@ -229,12 +251,12 @@ public class playerControl : MonoBehaviour {
                 free = false;
             }
 
-            if (Input.GetKey(KeyCode.Escape))
+            if (Input.GetKey(KeyCode.Escape))//kills game
             {
                 Application.Quit();
             }
 
-            if (free)
+            if (free)//if no other control was selected, do free animation
             {
                 if (!anim.IsPlaying("free"))
                 {
@@ -243,9 +265,9 @@ public class playerControl : MonoBehaviour {
             }
         }
 
-        if (Input.GetKey(spawnOne) && spawnTimer1==maxSpawnTimer1)
+        if (Input.GetKey(spawnOne) && spawnTimer1==maxSpawnTimer1)//spawn grunt at heor location
         {
-            if (goldManager.spendGold(20))
+            if (goldManager.spendGold(20))//if has enough gold to spend
             {
                 spawnManager.spawnUnit(transform, 2, gameObject.layer - 8);
                 spawnTimer1 = 0;
@@ -253,7 +275,7 @@ public class playerControl : MonoBehaviour {
 
         }
 
-        if (Input.GetKey(spawnTwo) && spawnTimer2 == maxSpawnTimer2)
+        if (Input.GetKey(spawnTwo) && spawnTimer2 == maxSpawnTimer2)//spawn golem
         {
             if (goldManager.spendGold(40))
             {
@@ -263,7 +285,7 @@ public class playerControl : MonoBehaviour {
 
         }
 
-        if (Input.GetKey(spawnThree) && spawnTimer3 == maxSpawnTimer3)
+        if (Input.GetKey(spawnThree) && spawnTimer3 == maxSpawnTimer3)//spawn dragon
         {
             if (goldManager.spendGold(60))
             {
@@ -273,10 +295,10 @@ public class playerControl : MonoBehaviour {
 
         }
 
-        if (dead)
+        if (dead)//if player is dead
         {
             deathTimer += Time.deltaTime;
-            if(deathTimer >= respawnCooldown)
+            if(deathTimer >= respawnCooldown)//respawn them at spawn point after delay
             {
                 dead = false;
                 transform.position = spawnpoint;
@@ -290,15 +312,14 @@ public class playerControl : MonoBehaviour {
 
     }
 
-    void FixedUpdate()
+    void FixedUpdate()//update hero rotation
     {
         transform.rotation = Quaternion.Euler(0, rotation, 0);
     }
 
     // Power-ups
 
-    // Strength update
-
+    // Strength powerup
     public void IncreaseDamageStrength(int amount)
     {
         DamageStrength += amount;
@@ -309,6 +330,7 @@ public class playerControl : MonoBehaviour {
 
     }
 
+    //invulnerability powerup
     public void MakeInvuln()
     {
         health.makeInvulnerable(true);
@@ -317,6 +339,7 @@ public class playerControl : MonoBehaviour {
 
     }
 
+    //speed powerup
     public void IncreaseSpeed(float speed)
     {
         walkingSpeed += speed;
@@ -324,9 +347,9 @@ public class playerControl : MonoBehaviour {
         StartCoroutine(EndPowerUp(3,(int)speed));
     }
 
-    private IEnumerator EndPowerUp(int type,int amount)
+    private IEnumerator EndPowerUp(int type,int amount)//after delay, reset effect of power up
     {
-        if (type == 1)
+        if (type == 1)//if strength
         {
             GameObject aura = Instantiate(strengthAura, transform.position+new Vector3(0,2.74f,0), transform.rotation, transform);
             yield return new WaitForSeconds(powerupTime);
@@ -335,7 +358,7 @@ public class playerControl : MonoBehaviour {
 
         }
 
-        if (type == 2)
+        if (type == 2)//if invulnerability
         {
             GameObject aura = Instantiate(invulnAura, transform.position + new Vector3(0, 2.74f, 0), transform.rotation, transform);
             yield return new WaitForSeconds(powerupTime);
@@ -344,7 +367,7 @@ public class playerControl : MonoBehaviour {
 
         }
 
-        if (type == 3)
+        if (type == 3)//if speed
         {
             GameObject aura = Instantiate(speedAura, transform.position + new Vector3(0, 2.74f, 0), transform.rotation, transform);
             yield return new WaitForSeconds(powerupTime);
@@ -354,7 +377,7 @@ public class playerControl : MonoBehaviour {
         }
     }
 
-    public void cooldownUpdate()
+    public void cooldownUpdate()//update cooldown indicators on HUD
     {
         cooldownIndicator[0].sizeDelta = new Vector2(cooldownIndicator[0].sizeDelta.x, (float)(maxSpawnTimer1 - spawnTimer1) / maxSpawnTimer1 * minionBarSize);
         cooldownIndicator[1].sizeDelta = new Vector2(cooldownIndicator[1].sizeDelta.x, (float)(maxSpawnTimer2 - spawnTimer2) / maxSpawnTimer2 * minionBarSize);
@@ -364,7 +387,7 @@ public class playerControl : MonoBehaviour {
 
     }
 
-    public void Die()
+    public void Die()//drop gold and play sounds when dead
     {
         audio.clip = deathSound;
         audio.Play();
@@ -380,7 +403,7 @@ public class playerControl : MonoBehaviour {
         setGold(cash);
     }
 
-    public void setGold(GameObject gold)
+    public void setGold(GameObject gold)//sets the gold layer and amount
     {
         if (gameObject.layer == 9)
         {

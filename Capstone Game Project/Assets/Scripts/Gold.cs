@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/* BATTLE LANE
+ * for CSC3020H Capestone Game
+ * Steven Mare - MRXSTE008
+ * Thethela Faltien - FLTTHE004
+ */
+
 public class Gold : MonoBehaviour
 {
 
@@ -11,18 +17,11 @@ public class Gold : MonoBehaviour
     private LayerMask Layer; //  checks which hero to give the gold to
     private float len;
     private float speed;
-    //private float cooldown = 1.0f;
-    //private float action1;
-    //private float action2;
-
 
     //Public variable
-    public float rad;
+    public float rad;//radius at which gold can be picked up
    
-    
-
-
-    public void setAmount(int amount, LayerMask Layer)
+    public void setAmount(int amount, LayerMask Layer)//set gold amount an which player layer can see it and pick it up
     {
         amountOfGold = amount;
         collected = false;
@@ -50,7 +49,7 @@ public class Gold : MonoBehaviour
 
     }
 
-    void checkForHero()
+    void checkForHero()//checks to see if a hero on the right unit layer has collided with the gold bar
     {
         Collider[] Heroes = Physics.OverlapSphere(transform.position, rad, Layer);
 
@@ -59,7 +58,7 @@ public class Gold : MonoBehaviour
             for(int i=0; i< Heroes.Length; i++)
             {
                 if (Heroes[i].gameObject != null && Heroes[i].GetComponent<playerControl>() != null && !Heroes[i].gameObject.GetComponent<GoldManager>().reachedMaxGold())
-                {
+                {//if there is still an object, its a player and they don't have max gold, give them gold
                     Heroes[i].gameObject.GetComponent<GoldManager>().addGold(amountOfGold);
                     collected = true;
                     GetComponent<AudioSource>().Play();
@@ -74,58 +73,13 @@ public class Gold : MonoBehaviour
 
     }
 
-    void animateObject()
+    void animateObject()//animates the object to rotate and 'bounce'
     {
-
-        //action1 += Time.deltaTime;
-        //action2 += Time.deltaTime;
-
-        //Vector3 posA = new Vector3(reset.position.x, reset.position.y + len, reset.position.z);
-
-        //ector3 posB = reset.transform.position;
-
-        //ector3 currentPos = transform.position;
-
-        // currentPos = posA;
-
-        /*f (action1 > cooldown)
-         {
-             currentPos = posA;
-             action1 = 0.0f;
-         }
-
-         if (action2 > cooldown)
-         {
-             currentPos = posB;
-             action2 = 0.0f;
-         }
-
-         if(currentPos == posA)
-         {
-             Debug.Log("current pos is pos A");
-         }
-
-         else if(currentPos == posB)
-         {
-             Debug.Log("Current pos is pos b");
-         }*/
-
-        //transform.position = Vector3.Lerp(transform.position, currentPos, Time.deltaTime * speed);
-
-        //currentPos = posB;
-
-        //ansform.position = Vector3.Lerp(transform.position, currentPos, Time.deltaTime * speed);
-
         float y =  Mathf.PingPong(speed * Time.time, len);
         Vector3 pos = new Vector3(transform.position.x, y, transform.position.z);
         transform.position = pos;
 
         transform.Rotate(Vector3.up, 100*Time.deltaTime);
-
-
-
-
-
     }
 
    

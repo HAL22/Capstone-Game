@@ -3,7 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GoldManager : MonoBehaviour {
+/* BATTLE LANE
+ * for CSC3020H Capestone Game
+ * Steven Mare - MRXSTE008
+ * Thethela Faltien - FLTTHE004
+ */
+
+public class GoldManager : MonoBehaviour {//used on heroes to monitor and control gold amounts
 
     public RectTransform goldBar;
     public Text goldText;
@@ -27,11 +33,11 @@ public class GoldManager : MonoBehaviour {
 
     public void addGold(int amount)
     {
-        goldAmount = Mathf.Min(maxGold, goldAmount + amount);
+        goldAmount = Mathf.Min(maxGold, goldAmount + amount);//cannot exceeed max gold amount
         updateGold();
     }
 
-    public bool spendGold(int amount)
+    public bool spendGold(int amount)//returns true if enough gold and gold is spent
     {
         if (amount > goldAmount)
         {
@@ -45,13 +51,13 @@ public class GoldManager : MonoBehaviour {
         }
     }
 
-    private void updateGold()
+    private void updateGold()//updates visual gold bar on ui
     {
         goldBar.sizeDelta = new Vector2(goldBar.sizeDelta.x, (float)(goldAmount) / maxGold * barSize);
         goldText.text = goldAmount + "/" + maxGold; ;
     }
 
-    public bool reachedMaxGold()
+    public bool reachedMaxGold()//use to prevent picking up gold when at max gold
     {
         return goldAmount == maxGold;
     }

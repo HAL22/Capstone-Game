@@ -4,16 +4,22 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class gameOverCheck : MonoBehaviour {
+/* BATTLE LANE
+ * for CSC3020H Capestone Game
+ * Steven Mare - MRXSTE008
+ * Thethela Faltien - FLTTHE004
+ */
 
-    public GameObject[] tower;
-    public Transform[] towerFocus;
-    public Text text;
-    public Camera gameOverCam;
-    public Camera [] playerCamera;
+public class gameOverCheck : MonoBehaviour {//used to check if win/tie condition has been met
+
+    public GameObject[] tower;//araay of towers (2)
+    public Transform[] towerFocus;//used to set losing player camera to their tower to see it die
+    public Text text;//game over text
+    public Camera gameOverCam;//activated when game over
+    public Camera [] playerCamera;//used in conjustion with tower focus to set losing camera
     public AudioSource gameMusic;
     public AudioClip victoryMusic;
-    public GameObject endClick;
+    public GameObject endClick;//makes screen clickable to go back to main menu
 
     private bool over;
 
@@ -26,10 +32,10 @@ public class gameOverCheck : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (!over)
+        if (!over)//while not over check if tower/s are destroyed
         {
             if(tower[0].GetComponent<healthManager>().getHealth() <=0 && tower[1].GetComponent<healthManager>().getHealth() <= 0)
-            {
+            {//if game ends in a tie
                 over = true;
                 text.text = "Game Ends in a Tie!";
                 gameOverCam.enabled = true;
@@ -39,7 +45,7 @@ public class gameOverCheck : MonoBehaviour {
                 playVictory();
             }
             else if(tower[1].GetComponent<healthManager>().getHealth() <= 0)
-            {
+            {//if player 1 wins
                 over = true;
                 text.text = "Player 1 Wins!!!";
                 gameOverCam.enabled = true;
@@ -48,7 +54,7 @@ public class gameOverCheck : MonoBehaviour {
                 playVictory();
             }
             else if (tower[0].GetComponent<healthManager>().getHealth() <= 0)
-            {
+            {//player 2 wins
                 over = true;
                 text.text = "Player 2 Wins!!!";
                 gameOverCam.enabled = true;
@@ -61,12 +67,12 @@ public class gameOverCheck : MonoBehaviour {
 		
 	}
 
-    public void Restart(string name)
+    public void Restart(string name)//go back to main menu
     {
         SceneManager.LoadScene(name);
     }
 
-    public void playVictory()
+    public void playVictory()//change music to victory music
     {
         gameMusic.clip = victoryMusic;
         gameMusic.Play();
